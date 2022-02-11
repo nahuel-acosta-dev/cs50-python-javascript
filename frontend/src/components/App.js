@@ -1,19 +1,12 @@
-import React, { Component } from "react";
-import { render } from "react-dom";
+import React from "react";
+import Button from 'react-bootstrap/Button'
 
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <div>
-       <h1>Esta funcionando</h1>
-      </div>
-    );
-  }
+const App = () => {
+  return(
+    <div>
+      <h1>Esta funcionando</h1>
+      <Button variant="outline-primary">Primary</Button>{' '}
+    </div>)
 }
 
-const appDiv = document.getElementById("app");
-render(<App />, appDiv);
+export default App;
