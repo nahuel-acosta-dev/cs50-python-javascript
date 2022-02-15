@@ -18,6 +18,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("api", include("capstone.urls")),
+    path("capstone_api/", include("capstone.urls")),
     path("", include("frontend.urls"))
+
 ]

@@ -2,6 +2,11 @@ from django.urls import path
 from django.urls import re_path
 from . import views
 
+app_name = 'frontend'
+
 urlpatterns = [
-    path("", views.index, name="index")
+    path("",  views.index),
+    path("login",  views.index),
+    path("register", views.index),
+    path("logout", views.index),
 ]

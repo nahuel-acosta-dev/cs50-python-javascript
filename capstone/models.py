@@ -15,10 +15,10 @@ class User(AbstractUser):
         return{
             "id": self.id,
             "username": self.username,
+            "password": self.password,
             "first_name": self.first_name,
             "last_name": self.last_name,
             "date": self.date.strftime("%b %d %Y, %I:%M %p")
-
         }
 
 
