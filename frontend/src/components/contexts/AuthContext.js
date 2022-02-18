@@ -1,11 +1,12 @@
-import React, {useState, useEffect, useContext} from "react";
-import RoutesSession from "./routes/RoutesSession";
-import {AuthProvider} from "./contexts/AuthContext"
+import React, {createContext, useState, useEffect} from 'react';
 import jwt_decode from "jwt-decode";
 
+const AuthContext = createContext();
 
-const App = () => {
-  const [user, setUser] = useState(() => localStorage.getItem("authTokens") ? 
+export default AuthContext;
+
+export const AuthProvider = ({children}) => {
+const [user, setUser] = useState(() => localStorage.getItem("authTokens") ? 
   jwt_decode(localStorage.getItem("authTokens")) : null);
   const [authTokens, setAuthToken] = useState(() => localStorage.getItem("authTokens") ? 
   JSON.parse(localStorage.getItem("authTokens")) : null);
@@ -64,8 +65,10 @@ const App = () => {
     localStorage.removeItem("authTokens");
   }
 
-  let contexData = {
+  let contextData = {
     user: user,
+    setUser: setUser,
+    updateToken: updateToken,
     authTokens: authTokens,
     loginUser: loginUser,
     logoutUser: logoutUser
@@ -83,17 +86,10 @@ const App = () => {
     return () => clearInterval(interval);
   }, [authTokens, loading])
 
-  //Borrar
-  const prueba = {
-    name: null,
-    years: null
-  }
 
   return(
-    <AuthProvider>
-        <RoutesSession user={user} setUser={setUser}
-        loginUser={loginUser} logoutUser={logoutUser} authTokens={authTokens} updateToken={updateToken}/>
-    </AuthProvider>)
+      <AuthContext.Provider value={contextData}>
+          {children}
+    </AuthContext.Provider>  
+  )
 }
-
-export default App;

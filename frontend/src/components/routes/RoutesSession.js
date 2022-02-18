@@ -11,16 +11,17 @@ import {
     Link, 
     Navigate} from "react-router-dom";
 
-const RoutesSession = ({loginUser, setUser, user, logoutUser}) => {
+const RoutesSession = (props) => {
 
     return (
     <Router>
             <Routes>
-                <Route exact path="/" element={!user ?<Navigate to="/login"/> : 
-                <Home user={user} logoutUser={logoutUser}/>} />
-                <Route exact path="/register" element={<Register setUser={setUser}/>}/>
-                <Route exact path="/login" element={user ? <Navigate to="/"/> : <Login 
-                loginUser={loginUser} user={user}/>}/>
+                <Route exact path="/" element={!props.user ?<Navigate to="/login"/> : 
+                <Home user={props.user} logoutUser={props.logoutUser} 
+                authTokens={props.authTokens} updateToken={props.updateToken}/>} />
+                <Route exact path="/register" element={<Register setUser={props.setUser}/>}/>
+                <Route exact path="/login" element={props.user ? <Navigate to="/"/> : <Login 
+                loginUser={props.loginUser} user={props.user}/>}/>
             </Routes>
     </Router>)
 

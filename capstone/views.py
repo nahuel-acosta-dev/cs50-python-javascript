@@ -8,10 +8,12 @@ from django.urls import reverse
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from rest_framework.response import Response
-from rest_framework.decorators import api_view, permissions_classes
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.tokens import RefreshToken
+
 
 from .serializers import CoinsSerializer
 from .models import User, Coins
@@ -43,40 +45,62 @@ def getRoutes(request):
     return Response(routes)
 
 
-@api_view(['GET'])
-@permissions_classes
-def getCoins(request):
-    coins = Coins.objects.all()
-    serializer = CoinsSerializer(coins, many=True)
-    return Response(serializer.data)
+"""@api_view(['POST'])
+def createUser(request):
+    serializer = RegisterSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+
+    user = serializer.save()
+    refresh = RefreshToken.for_user(user)
+    return{
+        'refresh': str(refresh),
+        'access': str(refresh.access_token),
+    }, Response({
+        'user_info': {
+            'id': user.id,
+            'username': user.username,
+            'email': user.email,
+        },
+        'token': refresh.access_token
+    })"""
 
 
-def register(request):
+@api_view(['POST'])
+def createUser(request):
     if request.method == "POST":
-        jd = json.loads(request.body)
-        username = jd["username"]
-        email = jd["email"]
+        username = request.POST["username"]
+        email = request.POST["email"]
 
         # Ensure password matches confirmation
-        password = jd["password"]
-        confirmation = jd["confirmation"]
+        password = request.POST["password"]
+        confirmation = request.POST["confirmation"]
         if password != confirmation:
-            error = {'error': "Passwords must match."}
-            return JsonResponse(error)
+            return Response({"message": "Passwords must match."})
 
         # Attempt to create new user
         try:
             user = User.objects.create_user(username, email, password)
             user.save()
         except IntegrityError:
-            response = {'error': "Username already taken"}
-            return JsonResponse(response)
-        login(request, user)
-        response = {'message': "Register successful"}
-        return JsonResponse(response, status=200)
+            return Response({"message": "Username already taken."})
+        return Response({'user_info': {
+            'id': user.id,
+            'username': user.username,
+            'email': user.email,
+        }})
     else:
-        error = {'error': "POST request required."}
-        return JsonResponse(error, status=400)
+        return Response({"message": "usage method post"}, status=400)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getCoins(request):
+    user = request.user
+    print(user.id)
+    #coins = Coins.objects.all()
+    coins = Coins.objects.filter(user_id=user.id)
+    serializer = CoinsSerializer(coins, many=True)
+    return Response(serializer.data)
 
 
 def allUsers(request):

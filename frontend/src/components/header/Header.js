@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import { AuthProvider } from "./../context/AuthContext";
+import { AuthProvider } from "../contexts/AuthContext";
 import Button from 'react-bootstrap/Button';
 
 import { 
