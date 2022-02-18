@@ -1,10 +1,8 @@
 import React, {useState} from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import axios from "axios";
 
-
-const Register = ({setUsuario}) => {
+const Register = () => {
     const [datos, setDatos] = useState({username: '', 
     email: '', 
     password: '', 
@@ -17,29 +15,31 @@ const Register = ({setUsuario}) => {
         })
         
     }
+     
+     let bodyContent = new FormData();
+     bodyContent.append("username", datos.username);
+     bodyContent.append("email", datos.email);
+     bodyContent.append("password", datos.password);
+     bodyContent.append("confirmation", datos.confirmation);
 
-    const registerUser = (event) => {
-        event.preventDefault();
+    let registerUser = async (e) => {
+        e.preventDefault();
         console.log('username:' + datos.username + " password: " + datos.password);
-        fetch(`capstone_api/register`, {
-            method: 'POST',
-            body: JSON.stringify({
-                username: datos.username,
-                email: datos.email,
-                password: datos.password,
-                confirmation: datos.confirmation
-            })
+        let response = await fetch("http://localhost:8000/capstone_api/register", { 
+          method: "POST",
+          body: bodyContent,
+          headers: {
+            "Accept": "*/*"
+          }
         })
-        .then(response => response.json())
-        .then(result => {
-          console.log(result);
-        })
-        
+
+        let data = await response.json();
+        console.log(data)
     }   
 
     return (
       <>
-        <Form onSubmit={registerUser}>
+        <Form onSubmit={registerUser} method='post'>
         <Form.Group className="mb-3" controlId="formBasicUsername">
           <Form.Label>Username</Form.Label>
           <Form.Control type="text" placeholder="Enter Username" 

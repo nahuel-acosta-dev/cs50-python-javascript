@@ -1,15 +1,11 @@
 import React, {useContext} from 'react';
-import { AuthProvider } from "../contexts/AuthContext";
+import AuthContext  from "../contexts/AuthContext";
 import Button from 'react-bootstrap/Button';
+import { Link } from "react-router-dom";
 
-import { 
-    BrowserRouter as Router, 
-    Routes, 
-    Route, 
-    Link} from "react-router-dom";
+const Header = () => {
+    let {user,logoutUser} = useContext(AuthContext);
 
-const Header = ({user,logoutUser}) => {
-    
     return (
     <>
     <nav>{!user ? 

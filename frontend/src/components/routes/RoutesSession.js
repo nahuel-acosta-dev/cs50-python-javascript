@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import Register from './../session/Register';
 import Login from './../session/Login';
 import Home from './../home/Home';
+import AuthContext from "../contexts/AuthContext";
 
 
 import { 
@@ -11,17 +12,16 @@ import {
     Link, 
     Navigate} from "react-router-dom";
 
-const RoutesSession = (props) => {
+const RoutesSession = () => {
+
+    let {user, setUser, loginUser} = useContext(AuthContext);
 
     return (
     <Router>
             <Routes>
-                <Route exact path="/" element={!props.user ?<Navigate to="/login"/> : 
-                <Home user={props.user} logoutUser={props.logoutUser} 
-                authTokens={props.authTokens} updateToken={props.updateToken}/>} />
-                <Route exact path="/register" element={<Register setUser={props.setUser}/>}/>
-                <Route exact path="/login" element={props.user ? <Navigate to="/"/> : <Login 
-                loginUser={props.loginUser} user={props.user}/>}/>
+                <Route exact path="/" element={!user ?<Navigate to="/login"/> : <Home />} />
+                <Route exact path="/register" element={<Register setUser={setUser}/>}/>
+                <Route exact path="/login" element={user ? <Navigate to="/"/> : <Login />}/>
             </Routes>
     </Router>)
 

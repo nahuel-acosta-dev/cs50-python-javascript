@@ -1,12 +1,10 @@
 import React, {useEffect, useState, useContext} from 'react';
 import Header from './../header/Header';
-import useUser from "../../hooks/useUser";
-import AuthContext from "../contexts/AuthContext"
+import AuthContext from "../contexts/AuthContext";
 
-const Home = ({user, logoutUser, authTokens, updateToken}) => {
+const Home = () => {
     const [coins, setCoins] = useState([]);
-    //const {name, years} = useUser();
-    let {loading} = useContext(AuthContext);
+    let {loading, logoutUser, authTokens, updateToken} = useContext(AuthContext);
 
     useEffect(() =>{
 
@@ -39,7 +37,7 @@ const Home = ({user, logoutUser, authTokens, updateToken}) => {
     return (
     <>
     <h1>Este es el home</h1>
-        <Header logoutUser={logoutUser} user={user}/>
+        <Header/>
         {coins.map(coin => (
             <div key={coin.id}>funciona{coin.coins}</div>
         ))
