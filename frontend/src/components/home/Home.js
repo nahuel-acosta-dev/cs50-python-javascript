@@ -1,4 +1,5 @@
 import React, {useEffect, useState, useContext} from 'react';
+import ItemService from '../../services/ItemService'
 import Header from './../header/Header';
 import AuthContext from "../contexts/AuthContext";
 
@@ -15,24 +16,16 @@ const Home = () => {
     }, []);
 
     let getCoins = async () =>{
-        let response = await fetch('http://localhost:8000/capstone_api/coins',{
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + String(authTokens.access)
-            }
-        })
-        let data = await response.json();
+        let response = await ItemService.getItem("coins", authTokens);
 
         if(response.status === 200){
-            setCoins(data);
+            setCoins(response.data);
         }else if(response.statusText === 'Unauthorized'){
             logoutUser();
         }
         
-        console.log(data)
     }
-
+    
 
     return (
     <>

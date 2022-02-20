@@ -33,7 +33,7 @@ const [user, setUser] = useState(() => localStorage.getItem("authTokens") ?
       localStorage.setItem("authTokens", JSON.stringify(data));
     }
     else alert('Something went weong!');
-  }
+}
 
   let updateToken = async () => {
     console.log('update Token called');
