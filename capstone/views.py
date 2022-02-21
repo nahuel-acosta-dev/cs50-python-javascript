@@ -45,26 +45,6 @@ def getRoutes(request):
     return Response(routes)
 
 
-"""@api_view(['POST'])
-def createUser(request):
-    serializer = RegisterSerializer(data=request.data)
-    serializer.is_valid(raise_exception=True)
-
-    user = serializer.save()
-    refresh = RefreshToken.for_user(user)
-    return{
-        'refresh': str(refresh),
-        'access': str(refresh.access_token),
-    }, Response({
-        'user_info': {
-            'id': user.id,
-            'username': user.username,
-            'email': user.email,
-        },
-        'token': refresh.access_token
-    })"""
-
-
 @api_view(['POST'])
 def createUser(request):
     if request.method == "POST":
@@ -97,14 +77,21 @@ def createUser(request):
 def getCoins(request):
     user = request.user
     print(user.id)
-    #coins = Coins.objects.all()
     coins = Coins.objects.filter(user_id=user.id)
     serializer = CoinsSerializer(coins, many=True)
     return Response(serializer.data)
 
 
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def createGroup(request):
+    user = request.user
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def allUsers(request):
     objecto = User.objects.all()
-    if request.method == 'GET':
-        objecto = objecto.order_by("-date").all()
-        return JsonResponse([objec.serialize() for objec in objecto], safe=False)
+    objecto = objecto.order_by("-date").all()
+    # return JsonResponse([],safe=false)
+    return Response([objec.serialize() for objec in objecto])

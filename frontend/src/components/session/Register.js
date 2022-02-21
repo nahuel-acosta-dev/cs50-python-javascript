@@ -1,12 +1,16 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
+import AuthContext from "../contexts/AuthContext";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { Link } from "react-router-dom";
 
 const Register = () => {
     const [datos, setDatos] = useState({username: '', 
     email: '', 
     password: '', 
     confirmation: ''});
+    let {loginUser} = useContext(AuthContext);
+
 
     const handleInputChange = (event) => {
         setDatos({
@@ -16,11 +20,11 @@ const Register = () => {
         
     }
      
-     let bodyContent = new FormData();
-     bodyContent.append("username", datos.username);
-     bodyContent.append("email", datos.email);
-     bodyContent.append("password", datos.password);
-     bodyContent.append("confirmation", datos.confirmation);
+    let bodyContent = new FormData();
+    bodyContent.append("username", datos.username);
+    bodyContent.append("email", datos.email);
+    bodyContent.append("password", datos.password);
+    bodyContent.append("confirmation", datos.confirmation);
 
     let registerUser = async (e) => {
         e.preventDefault();
@@ -31,10 +35,11 @@ const Register = () => {
           headers: {
             "Accept": "*/*"
           }
-        })
+        });
 
         let data = await response.json();
-        console.log(data)
+        console.log(data);
+        loginUser(e);
     }   
 
     return (
@@ -76,6 +81,9 @@ const Register = () => {
           Submit
         </Button>
       </Form>
+      <div>
+        <Link to="/login">Login</Link>
+      </div>
       </>
     )
 

@@ -2,16 +2,13 @@ import React, {useContext} from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import AuthContext from "../contexts/AuthContext";
+import { Link } from "react-router-dom";
 
 const Login = () =>{
     let {loginUser, user} = useContext(AuthContext);
 
     return (
     <>
-        {user &&
-        <><p>Hello {user.username}</p>
-        </>
-        }
         <Form onSubmit={loginUser} method='post'>
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Username address</Form.Label>
@@ -32,6 +29,11 @@ const Login = () =>{
                 Submit
             </Button>
         </Form>
+
+        <div>
+            <Link to="/register">Register</Link>
+        </div>
+        
         </>
         )
 }

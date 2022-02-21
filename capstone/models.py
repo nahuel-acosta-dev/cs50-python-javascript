@@ -15,7 +15,8 @@ class User(AbstractUser):
         return{
             "id": self.id,
             "username": self.username,
-            "password": self.password,
+            'groups_create': self.groups_create,
+            'groups_joined': self.groups_joined,
             "first_name": self.first_name,
             "last_name": self.last_name,
             "date": self.date.strftime("%b %d %Y, %I:%M %p")
@@ -40,10 +41,13 @@ class Ideas(models.Model):
     idea = models.TextField(blank=True, null=True)
 
 
-class Group(models.Model):
+class GroupDetails(models.Model):
     name = models.CharField(max_length=100)
     theme = models.CharField(max_length=150)
     description = models.TextField()
+
+
+class Group(models.Model):
     user = models.ForeignKey(
         "User", on_delete=models.CASCADE, null=False, related_name="user_group")
     user_competitor1 = models.ForeignKey(
@@ -54,6 +58,8 @@ class Group(models.Model):
 
 
 class Invitation(models.Model):
+    group_details = models.ForeignKey(
+        "GroupDetails", on_delete=models.CASCADE, null=False, related_name="invitation_group_details")
     invitation1 = models.BooleanField(default=False)
     invitation2 = models.BooleanField(default=False)
     group = models.ForeignKey(

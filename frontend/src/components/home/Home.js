@@ -1,19 +1,11 @@
 import React, {useEffect, useState, useContext} from 'react';
-import ItemService from '../../services/ItemService'
+import ItemService from '../../services/ItemService';
 import Header from './../header/Header';
 import AuthContext from "../contexts/AuthContext";
 
 const Home = () => {
     const [coins, setCoins] = useState([]);
     let {loading, logoutUser, authTokens, updateToken} = useContext(AuthContext);
-
-    useEffect(() =>{
-
-        if(loading){
-            updateToken();
-        }
-        getCoins();
-    }, []);
 
     let getCoins = async () =>{
         let response = await ItemService.getItem("coins", authTokens);
@@ -25,16 +17,22 @@ const Home = () => {
         }
         
     }
-    
+
+    useEffect(() =>{
+
+        if(loading){
+            updateToken();
+        }
+        getCoins();
+    }, []);
 
     return (
     <>
-    <h1>Este es el home</h1>
+        <h1>Este es el home</h1>
         <Header/>
         {coins.map(coin => (
             <div key={coin.id}>funciona{coin.coins}</div>
         ))
-
         }
     </>
     
