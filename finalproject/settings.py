@@ -32,6 +32,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
+    'capstone',
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
     'django.contrib.admin',
@@ -40,7 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'capstone',
     'frontend.apps.FrontendConfig',
     'corsheaders'
 ]
@@ -179,5 +180,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # where user is the app name and User is the model class name
 AUTH_USER_MODEL = 'capstone.User'
-
-CORS_ALLOW_ALL_ORIGIN = True
+ASGI_APPLICATION = "finalproject.routing.application"
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}

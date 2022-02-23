@@ -28,14 +28,15 @@
   },
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.16.7",
-    "bootstrap": "^5.1.3",
-    "react-bootstrap": "^2.1.2",
-    "browser-sync": "^2.27.7",
     "axios": "^0.25.0",
+    "bootstrap": "^5.1.3",
+    "browser-sync": "^2.27.7",
     "create-use-context": "^1.0.1",
     "jwt-decode": "^3.1.2",
+    "react-bootstrap": "^2.1.2",
     "react-bootstrap-icons": "^1.7.2",
-    "react-router-dom": "^6.2.1"
+    "react-router-dom": "^6.2.1",
+    "websocket": "^1.0.34"
   },
   "description": ""
 }

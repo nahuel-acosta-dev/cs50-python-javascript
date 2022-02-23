@@ -7,6 +7,14 @@ const Home = () => {
     const [coins, setCoins] = useState([]);
     let {loading, logoutUser, authTokens, updateToken} = useContext(AuthContext);
 
+    let state = {
+        isLoggedIn: false,
+        messages: [],
+        value: '',
+        name: '',
+        room: '',
+    }
+
     let getCoins = async () =>{
         let response = await ItemService.getItem("coins", authTokens);
 

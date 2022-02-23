@@ -13,9 +13,12 @@ urlpatterns = [
     path("", views.getRoutes),
     path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('coins', views.getCoins),
-
     path("register", views.createUser, name="register"),
+
+    # general
+    path('coins', views.getCoins),
     path("allusers", views.allUsers, name="allusers"),
+    path('createinvitation', views.createInvitation),
+    path('<str:room_name>/', views.room, name="room"),
 
 ]

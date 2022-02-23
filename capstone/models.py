@@ -58,12 +58,35 @@ class Group(models.Model):
 
 
 class Invitation(models.Model):
-    group_details = models.ForeignKey(
-        "GroupDetails", on_delete=models.CASCADE, null=False, related_name="invitation_group_details")
+    user = models.ForeignKey(
+        "User", on_delete=models.CASCADE, null=False, related_name="inviting_user")
     invitation1 = models.BooleanField(default=False)
+    user1 = models.ForeignKey(
+        "User", on_delete=models.CASCADE, null=True, related_name="invitation_user1")
     invitation2 = models.BooleanField(default=False)
+    user2 = models.ForeignKey(
+        "User", on_delete=models.CASCADE, null=True, related_name="invitation_user2")
+
+    def __str__(self):
+        return f"{self.username}"
+
+    def serialize(self):
+        return{
+            "user_id": self.user.id,
+            'invitation1': self.invitation1,
+            'user1_id': self.user1.id,
+            "invitation2": self.invitation2,
+            "user2_id": self.user2.id
+        }
+
+
+class CreateGroup(models.Model):
+    group_details = models.ForeignKey(
+        "GroupDetails", on_delete=models.CASCADE, null=False, related_name="creategroup_groupdetails")
+    invitation = models.ForeignKey(
+        "Invitation", on_delete=models.CASCADE, null=False, related_name="creategroup_invitation")
     group = models.ForeignKey(
-        "Group", on_delete=models.CASCADE, null=False, related_name="invitation_group")
+        "Group", on_delete=models.CASCADE, null=False, related_name="creategroup_group")
 
 
 class RegisterGroup(models.Model):
