@@ -20,33 +20,25 @@ class CapstoneRoomConsumer(AsyncWebsocketConsumer):
             self.channel_name
         )
 
-    async def receive(self, text_data):
+    async def receive(self, text_data=None, bytes_data=None):
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
-        username = text_data_json['username']
+        name = text_data_json['name']
 
         await self.channel_layer.group_send(
             self.room_group_name,
             {
-                'type': 'chatroom_message',
+                'type': 'chat_message',
                 'message': message,
-                'username': username,
+                'name': name
             }
         )
 
-    async def chatroom_message(self, event):
+    async def chat_message(self, event):
         message = event['message']
-        username = event['username']
+        name = event['name']
 
         await self.send(text_data=json.dumps({
             'message': message,
-            'username': username,
+            'name': name
         }))
-
-    """def connect(self):
-        self.accept()
-
-        self.send(text_data=json.dumps({
-            'type': 'connection established',
-            'message': 'You are now connected!'
-        }))"""

@@ -8,13 +8,18 @@ https://docs.djangoproject.com/en/4.0/howto/deployment/asgi/
 """
 
 import os
-import django
 from django.core.asgi import get_asgi_application
-from channels.routing import get_default_application
 from channels.auth import AuthMiddlewareStack
 from channels.routing import ProtocolTypeRouter, URLRouter
 import capstone.routing
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'finalproject.settings')
 
-application = get_asgi_application()
+application = ProtocolTypeRouter({
+    'http': get_asgi_application(),
+    'websocket': AuthMiddlewareStack(
+        URLRouter(
+            capstone.routing.websocket_urlpatterns
+        )
+    )
+})

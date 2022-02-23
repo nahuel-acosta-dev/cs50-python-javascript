@@ -18,7 +18,6 @@ urlpatterns = [
     # general
     path('coins', views.getCoins),
     path("allusers", views.allUsers, name="allusers"),
-    path('createinvitation', views.createInvitation),
-    path('<str:room_name>/', views.room, name="room"),
+    path('createinvitation', views.createInvitation)
 
 ]

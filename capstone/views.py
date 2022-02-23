@@ -108,22 +108,3 @@ def createInvitation(request):
         invitation = Invitation.objects.create(
             user=user, user1=user1, user2=user2, invitation1=invitation1, invitation2=invitation2)
         return Response(invitation.serialize())
-
-
-def room(request, room_name):
-    return render(request, 'chatroom.html', {
-        'room_name': room_name
-    })
-
-
-"""def createGroup(request, invitation1, invitation2):
-    if invitation1 and invitation2:
-        user1 = User.objects.get(id=invitation1.id)
-        user2 = User.objects.get(id=invitation2.id)
-    elif invitation1 and invitation2 == False:
-        user1 = User.objects.get(id=invitation1.id)
-        user2 = False
-    elif invitation2 and invitation1 == False:
-        user1 = False
-        user2 = User.objects.get(id=invitation2.id)
-    Group.objects.create(user=request.user, user1=user1, user2=user2)"""
