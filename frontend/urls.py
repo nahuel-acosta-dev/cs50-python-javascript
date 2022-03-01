@@ -10,4 +10,7 @@ urlpatterns = [
     path("register", views.index),
     path("logout", views.index),
     path("group-invitation", views.index),
+    path("room", views.index),
+    path("newroom", views.index),
+    path("notification", views.index)
 ]

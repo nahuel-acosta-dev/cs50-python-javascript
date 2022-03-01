@@ -4,6 +4,9 @@ import Login from './../session/Login';
 import Home from './../home/Home';
 import AuthContext from "../contexts/AuthContext";
 import Invitation from '../group/Invitation';
+import Room from '../room/Room';
+import NewRoom from '../newroom/NewRoom';
+import Notification from '../notification/Notification';
 
 
 import { 
@@ -23,6 +26,9 @@ const RoutesSession = () => {
                 <Route exact path="/register" element={!user ?<Register/> : <Navigate to="/"/>} />
                 <Route exact path="/login" element={user ? <Navigate to="/"/> : <Login />}/>
                 <Route exact path="/group-invitation" element={!user ? <Navigate to="/login"/> : <Invitation />} />
+                <Route exact path="/room" element={!user ? <Navigate to="/login"/> : <Room />} />
+                <Route exact path="/newroom" element={!user ? <Navigate to="/login"/> : <NewRoom />} />
+                <Route exact path="/notification" element={!user ? <Navigate to="/login"/> : <Notification />} />
             </Routes>
     </Router>)
 

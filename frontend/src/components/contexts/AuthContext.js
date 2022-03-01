@@ -11,14 +11,6 @@ export const AuthProvider = ({children}) => {
   const [authTokens, setAuthToken] = useState(() => localStorage.getItem("authTokens") ? 
   JSON.parse(localStorage.getItem("authTokens")) : null);
   let [loading, setLoading] = useState(true);
-  
-  /*let url = `ws://${windows.location.host}/ws/socket-server/`;
-  const chatSocket = new WebSocket(url);
-  chatSocket.onmessage = (e) => {
-    let data = JSON.parse(e.data);
-    console.log('Data:', data)
-  }*/
-
 
   let loginUser = async (e) => {
     e.preventDefault();

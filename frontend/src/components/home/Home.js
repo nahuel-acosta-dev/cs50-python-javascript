@@ -5,7 +5,7 @@ import AuthContext from "../contexts/AuthContext";
 import Cajitaazul from './Cajitaazul';
 import Cajitachat from './Cajitachat';
 
-const chatSocket = new WebSocket('ws://localhost:8000/ws/chat/kakao/');
+const chatSocket = new WebSocket(`ws://localhost:8000/ws/chat/kakao/`);
 
 const Home = () => {
     const [coins, setCoins] = useState([]);
@@ -15,9 +15,6 @@ const Home = () => {
 
     let nombre = user.username;
 
-    function captura_nombre(e){
-        setnombre(e.value)
-      }
       function actualizarMsj(e){
         setmsj(e.value)
       }
@@ -44,6 +41,16 @@ const Home = () => {
         
     }
 
+    let readyWebSocket = () =>{
+      chatSocket.onopen = () => {
+        console.log('WebSocket conectado');
+      };
+      chatSocket.onclose = function (evt) {
+        console.log('WebSocket desconectado');
+      };
+
+    }
+
     useEffect(() =>{
 
         if(loading){
@@ -51,13 +58,7 @@ const Home = () => {
         }
         getCoins();
 
-        chatSocket.onopen = () => {
-            console.log('WebSocket conectado');
-          };
-          chatSocket.onclose = function (evt) {
-            console.log('WebSocket desconectado');
-          };
-      
+        readyWebSocket();
     }, []);
 
     chatSocket.onmessage = (message)=>{
@@ -72,40 +73,35 @@ const Home = () => {
           ])
         }
       }
-    
+
 
     return (
     <>
-        <h1>Este es el home</h1>
-        <Header/>
-        {coins.map(coin => (
-            <div key={coin.id}>funciona{coin.coins}</div>
-        ))
-        }
+      <h1>Este es el home</h1>
+      <Header/>
+      {coins.map(coin => (
+        <div key={coin.id}>funciona{coin.coins}</div>
+      ))
+      }
 
-    <div>
-        <div className="pantalla">
+      <div>
+          <div className="pantalla">
+            <div id="elCuerpo">
+              {converzacion.map((m, i)=>
+              <div key={i}>
+                {m.name==nombre? 
+                    (<Cajitachat data={m} />):
+                        (<Cajitaazul data={m}/>)
+                    }
+              </div>)}
+            </div>
 
-          <div id="elCuerpo" >
-            {converzacion.map((m, i)=>
-            <>
-              {m.name==nombre? 
-                  (<Cajitachat data={m} key={m}/>):
-                      (<Cajitaazul data={m} key={m}/>)
-                  }
-            </>)}
+            <div className="enviar">
+              <input className="chat" type="text" value={msj} onChange={(e)=>actualizarMsj(e.target)}/>
+              <button className="botonEnviar" onClick={(e)=>{enviar(e)}}> enviar</button>
+            </div>
           </div>
-
-          <div className="enviar">
-            <input className="chat" type="text" value={msj} onChange={(e)=>actualizarMsj(e.target)}/>
-            <button className="botonEnviar" onClick={(e)=>{enviar(e)}} > enviar</button>
-          </div>
-          
-
-        </div>
-    </div>
-
-
+      </div>
     </>
     
     )

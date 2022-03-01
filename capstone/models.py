@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.db.models import Q
 
 
 class User(AbstractUser):
@@ -26,6 +27,7 @@ class User(AbstractUser):
 class Coins(models.Model):
     user = models.ForeignKey(
         "User", on_delete=models.CASCADE, null=False, related_name="user_coins")
+    price = models.DecimalField(default=10.00, max_digits=8, decimal_places=2)
     coins = models.DecimalField(default=50.00, max_digits=8, decimal_places=2)
 
 
@@ -92,3 +94,47 @@ class CreateGroup(models.Model):
 class RegisterGroup(models.Model):
     group = models.ForeignKey(
         "Group", on_delete=models.CASCADE, null=False, related_name="register_group")
+
+
+class Notification(models.Model):
+    username = models.CharField(max_length=255)
+    room = models.CharField(max_length=255)
+    content = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
+
+    def serialize(self):
+        return{
+            "content": self.content,
+        }
+
+
+class Message(models.Model):
+    username = models.CharField(max_length=255)
+    room = models.CharField(max_length=255)
+    content = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
+
+    def serialize(self):
+        return{
+            "content": self.content,
+        }
+
+    # clone Whatsap
+
+
+class ChatModel(models.Model):
+    sender = models.CharField(max_length=100, default=None)
+    message = models.TextField(null=True, blank=True)
+    thread_name = models.CharField(null=True, blank=True, max_length=50)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def serialize(self):
+        return{
+            'sender': self.sender,
+            'message': self.message,
+            'thread_name': self.thread_name,
+            'timestamp': self.timestamp
+        }
+
+    def __str__(self) -> str:
+        return self.message

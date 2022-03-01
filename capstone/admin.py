@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Coins, Calification, Group, Ideas, RegisterGroup
+from . import models
 from rest_framework_simplejwt import token_blacklist
 
 
@@ -13,9 +13,11 @@ admin.site.unregister(token_blacklist.models.OutstandingToken)
 admin.site.register(token_blacklist.models.OutstandingToken,
                     OutstandingTokenAdmin)
 
-admin.site.register(User)
-admin.site.register(Coins)
-admin.site.register(Calification)
-admin.site.register(Group)
-admin.site.register(Ideas)
-admin.site.register(RegisterGroup)
+
+admin.site.register(models.User)
+admin.site.register(models.Coins)
+admin.site.register(models.Calification)
+admin.site.register(models.Group)
+admin.site.register(models.Ideas)
+admin.site.register(models.RegisterGroup)
+admin.site.register(models.ChatModel)
