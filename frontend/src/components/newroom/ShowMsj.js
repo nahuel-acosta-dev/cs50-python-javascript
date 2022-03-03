@@ -3,12 +3,12 @@ import AuthContext from '../contexts/AuthContext';
 import Cajitaone from './Cajitaone';
 import Cajitatwo from './Cajitatwo';
 
-const ShowMsj = ({id, thread, message_username, myUser, setMostrar, mostrar}) => {
+const ShowMsj = ({id, thread, message_username, myUser, setMostrar, mostrar, socket}) => {
 const [msj, setmsj] = useState('');
 let {user, loading, updateToken} = useContext(AuthContext);
-let endpoint = `ws://localhost:8000/ws/private/${id}/`;
+//let endpoint = `ws://localhost:8000/ws/private/${id}/`;
 //const socket = new WebSocket(endpoint + "?token=" + authTokens.access);
-const socket = new WebSocket(endpoint + myUser.id);
+//const socket = new WebSocket(endpoint + myUser.id);
 console.log(socket);
 
 console.log('viene el user');

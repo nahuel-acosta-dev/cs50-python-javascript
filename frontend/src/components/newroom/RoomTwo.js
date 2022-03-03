@@ -8,11 +8,9 @@ let {user, updateToken, loading, authTokens} = useContext(AuthContext);
 const [contact, setContact] = useState([]);
 const [thread, setThread] = useState([]);
 const [mostrar, setMostrar] = useState([]);
+const [socket, setSocket] = useState();
 const message_username = user.username;
 
-if(contact) {
-    
-}
 
 let getThreads = async (otherUser) =>{
     if(loading)updateToken();
@@ -32,6 +30,8 @@ let getThreads = async (otherUser) =>{
 const getContact = async (otherUser) => {
     setContact(otherUser);
     setMostrar([]);
+    let endpoint = `ws://localhost:8000/ws/private/${otherUser.id}/`;
+    setSocket(new WebSocket(endpoint + myUser.id));
     return await getThreads(otherUser);
 }
 
@@ -108,7 +108,7 @@ const getContact = async (otherUser) => {
             <>
             {contact.username != undefined ?
                 <ShowMsj id={contact.id} myUser={myUser} setMostrar={setMostrar}
-                mostrar={mostrar} thread={thread} 
+                mostrar={mostrar} thread={thread} socket={socket}
                 message_username={message_username}/> : null
                 }
             </>
