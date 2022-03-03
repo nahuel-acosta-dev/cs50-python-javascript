@@ -3,12 +3,9 @@ import AuthContext from '../contexts/AuthContext';
 import Cajitaone from './Cajitaone';
 import Cajitatwo from './Cajitatwo';
 
-const ShowMsj = ({id, thread, message_username, myUser, setMostrar, mostrar, socket}) => {
+const ShowMsj = ({thread, message_username, myUser, setMostrar, mostrar, socket}) => {
 const [msj, setmsj] = useState('');
 let {user, loading, updateToken} = useContext(AuthContext);
-//let endpoint = `ws://localhost:8000/ws/private/${id}/`;
-//const socket = new WebSocket(endpoint + "?token=" + authTokens.access);
-//const socket = new WebSocket(endpoint + myUser.id);
 console.log(socket);
 
 console.log('viene el user');
@@ -33,6 +30,7 @@ socket.onerror = function(e){
         console.log("ERROR OCCURED");
     }
 }
+
     useEffect(() => {
         if(loading)updateToken();
 
@@ -51,26 +49,6 @@ socket.onmessage = function(e){
             }
           ])
     }
-    /*if(data.username == message_username){
-        setMostrar([
-        ...mostrar,
-        {code:
-            <td>
-                <p className="bg-success p-2 mt-2 mr-5 
-                shadow-sm text-white float-right rounded">{data.message}</p>
-            </td>}
-        ])
-    }*/
-    
-    /*else{
-         setMostrar([
-        ...mostrar,
-            {code:<td>
-                <p className="bg-primary p-2 mt-2 mr-5 shadow-sm 
-                text-white float-left rounded">{data.message}</p>
-            </td>}
-        ])
-    }*/
 }
     const sendMsj= (e) => {
         const message = msj;

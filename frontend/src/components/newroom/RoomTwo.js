@@ -64,8 +64,6 @@ const getContact = async (otherUser) => {
                             d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
                     </svg>
                 </span>
-
-
             </div>
             <div className="col-sm-8">
                 <img src="https://publicdomainvectors.org/photos/JAVA.png" alt="" className="profile-image rounded-circle"/>
@@ -95,7 +93,6 @@ const getContact = async (otherUser) => {
                             <tr key={otherUser.id}>
                                 <td><img src="https://publicdomainvectors.org/photos/JAVA.png" alt="" className="profile-image rounded-circle"/>
                                 </td>
-                                {/*<td><a href="{% url 'chat' username=user.username %}">{otherUser.username}</a></td>*/}
                                 <td><button onClick={() => getContact(otherUser)}>{otherUser.username}</button></td>
                             </tr>
                             ))}
@@ -103,11 +100,10 @@ const getContact = async (otherUser) => {
                         </tbody>
                     </table>
                 </div>
-
             </div>
             <>
             {contact.username != undefined ?
-                <ShowMsj id={contact.id} myUser={myUser} setMostrar={setMostrar}
+                <ShowMsj myUser={myUser} setMostrar={setMostrar}
                 mostrar={mostrar} thread={thread} socket={socket}
                 message_username={message_username}/> : null
                 }
