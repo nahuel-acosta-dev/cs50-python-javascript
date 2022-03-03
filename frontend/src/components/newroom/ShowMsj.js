@@ -3,48 +3,54 @@ import AuthContext from '../contexts/AuthContext';
 import Cajitaone from './Cajitaone';
 import Cajitatwo from './Cajitatwo';
 
-const ShowMsj = ({id, thread, message_username}) => {
+const ShowMsj = ({id, thread, message_username, myUser, setMostrar, mostrar}) => {
 const [msj, setmsj] = useState('');
-const [mostrar, setMostrar] = useState([]);
-let {user} = useContext(AuthContext);
+let {user, loading, updateToken} = useContext(AuthContext);
+let endpoint = `ws://localhost:8000/ws/private/${id}/`;
+//const socket = new WebSocket(endpoint + "?token=" + authTokens.access);
+const socket = new WebSocket(endpoint + myUser.id);
+console.log(socket);
+
+console.log('viene el user');
+
+console.log("Aqui esta " + myUser.id);
+
+
 
 function actualizarMsj(e){
     setmsj(e.value)
     }
-
-const socket = new WebSocket(`ws://localhost:8000/ws/private/${id}/`);
-console.log(socket);
-
-
 const readyWebSocket = () => {
-    socket.onopen = function(e){
-        console.log("CONNECTION ESTABLISHED");
+socket.onopen = function(e){
+    console.log("CONNECTION ESTABLISHED");
     }
 
-    socket.onclose = function(e){
+socket.onclose = function(e){
         console.log("CONNECTION LOST");
     }
 
-    socket.onerror = function(e){
+socket.onerror = function(e){
         console.log("ERROR OCCURED");
     }
 }
-useEffect(() => {
-    readyWebSocket();
-}, [])
+    useEffect(() => {
+        if(loading)updateToken();
+
+        readyWebSocket();
+    }, [])
+
 
 socket.onmessage = function(e){
     const data = JSON.parse(e.data);
 
     if(data){
-        setMostrar([...mostrar , 
+        setMostrar([...mostrar, 
             {
               msg:data.message,
               name:data.username
             }
           ])
     }
-
     /*if(data.username == message_username){
         setMostrar([
         ...mostrar,
@@ -66,9 +72,6 @@ socket.onmessage = function(e){
         ])
     }*/
 }
-    console.log("viene mostrar")
-    console.log(mostrar)
-
     const sendMsj= (e) => {
         const message = msj;
         console.log(msj)
@@ -105,7 +108,7 @@ socket.onmessage = function(e){
                             (<tr key={i}>
                                 <td>
                                     <p className="bg-primary p-2 mt-2 mr-5 shadow-sm text-white float-left rounded">
-                                        {message.message} buena
+                                        {message.message}
                                     </p>
                                 </td>
                                 <td>
@@ -113,15 +116,14 @@ socket.onmessage = function(e){
                                     </p>
                                 </td>
                             </tr>)
-                            
                             ))}
                             {mostrar.map((mos, i) => (
                                 <tr key={i}>
-                                    {mos.name === user.username ?
+                                    {mos.name == user.username ?
                                     (<Cajitaone data={mos} />):
-                                    (<Cajitatwo data={mos}/>)}
+                                    (<Cajitatwo data={mos} />)}
                                 </tr>
-                            ))}
+                                    ))}
                         </tbody>
                     </table>
                 </div>

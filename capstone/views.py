@@ -90,6 +90,14 @@ def createGroup(request):
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
+def myUser(request):
+    objecto = User.objects.get(id=request.user.id)
+    # return JsonResponse([],safe=false)
+    return Response(objecto.serialize(), status=200)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def allUsers(request):
     objecto = User.objects.exclude(username=request.user.username)
     objecto = objecto.order_by("-date").all()

@@ -18,6 +18,7 @@ urlpatterns = [
     # general
     path('coins', views.getCoins),
     path("allusers", views.allUsers, name="allusers"),
+    path("user", views.myUser),
     path('createinvitation', views.createInvitation),
     path('messages/<str:room_name>', views.getMessages, name="getMessages"),
     path('newroom/<str:username>', views.chatPage),

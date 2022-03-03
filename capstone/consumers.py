@@ -2,6 +2,7 @@ import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.consumer import AsyncConsumer
 from asgiref.sync import sync_to_async
+from django.contrib.auth.models import AnonymousUser
 from channels.db import database_sync_to_async
 from .models import Message, User, ChatModel
 
@@ -109,8 +110,14 @@ class NotificationConsumer(AsyncWebsocketConsumer):
 
 class PersonalChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        my_id = self.scope['user'].id
+        #user = self.scope['user']
+        print('este es mi usuario')
+        # print(user)
+        my_id = self.scope['url_route']['kwargs']['user']
+        print(my_id)
         other_user_id = self.scope['url_route']['kwargs']['id']
+        print('viene el usuario')
+        print(my_id, other_user_id)
         if int(my_id) > int(other_user_id):
             self.room_name = f'{my_id}-{other_user_id}'
         else:
