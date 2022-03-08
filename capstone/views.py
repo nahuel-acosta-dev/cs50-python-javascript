@@ -16,7 +16,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 
 from .serializers import CoinsSerializer
-from .models import User, Coins, Invitation, Group, Message, Notification, ChatModel
+from .models import User, Coins, GroupDetails, Message, ChatModel
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -35,6 +35,11 @@ class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
 
+grupos = GroupDetails.objects.all()
+
+print(len(grupos))
+
+
 @api_view(['GET'])
 def getRoutes(request):
     routes = [
@@ -43,6 +48,23 @@ def getRoutes(request):
     ]
 
     return Response(routes)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def myUser(request):
+    objecto = User.objects.get(id=request.user.id)
+    # return JsonResponse([],safe=false)
+    return Response(objecto.serialize(), status=200)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def allUsers(request):
+    objecto = User.objects.exclude(username=request.user.username)
+    objecto = objecto.order_by("-date").all()
+    # return JsonResponse([],safe=false)
+    return Response([objec.serialize() for objec in objecto], status=200)
 
 
 @api_view(['POST'])
@@ -84,59 +106,89 @@ def getCoins(request):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def createGroup(request):
+def createGroupDetails(request):
     user = request.user
+    data = json.loads(request.body)
+    name = data['name']
+    theme = data['theme']
+    description = data['description']
+    group = GroupDetails.objects.create(user=user, name=name,
+                                        theme=theme, description=description)
+    return Response(group.serialize(), status=200)
+
+
+@api_view(['PUT', 'DELETE'])
+@permission_classes([IsAuthenticated])
+def modGroupDetails(request, id):
+    data = json.loads(request.body)
+    group = GroupDetails.objects.get(id=id)
+    value = False
+    try:
+        if data['invitation1']:
+            group.invitation1 = True
+            group.user1 = User.objects.get(id=data['user1'])
+            value = True
+    except:
+        print({'message': 'Not changes invitation1'})
+    try:
+        if data['invitation2']:
+            group.invitation2 = True
+            group.user2 = User.objects.get(id=data['user2'])
+            value = True
+    except:
+        print({'message': 'Not changes invitation2'})
+    try:
+        if data['active'] == False:
+            group.active = False
+            value = True
+            grups = GroupDetails.objects.filter(user=request.user)
+            if len(grups) > 10:
+                grupDelete = GroupDetails.objects.filter(user=request.user)
+                print(grupDelete)
+                for grup in grupDelete[0:1]:
+                    grup.delete()
+    except:
+        print({'message': 'Not changes active'})
+
+    if value:
+        group.save()
+        return Response(group.serialize(), status=200)
+    else:
+        return Response({'message': 'Not changes'}, status=200)
 
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def myUser(request):
-    objecto = User.objects.get(id=request.user.id)
-    # return JsonResponse([],safe=false)
-    return Response(objecto.serialize(), status=200)
+def getGroupDetails(request):
+    try:
+        details = GroupDetails.objects.get(
+            user_id=request.user.id, active=True)
+        if details:
+            return Response(details.serialize(), status=200)
+        else:
+            return Response({"message": "No se ha encontrado ningun grupo disponible"}, status=400)
+    except:
+        return Response({"message": "No se ha encontrado ningun grupo disponible"}, status=400)
 
 
-@api_view(['GET'])
+@api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
-def allUsers(request):
-    objecto = User.objects.exclude(username=request.user.username)
-    objecto = objecto.order_by("-date").all()
-    # return JsonResponse([],safe=false)
-    return Response([objec.serialize() for objec in objecto], status=200)
+def deleteGroupDetails(request, id):
+    try:
+        details = GroupDetails.objects.get(id=id, user=request.user)
+        if details:
+            details.delete()
+            return Response({"message": "Your last group was deleted"}, status=200)
+        else:
+            return Response({"message": "No available group found"}, status=400)
+    except:
+        return Response({"message": "No available group found"}, status=400)
 
 
 @api_view(['POST'])
-def createInvitation(request):
-    data = json.loads(request.body)
+@permission_classes([IsAuthenticated])
+def createGroup(request):
     user = request.user
-    user1 = User.objects.get(user_id=data["user1"])
-    invitation1 = data["invitation1"]
-    user2 = User.objects.get(data["user2"])
-    invitation2 = data["invitation2"]
-    if invitation1 and invitation2:
-        invitation = Invitation.objects.create(
-            user=user, user1=user1, user2=user2, invitation1=invitation1, invitation2=invitation2)
-    elif invitation1 and invitation2 == False:
-        invitation = Invitation.objects.create(
-            user=user, user1=user1, user2=False, invitation1=invitation1, invitation2=False)
-    elif invitation2 and invitation1 == False:
-        invitation = Invitation.objects.create(
-            user=user, user2=user2, user1=False, invitation2=invitation1, invitation1=False)
-    else:
-        return Response({"message": "Las invitaciones fueron rechazadas"}, status=400)
-    return Response(invitation.serialize())
-
-
-@api_view(['PUT'])
-def UpdateInvitation(request):
-    jd = json.loads(request.body)
-    invitation = Invitation.objects.get(id=jd['id'])
-    invitation.user1 = User.objects.get(id=jd["user1"])
-    invitation.user2 = User.objects.get(id=jd["user2"])
-    invitation.invitation1 = jd["invitation1"]
-    invitation.invitation2 = jd["invitation2"]
-    invitation.save()
-    return Response(invitation.serialize())
 
 
 @api_view(['GET'])

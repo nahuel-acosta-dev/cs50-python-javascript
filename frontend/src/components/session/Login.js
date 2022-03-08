@@ -5,7 +5,7 @@ import AuthContext from "../contexts/AuthContext";
 import { Link } from "react-router-dom";
 
 const Login = () =>{
-    let {loginUser, user} = useContext(AuthContext);
+    let {loginUser} = useContext(AuthContext);
 
     return (
     <>
