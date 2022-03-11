@@ -210,10 +210,11 @@ class PersonalChatConsumer(AsyncWebsocketConsumer):
         title = data['title']
         theme = data['theme']
         description = data['description']
-        message = data['message']
+        response = data['response']
         username = data['username']
+        user_id = data['user_id']
 
-        await self.save_message(username, self.room_group_name, message, model, title, theme, description)
+        await self.save_message(username, self.room_group_name, response, model, title, theme, description, user_id)
         await self.channel_layer.group_send(
             self.room_group_name,
             {
@@ -222,8 +223,9 @@ class PersonalChatConsumer(AsyncWebsocketConsumer):
                 'title': title,
                 'theme': theme,
                 'description': description,
-                'message': message,
+                'response': response,
                 'username': username,
+                'user_id': user_id
             }
         )
 
@@ -232,16 +234,18 @@ class PersonalChatConsumer(AsyncWebsocketConsumer):
         title = event['title']
         theme = event['theme']
         description = event['description']
-        message = event['message']
+        response = event['response']
         username = event['username']
+        user_id = event['user_id']
 
         await self.send(text_data=json.dumps({
             'model': model,
             'title': title,
             'theme': theme,
             'description': description,
-            'message': message,
-            'username': username
+            'response': response,
+            'username': username,
+            'user_id': user_id
         }))
 
     async def disconnect(self, code):
@@ -251,6 +255,7 @@ class PersonalChatConsumer(AsyncWebsocketConsumer):
         )
 
     @database_sync_to_async
-    def save_message(self, username, thread_name, message, title, theme, description, model):
+    def save_message(self, username, thread_name, response, model, title, theme, description, user_id):
         ChatModel.objects.create(
-            sender=username, message=message, thread_name=thread_name)
+            sender=username, theme=theme, thread_name=thread_name, description=description,
+            response=response, title=title, model=model)

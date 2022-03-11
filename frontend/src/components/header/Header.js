@@ -8,14 +8,14 @@ const Header = () => {
 
     return (
     <>
-    <nav>
-        {!user ? 
-        (<> 
-            <Link to="login">Login</Link> | 
-            <Link to="register">Register</Link>
-        </>) : 
-        (<><Button variant="link" onClick={logoutUser}>Logout</Button> </>)}
-    </nav>
+        <nav>
+            {!user ? 
+            (<> 
+                <Link to="login">Login</Link> | 
+                <Link to="register">Register</Link>
+            </>) : 
+            (<><Button variant="link" onClick={logoutUser}>Logout</Button> </>)}
+        </nav>
     </>
     
     )

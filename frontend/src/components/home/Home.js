@@ -1,22 +1,24 @@
 import React, {useEffect, useState, useContext} from 'react';
 import ItemService from '../../services/ItemService';
-import Header from './../header/Header';
+import Header from '../header/Header';
 import AuthContext from "../contexts/AuthContext";
 import Cajitaazul from './Cajitaazul';
 import Cajitachat from './Cajitachat';
 
-const chatSocket = new WebSocket(`ws://localhost:8000/ws/chat/kakao/`);
+//const chatSocket = new WebSocket(`ws://localhost:8000/ws/chat/kakao/`);
 
 const Home = () => {
     const [coins, setCoins] = useState([]);
     let {loading, logoutUser, authTokens, updateToken, user} = useContext(AuthContext);
     const [msj,setmsj] = useState('');
     const [converzacion,setconverzacion] = useState([]);
+    const chatSocket = new WebSocket(`ws://localhost:8000/ws/chat/${user.user_id}/`);
+    console.log(chatSocket);
 
     let nombre = user.username;
 
       function actualizarMsj(e){
-        setmsj(e.value)
+        setmsj(e.value);
       }
       
       function enviar(e){
@@ -25,8 +27,8 @@ const Home = () => {
           message:msj,
           name:nombre
         }))
-        setmsj('')
-        e.preventDefault()
+        setmsj('');
+        e.preventDefault();
       }
     
 

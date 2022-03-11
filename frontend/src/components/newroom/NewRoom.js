@@ -25,13 +25,12 @@ const NewRoom = () => {
     }
 
     let getGroupDetails = async () =>{
-        if(loading)updateToken();
         try{
+            if(loading)updateToken();
             let response = await ItemService.getItem('group/get_group_details', authTokens);
             if(response.status === 200){
                 setGroupDetails(response.data);
                 console.log(response.data);
-                console.log(response.data.id)
             }else if(response.statusText === 'Unauthorized'){
                 logoutUser();
             }
@@ -40,7 +39,6 @@ const NewRoom = () => {
             console.log('no se han encontrado grupos');
             setNotEncounter(true)
         }
-
     }
 
     let getMyUser = async () =>{
@@ -71,7 +69,9 @@ const NewRoom = () => {
         
             <Routes>
                 <Route path="invitate" 
-                element={groupDetails ? <RoomTwo users={users} myUser={myUser} groupDetails={groupDetails}/>: 
+                element={groupDetails ? <RoomTwo users={users} myUser={myUser} groupDetails={groupDetails}
+                setGroupDetails={setGroupDetails} getGroupDetails={getGroupDetails}
+                />: 
                 <Navigate to="/newroom/create" />
                 } />
                 <Route path="create" 

@@ -7,25 +7,6 @@ const Room = () =>{
     const [entrada, setEntrada] = useState(false);
     const [messages, setMessages] = useState([]);
 
-    const llamada = async (room) => {
-        let response = await fetch(`http://127.0.0.1:8000/capstone_api/messages/${room}`,
-        {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-              }
-        })
-    
-        let data = await response.json();
-    
-        if(response.status === 200){
-            setMessages(data);
-            console.log(messages);
-        }
-        else{
-            alert('hiciste algo mal')
-        }}
-
     const getData =async (e) => { 
         e.preventDefault();
         console.log(e.target.roomname.value);

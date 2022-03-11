@@ -3,19 +3,15 @@ import AuthContext from '../contexts/AuthContext';
 import ShowMsj from './ShowMsj';
 import ItemService from '../../services/ItemService';
 
-const RoomTwo = ({users, myUser, groupDetails}) =>{
+const RoomTwo = ({users, myUser, groupDetails, setGroupDetails, getGroupDetails}) =>{
 let {user, updateToken, loading, authTokens} = useContext(AuthContext);
 const [contact, setContact] = useState([]);
 const [thread, setThread] = useState([]);
 const [mostrar, setMostrar] = useState([]);
 const [socket, setSocket] = useState();
-const message_username = user.username;
-
 
 let getThreads = async (otherUser) => {
     if(loading)updateToken();
-    console.log('viene')
-    console.log(otherUser)
     let response = await ItemService.getItem(`newroom/${otherUser.username}`, authTokens);
     console.log(response);
     if(response.status === 200){
@@ -74,9 +70,9 @@ const getContact = async (otherUser) => {
             </div>
             <>
             {contact.username != undefined ?
-                <ShowMsj setMostrar={setMostrar} groupDetails={groupDetails}
-                mostrar= {mostrar} thread={thread} socket= {socket}
-                message_username= {message_username}/> : null
+                <ShowMsj setMostrar={setMostrar} groupDetails={groupDetails} setGroupDetails={setGroupDetails}
+                mostrar= {mostrar} thread={thread} socket= {socket} 
+                myUser={myUser} getGroupDetails={getGroupDetails}/> : null
                 }
             </>
         </div>

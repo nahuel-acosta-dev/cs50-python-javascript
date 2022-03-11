@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
 
-export default function Cajitatwo({data,sendMsj, setmsj}){
+export default function Cajitatwo({data,sendMsj}){
 const [response, setResponse] = useState(false);
 
     const aceptar = (e) => {
@@ -39,7 +39,7 @@ const [response, setResponse] = useState(false);
                 (<td>
                     <p className="bg-success p-2 mt-2 mr-5 
                     shadow-sm text-white float-right rounded">Ha {
-                    data.msg == true ?
+                    data.response == true ?
                     'Aceptado la propuesta':
                     'Rechazado la propuesta'}</p>
                 </td>)

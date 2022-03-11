@@ -2,17 +2,24 @@ import React, {useState, useContext, useEffect} from 'react';
 import AuthContext from '../contexts/AuthContext';
 import Cajitaone from './model/Cajitaone';
 import Cajitatwo from './model/Cajitatwo';
+import ResponseUser from './model/ResponseUser';
+import Room from '../room/Room';
+import ItemService from '../../services/ItemService';
+import {Routes, Route, Navigate} from "react-router-dom";
 
-const ShowMsj = ({thread, message_username, setMostrar, mostrar, socket, groupDetails}) => {
-const [msj, setmsj] = useState('');
-let {user, loading, updateToken} = useContext(AuthContext);
+const ShowMsj = ({thread, myUser,setMostrar, mostrar, socket, groupDetails, setGroupDetails, getGroupDetails}) => {
+const [redirect, setRedirect] = useState(false);
+const [response, setResponse] = useState({
+    invitation1:false,
+    invitation2:false
+});
+const [room, setRoom] = useState();
+let {user, loading, updateToken, authTokens} = useContext(AuthContext);
+const message_username = user.username;
 
-function actualizarMsj(e){
-    setmsj(e.value)
-    }
+if(response.invitation1 && response.invitation2)setRedirect(true);
 
 const readyWebSocket = () => {
-
     socket.onopen = function(e){
         console.log("CONNECTION ESTABLISHED");
         }
@@ -26,37 +33,62 @@ const readyWebSocket = () => {
         }
 }
 
-    useEffect(() => {
-        if(loading)updateToken();
+useEffect(() => {
+    if(loading)updateToken();
 
-        readyWebSocket();
-    }, [])
+    readyWebSocket();
+}, []);
+
+const addUserGroups = async (user_id) => {
+    let invitation = {
+        'invitation': true,
+        'user': user_id 
+    }
+
+    let response = await ItemService.updateItem(`group/mod_group_details/${groupDetails.id}`,
+    invitation ,authTokens);
+    let data = await response.json();
+
+    if(response.status === 200) {
+        console.log('entro aca');
+        setGroupDetails(data);
+    }
+    else if(response.statusText === 'Unauthorized'){
+        logoutUser();
+    }
+}
 
 
 socket.onmessage = function(e){
     const data = JSON.parse(e.data);
-
     if(data){
-        console.log(data.message)
+        console.log(data.response);
         if(data.model == 'response'){
-        setMostrar([...mostrar, 
-            {
-              model: data.model,
-              msg:data.message,
-              name:data.username
-            }
-          ])}
+            setMostrar([...mostrar, 
+                {
+                    model: data.model,
+                    response:data.response,
+                    name:data.username
+                }]
+            )
+            console.log(data.response);
+            if(data.response === true && data.username !== user.username)addUserGroups(data.user_id);
+            if(response.invitation1 == false)setResponse({...response,invitation1:true});
+            else if(response.invitation2 == false)setResponse({...response,invitation2:true});
+            console.log(response);
+        }
         else if(data.model == 'invitation'){
-        setMostrar([...mostrar, 
-            {
-                model: data.model,
-                title:data.title,
-                theme:data.theme,
-                description:data.description,
-                msg:data.message,
-                name:data.username
-            }
-        ]) 
+            setMostrar([...mostrar, 
+                {
+                    model: data.model,
+                    title:data.title,
+                    theme:data.theme,
+                    description:data.description,
+                    response:data.response,
+                    name:data.username
+                }
+            ])
+            setRoom(`${data.title}${data.username}`)
         }
         else{
             return alert('error al identificari el tipo de mensaje')
@@ -64,17 +96,18 @@ socket.onmessage = function(e){
     }
 }
     const sendMsj= (e, model, value) => {
-        console.log(value);
-        console.log(groupDetails.description);
         if(model === 'response'){
         socket.send(JSON.stringify({
             'model':model,
             'title':'null',
             'theme':'null',
             'description':'null',
-            'message':value,
-            'username':message_username
+            'response':value,
+            'username':message_username,
+            'user_id': myUser.id
         }));
+
+        if(value === true)setRedirect(true);
     }
 
     else if(model === 'invitation'){
@@ -83,15 +116,15 @@ socket.onmessage = function(e){
             'title':groupDetails.name,
             'theme':groupDetails.theme,
             'description':groupDetails.description,
-            'message':'null',
-            'username':message_username
+            'response':'null',
+            'username':message_username,
+            'user_id':'null'
         }));
     }
 
-    else return console.log('Revisa el codigo')
+    else return console.log('Revisa el codigo');
 
-        setmsj('');
-        e.preventDefault();
+    e.preventDefault();
     }
 
     return (
@@ -100,30 +133,14 @@ socket.onmessage = function(e){
                 <div className="message-table-scroll">
                     <table className="table">
                         <tbody id='chat-body'>
-                            {thread.map( (message, i) => (
+                            {thread.map((message, i) => (
                             message.sender == user.username ? (
                             <tr key={i} className="">
-                                <td>
-                                    <p className="bg-success p-2 mt-2 mr-5 shadow-sm text-white float-right rounded">
-                                        {message.message}
-                                    </p>
-                                </td>
-                                <td>
-                                    <p><small className="p-1 shadow-sm">{message.timestamp}</small>
-                                    </p>
-                                </td>
+                                <Cajitaone data={message} />
                             </tr>)
                             :
                             (<tr key={i}>
-                                <td>
-                                    <p className="bg-primary p-2 mt-2 mr-5 shadow-sm text-white float-left rounded">
-                                        {message.message}
-                                    </p>
-                                </td>
-                                <td>
-                                    <p><small className="p-1 shadow-sm">{message.timestamp}</small>
-                                    </p>
-                                </td>
+                                <ResponseUser data={message} />
                             </tr>)
                             ))}
                             {mostrar.map((mos, i) => (
@@ -139,16 +156,24 @@ socket.onmessage = function(e){
                     </table>
                 </div>
                 <div className="row message-box p-3" >
-                    <div className="col-sm-8">
-                        <input value={msj} onChange={(e)=>actualizarMsj(e.target)} type="text" className="form-control" name="messageinput" placeholder="Write message..."/>
-                    </div>
                     <div className="col-sm-2 mt-1">
                         <div className="control">
-                            <button onClick={(e) => sendMsj(e, 'invitation')} className="btn btn-success" id="chat-message-submit">Invitar</button>
+                            <button onClick={(e) => sendMsj(e, 'invitation')} 
+                            className="btn btn-success" id="chat-message-submit">Invitar</button>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <Routes>
+                <Route path="/room" 
+                element={<Room room={room} groupDetails={groupDetails}/>} />
+            </Routes>
+
+            {
+                redirect &&
+                <Navigate to="/room" />
+            }                            
         </>
     )
 }

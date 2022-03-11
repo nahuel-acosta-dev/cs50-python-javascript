@@ -26,6 +26,8 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         # Add custom claims
         token['username'] = user.username
+        token['id'] = user.id
+        print(token)
         # ...
 
         return token
@@ -124,19 +126,19 @@ def modGroupDetails(request, id):
     group = GroupDetails.objects.get(id=id)
     value = False
     try:
-        if data['invitation1']:
-            group.invitation1 = True
-            group.user1 = User.objects.get(id=data['user1'])
-            value = True
+        if data['invitation']:
+            if group.invitation1 == False:
+                group.invitation1 = True
+                group.user1 = User.objects.get(id=data['user'])
+                value = True
+            elif group.invitation2 == False:
+                group.invitation2 = True
+                group.user2 = User.objects.get(id=data['user'])
+                value = True
+            else:
+                print({'message': 'Not changes invitation'})
     except:
-        print({'message': 'Not changes invitation1'})
-    try:
-        if data['invitation2']:
-            group.invitation2 = True
-            group.user2 = User.objects.get(id=data['user2'])
-            value = True
-    except:
-        print({'message': 'Not changes invitation2'})
+        print({'message': 'Not changes invitation'})
     try:
         if data['active'] == False:
             group.active = False
@@ -185,12 +187,6 @@ def deleteGroupDetails(request, id):
         return Response({"message": "No available group found"}, status=400)
 
 
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-def createGroup(request):
-    user = request.user
-
-
 @api_view(['GET'])
 def getMessages(request, room_name):
     objecto = Message.objects.filter(room=room_name)
@@ -212,7 +208,6 @@ def getNotification(request, room_name):
 @permission_classes([IsAuthenticated])
 def chatPage(request, username):
     user_obj = User.objects.get(username=username)
-    users = User.objects.exclude(username=request.user.username)
     #users = User.objects.exclude(username='nahuel')
     user = request.user
     if user is None:
@@ -224,6 +219,5 @@ def chatPage(request, username):
     else:
         thread_name = f'chat_{user_obj.id}-{request.user.id}'
     message_objs = ChatModel.objects.filter(thread_name=thread_name)
-    context = {'user': user_obj, 'users': users, 'messages': message_objs}
 
     return Response([objec.serialize() for objec in message_objs])

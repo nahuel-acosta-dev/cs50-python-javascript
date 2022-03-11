@@ -114,18 +114,26 @@ class Message(models.Model):
 
 
 class ChatModel(models.Model):
+    model = models.CharField(max_length=100, default=None)
+    title = models.CharField(max_length=100, default=None)
+    theme = models.CharField(max_length=100, default=None)
+    description = models.CharField(max_length=500, default=None)
     sender = models.CharField(max_length=100, default=None)
-    message = models.TextField(null=True, blank=True)
+    response = models.TextField(null=True, blank=True)
     thread_name = models.CharField(null=True, blank=True, max_length=50)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def serialize(self):
         return{
+            'model': self.model,
+            'title': self.title,
+            'theme': self.theme,
+            'description': self.description,
             'sender': self.sender,
-            'message': self.message,
+            'response': self.response,
             'thread_name': self.thread_name,
             'timestamp': self.timestamp
         }
 
     def __str__(self) -> str:
-        return self.message
+        return self.response
