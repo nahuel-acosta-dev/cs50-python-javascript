@@ -18,6 +18,7 @@ urlpatterns = [
 
     # general
     path('coins', views.getCoins),
+    path("allcoins", views.getAllCoins, name="allcoins"),
     path("allusers", views.allUsers, name="allusers"),
 
     path("group/create_group_details", views.createGroupDetails),

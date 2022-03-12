@@ -30,6 +30,9 @@ class Coins(models.Model):
     price = models.DecimalField(default=10.00, max_digits=8, decimal_places=2)
     coins = models.DecimalField(default=50.00, max_digits=8, decimal_places=2)
 
+    def __str__(self):
+        return f"{self.user}"
+
 
 class Calification(models.Model):
     user = models.ForeignKey(
@@ -41,6 +44,9 @@ class Ideas(models.Model):
     user = models.ForeignKey(
         "User", on_delete=models.CASCADE, null=False, related_name="user_ideas")
     idea = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.user_username}"
 
 
 class GroupDetails(models.Model):

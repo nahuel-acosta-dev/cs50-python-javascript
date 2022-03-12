@@ -19,6 +19,7 @@ from .serializers import CoinsSerializer
 from .models import User, Coins, GroupDetails, Message, ChatModel
 
 
+# ----------------Token Views-------------------------
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
@@ -51,6 +52,10 @@ def getRoutes(request):
 
     return Response(routes)
 
+# -----------------------------
+
+
+# -----------User Views---------------
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -87,6 +92,7 @@ def createUser(request):
             user.save()
         except IntegrityError:
             return Response({"message": "Username already taken."})
+        createCoins(user)
         return Response({'user_info': {
             'id': user.id,
             'username': user.username,
@@ -94,6 +100,13 @@ def createUser(request):
         }})
     else:
         return Response({"message": "usage method post"}, status=400)
+
+# -----------------------
+
+
+# -----------Coins Views-------------
+def createCoins(user):
+    Coins.objects.create(user=user)
 
 
 @api_view(['GET'])
@@ -103,8 +116,23 @@ def getCoins(request):
     print(user.id)
     coins = Coins.objects.filter(user_id=user.id)
     serializer = CoinsSerializer(coins, many=True)
+    print(serializer.data)
     return Response(serializer.data)
 
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getAllCoins(request):
+    user = request.user
+    print(user.id)
+    coins = Coins.objects.all()
+    serializer = CoinsSerializer(coins, many=True)
+    return Response(serializer.data)
+
+# ------------------------------
+
+
+# -----------GroupDetails Views--------------
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -185,6 +213,8 @@ def deleteGroupDetails(request, id):
             return Response({"message": "No available group found"}, status=400)
     except:
         return Response({"message": "No available group found"}, status=400)
+
+# -----------------------------
 
 
 @api_view(['GET'])

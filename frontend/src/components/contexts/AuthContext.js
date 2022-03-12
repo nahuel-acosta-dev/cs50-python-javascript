@@ -71,26 +71,25 @@ export const AuthProvider = ({children}) => {
     updateToken: updateToken,
     authTokens: authTokens,
     loginUser: loginUser,
-    logoutUser: logoutUser,
-    loading: loading
+    logoutUser: logoutUser
   }
 
   useEffect(() => {
+    if(loading)updateToken();
+
     let fourMinutes = 1000 * 60 * 4;
     let interval = setInterval(() => {
-      if(authTokens){
-        updateToken();
-      }
+      if(authTokens)updateToken();
+      
     }, fourMinutes)
-    //revisar esta parte, mi sesion se cierra tras cumplir el tiempo que marc
-    //four minutes debido a que se actualiza el token
+
     return () => clearInterval(interval);
   }, [authTokens, loading]);
 
 
   return(
       <AuthContext.Provider value={contextData}>
-          {children}
+          {loading ? null: children}
     </AuthContext.Provider>  
   )
 }

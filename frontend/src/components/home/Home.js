@@ -1,5 +1,4 @@
 import React, {useEffect, useState, useContext} from 'react';
-import ItemService from '../../services/ItemService';
 import Header from '../header/Header';
 import AuthContext from "../contexts/AuthContext";
 import Cajitaazul from './Cajitaazul';
@@ -8,14 +7,12 @@ import Cajitachat from './Cajitachat';
 //const chatSocket = new WebSocket(`ws://localhost:8000/ws/chat/kakao/`);
 
 const Home = () => {
-    const [coins, setCoins] = useState([]);
-    let {loading, logoutUser, authTokens, updateToken, user} = useContext(AuthContext);
+    let {user} = useContext(AuthContext);
     const [msj,setmsj] = useState('');
     const [converzacion,setconverzacion] = useState([]);
     const chatSocket = new WebSocket(`ws://localhost:8000/ws/chat/${user.user_id}/`);
-    console.log(chatSocket);
-
     let nombre = user.username;
+    console.log(chatSocket);
 
       function actualizarMsj(e){
         setmsj(e.value);
@@ -30,36 +27,21 @@ const Home = () => {
         setmsj('');
         e.preventDefault();
       }
-    
-
-    let getCoins = async () =>{
-        let response = await ItemService.getItem("coins", authTokens);
-
-        if(response.status === 200){
-            setCoins(response.data);
-        }else if(response.statusText === 'Unauthorized'){
-            logoutUser();
-        }
-        
-    }
 
     let readyWebSocket = () =>{
       chatSocket.onopen = () => {
         console.log('WebSocket conectado');
       };
+
       chatSocket.onclose = function (evt) {
+        console.log(evt.reason);
         console.log('WebSocket desconectado');
+        
       };
 
     }
 
     useEffect(() =>{
-
-        if(loading){
-            updateToken();
-        }
-        getCoins();
-
         readyWebSocket();
     }, []);
 
@@ -81,11 +63,6 @@ const Home = () => {
     <>
       <h1>Este es el home</h1>
       <Header/>
-      {coins.map(coin => (
-        <div key={coin.id}>funciona{coin.coins}</div>
-      ))
-      }
-
       <div>
           <div className="pantalla">
             <div id="elCuerpo">
