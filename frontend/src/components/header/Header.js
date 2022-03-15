@@ -16,7 +16,8 @@ const Header = () => {
             </>) : 
             (<section className="row">
                 <div className="col-md-2"><Link to="/">Home</Link></div>
-                <div className="col-md-2"><Link to="invitation">Invitation</Link></div>
+                <div className="col-md-2"><Link to="/invitation">Invitation</Link></div>
+                <div className="col-md-2"><Link to="/receive-invitations">receive invitations</Link></div>
                 <div className="col-md-2"><Button variant="link" onClick={logoutUser}>Logout</Button></div>
             </section>)}
         </nav>

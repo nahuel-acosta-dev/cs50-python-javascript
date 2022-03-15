@@ -14,7 +14,7 @@ const [response, setResponse] = useState({
     invitation2:false
 });
 const [room, setRoom] = useState();
-let {user, loading, updateToken, authTokens} = useContext(AuthContext);
+let {user, authTokens} = useContext(AuthContext);
 const message_username = user.username;
 
 if(response.invitation1 && response.invitation2)setRedirect(true);
@@ -34,8 +34,6 @@ const readyWebSocket = () => {
 }
 
 useEffect(() => {
-    if(loading)updateToken();
-
     readyWebSocket();
 }, []);
 

@@ -1,4 +1,4 @@
-import React,{useState,useEffect, useContext} from 'react';
+import React,{useState,useEffect, useContext, memo} from 'react';
 import AuthContext from '../../contexts/AuthContext';
 import Button from 'react-bootstrap/Button';
 
@@ -38,17 +38,21 @@ const Invite = ({otherUser, onHide}) => {
 
         setInterval(() => {
             chatSocket.close(1000, 'no responsing');
-        }, 10000)
+            console.log('Fue el intervalo');
+        }, 10000);
         
         e.preventDefault();
 
       }
 
       chatSocket.onmessage = (message)=>{
-        const dataFromserver = JSON.parse(message.data)
+        const dataFromserver = JSON.parse(message.data);
         if (dataFromserver){
-            if(user.username === dataFromserver.username){
-                chatSocket.close(1000, 'thanks for response')}
+            if(otherUser.username === dataFromserver.name){
+                chatSocket.close(1000, 'thanks for response');
+                alert("message: " + dataFromserver.message
+                + "\nname: " + dataFromserver.name);
+              }
         }
     }
 

@@ -23,14 +23,17 @@ const Invitation = () => {
 
     return(
         <>
-        <Header />
         <Table striped bordered hover variant="info">
                 <thead>
                     <tr>
+                    {/*poner un boton reload con el icono de reload, 
+                        para que recargue usuarios disponibles*/}
+                    
                     <th>Invitation</th>
                     <th>Price</th>
-                    <th>First Name</th>
+                    <th>coins</th>
                     <th>Username</th>
+                    <th>Reload</th>
                     </tr>
                 </thead>
                 <tbody>

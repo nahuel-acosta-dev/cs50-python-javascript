@@ -6,9 +6,9 @@ const AuthContext = createContext();
 export default AuthContext;
 
 export const AuthProvider = ({children}) => {
-  const [user, setUser] = useState(() => localStorage.getItem("authTokens") ? 
+  let [user, setUser] = useState(() => localStorage.getItem("authTokens") ? 
   jwt_decode(localStorage.getItem("authTokens")) : null);
-  const [authTokens, setAuthToken] = useState(() => localStorage.getItem("authTokens") ? 
+  let [authTokens, setAuthToken] = useState(() => localStorage.getItem("authTokens") ? 
   JSON.parse(localStorage.getItem("authTokens")) : null);
   let [loading, setLoading] = useState(true);
 
@@ -53,9 +53,8 @@ export const AuthProvider = ({children}) => {
     }
     else logoutUser();
 
-    if(loading) {
-      setLoading(false);
-    }
+    if(loading) setLoading(false);
+    
   }
 
 
@@ -66,30 +65,32 @@ export const AuthProvider = ({children}) => {
   }
 
   let contextData = {
-    user: user,
     setUser: setUser,
-    updateToken: updateToken,
-    authTokens: authTokens,
     loginUser: loginUser,
-    logoutUser: logoutUser
+    logoutUser: logoutUser,
+    user: user,
+    authTokens: authTokens
   }
 
-  useEffect(() => {
+  useEffect(()=> {
+
     if(loading)updateToken();
+    
+    let fourMinutes = 1000 * 60 * 4
 
-    let fourMinutes = 1000 * 60 * 4;
-    let interval = setInterval(() => {
-      if(authTokens)updateToken();
-      
-    }, fourMinutes)
+    let interval =  setInterval(()=> {
+        if(authTokens)updateToken();
+        
+    }, fourMinutes);
 
-    return () => clearInterval(interval);
-  }, [authTokens, loading]);
+    return ()=> clearInterval(interval);
+
+}, [authTokens, loading]);
 
 
   return(
       <AuthContext.Provider value={contextData}>
-          {loading ? null: children}
+          {loading ? null : children}
     </AuthContext.Provider>  
   )
 }

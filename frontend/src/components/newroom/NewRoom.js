@@ -42,7 +42,6 @@ const NewRoom = () => {
     }
 
     let getMyUser = async () =>{
-        if(loading)updateToken();
         let response = await ItemService.getItem('user', authTokens);
 
         if(response.status === 200){

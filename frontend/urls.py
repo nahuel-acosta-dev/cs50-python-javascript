@@ -17,5 +17,6 @@ urlpatterns = [
     path("newroom", views.index),
     path("newroom/invitate", views.index),
     path("newroom/create", views.index),
-    path("notification", views.index)
+    path("notification", views.index),
+    path('receive-invitations', views.index)
 ]

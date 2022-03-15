@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {memo, useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import UserModal from '../modal/UserModal';
 
@@ -24,4 +24,4 @@ const TableUser = ({coin}) => {
     )
 }
 
-export default TableUser;
+export default memo(TableUser);
