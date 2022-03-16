@@ -1,5 +1,5 @@
-import React, {useContext,useState, useEffect, memo} from 'react';
-import AuthContext from '../contexts/AuthContext';
+import React, {useContext, useEffect} from 'react';
+import AuthContext from '../../contexts/AuthContext';
 import Chat from './Chat';
 
 const ReInvitations = () => {
@@ -45,4 +45,4 @@ const ReInvitations = () => {
     )
 }
 
-export default memo(ReInvitations);
+export default ReInvitations;

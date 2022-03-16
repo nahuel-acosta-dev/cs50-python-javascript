@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, memo} from 'react';
 
 const Input = ({chatSocket, nombre}) =>{
     const [msj,setmsj] = useState('');
@@ -22,7 +22,7 @@ const Input = ({chatSocket, nombre}) =>{
 return (
     <>
         <input className="chat" type="text" value={msj} onChange={(e)=>actualizarMsj(e.target)}/>
-        <button className="botonEnviar" onClick={(e)=>{enviar(e)}}> enviar</button>
+        <button className="botonEnviar" type="submit" onClick={(e)=>{enviar(e)}}> enviar</button>
     </>
 )
 

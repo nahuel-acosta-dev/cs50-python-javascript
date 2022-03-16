@@ -1,5 +1,5 @@
 import React, {useState, useContext, useEffect} from 'react';
-import AuthContext from '../contexts/AuthContext';
+import AuthContext from '../../contexts/AuthContext';
 import Cajitaone from './model/Cajitaone';
 import Cajitatwo from './model/Cajitatwo';
 import ResponseUser from './model/ResponseUser';

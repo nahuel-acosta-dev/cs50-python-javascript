@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useMemo} from 'react';
+import React, {useState} from 'react';
 import Input from './Input';
 import Cajitaazul from './Cajitaazul';
 import Cajitachat from './Cajitachat';
@@ -7,16 +7,16 @@ const Chat = ({nombre, chatSocket}) => {
     const [converzacion, setconverzacion] = useState([]);
     console.log(converzacion);
 
-
       chatSocket.onmessage = (message)=> {
         const dataFromserver = JSON.parse(message.data);
+     
         if (dataFromserver){
-          setconverzacion([...converzacion, 
-            {
-              msg:dataFromserver.message,
-              name:dataFromserver.name
-            }
-          ])
+            setconverzacion([...converzacion, 
+              {
+                msg:dataFromserver.message,
+                name:dataFromserver.name,
+              }
+            ]);
         }
       }
       

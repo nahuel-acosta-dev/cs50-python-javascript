@@ -3,11 +3,11 @@ import Register from './../session/Register';
 import Login from './../session/Login';
 import Header from '../header/Header';
 import Home from './../home/Home';
-import AuthContext from "../contexts/AuthContext";
+import AuthContext from "../../contexts/AuthContext";
 import Room from '../room/Room';
 import NewRoom from '../newroom/NewRoom';
 import Invitation from '../invitation/Invitation';
-import ReInvitations from '../reinvitations/ReInvitations';
+import Loading from '../reinvitations/Loading';
 
 
 import { 
@@ -29,7 +29,7 @@ const RoutesSession = () => {
                     <Route exact path="/register" element={!user ?<Register/> : <Navigate to="/"/>} />
                     <Route exact path="/login" element={user ? <Navigate to="/"/> : <Login />}/>
                     <Route exact path="/invitation/*" element={!user ? <Navigate to="/login"/> : <Invitation/>} />
-                    <Route exact path="/receive-invitations/*" element={!user ? <Navigate to="/login"/> : <ReInvitations />} />
+                    <Route exact path="/receive-invitations/*" element={!user ? <Navigate to="/login"/> : <Loading/>} />
 
                     <Route exact path="/room" element={!user ? <Navigate to="/login"/> : <Room />} />
                     <Route exact path="/newroom/*" element={!user ? <Navigate to="/login"/> : <NewRoom />} />

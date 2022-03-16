@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import AuthContext from "../contexts/AuthContext";
+import AuthContext from "../../contexts/AuthContext";
 import { Link } from "react-router-dom";
 
 const Login = () =>{

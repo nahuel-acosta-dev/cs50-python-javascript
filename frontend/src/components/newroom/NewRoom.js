@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import AuthContext from '../contexts/AuthContext';
+import AuthContext from '../../contexts/AuthContext';
 import ItemService from '../../services/ItemService';
 import CreateGroupDetails from './groupdetails/CreateGroupDetails';
 import RoomTwo from './RoomTwo';

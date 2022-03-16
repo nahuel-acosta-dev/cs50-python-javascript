@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import React from 'react';
 
 //const chatSocket = new WebSocket(`ws://localhost:8000/ws/chat/kakao/`);
 
@@ -12,4 +12,4 @@ const Home = () => {
     )
 }
 
-export default memo(Home);
+export default Home;

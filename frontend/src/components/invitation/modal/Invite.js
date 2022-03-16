@@ -1,5 +1,5 @@
 import React,{useState,useEffect, useContext, memo} from 'react';
-import AuthContext from '../../contexts/AuthContext';
+import AuthContext from '../../../contexts/AuthContext';
 import Button from 'react-bootstrap/Button';
 
 const Invite = ({otherUser, onHide}) => {

@@ -1,7 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react';
-import AuthContext from '../contexts/AuthContext';
+import AuthContext from '../../contexts/AuthContext';
 import Table from 'react-bootstrap/Table';
-import Header from '../header/Header';
 import ItemService from '../../services/ItemService';
 import TableUser from './tableuser/TableUser';
 
@@ -42,8 +41,6 @@ const Invitation = () => {
                     ))}
                 </tbody>
             </Table>
-
-            
         </>
     )
 

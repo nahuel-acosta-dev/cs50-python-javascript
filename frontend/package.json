@@ -32,6 +32,7 @@
     "bootstrap": "^5.1.3",
     "browser-sync": "^2.27.7",
     "create-use-context": "^1.0.1",
+    "dayjs": "^1.11.0",
     "jwt-decode": "^3.1.2",
     "react-bootstrap": "^2.1.2",
     "react-bootstrap-icons": "^1.7.2",
