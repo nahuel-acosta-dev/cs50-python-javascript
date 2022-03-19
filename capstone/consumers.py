@@ -4,7 +4,7 @@ from channels.consumer import AsyncConsumer
 from asgiref.sync import sync_to_async
 from django.contrib.auth.models import AnonymousUser
 from channels.db import database_sync_to_async
-from .models import Message, User, ChatModel
+from .models import Message, User, ChatModel, Invitations, GroupDetails
 
 
 class CapstoneRoomConsumer(AsyncWebsocketConsumer):
@@ -27,26 +27,74 @@ class CapstoneRoomConsumer(AsyncWebsocketConsumer):
 
     async def receive(self, text_data=None, bytes_data=None):
         text_data_json = json.loads(text_data)
-        message = text_data_json['message']
+        type_message = text_data_json['type_message']
+        response = text_data_json['response']
+        group_id = text_data_json['group_id']
+        user_id = text_data_json['user_id']
         name = text_data_json['name']
+        title = text_data_json['title']
+        theme = text_data_json['theme']
+        description = text_data_json['description']
+
+        await self.save_message(self.room_group_name, type_message, response, name)
+        await self.update_group(group_id, user_id, response, type_message)
 
         await self.channel_layer.group_send(
             self.room_group_name,
             {
                 'type': 'chat_message',
-                'message': message,
-                'name': name
+                'type_message': type_message,
+                'response': response,
+                'name': name,
+                'group_id': group_id,
+                'user_id': user_id,
+                'title': title,
+                'theme': theme,
+                'description': description
             }
         )
 
     async def chat_message(self, event):
-        message = event['message']
+        type_message = event['type_message']
+        response = event['response']
         name = event['name']
+        group_id = event['group_id']
+        user_id = event['user_id']
+        title = event['title']
+        theme = event['theme']
+        description = event['description']
 
         await self.send(text_data=json.dumps({
-            'message': message,
-            'name': name
+            'type_message': type_message,
+            'response': response,
+            'group_id': group_id,
+            'user_id': user_id,
+            'name': name,
+            'title': title,
+            'theme': theme,
+            'description': description
         }))
+
+    @database_sync_to_async
+    def save_message(self, room, type_message, response, name):
+        Invitations.objects.create(
+            room=room, type_message=type_message, message=response, name=name)
+
+    @database_sync_to_async
+    def update_group(self, group_id, user_id, response, type_message):
+        print(response)
+        if response == 'true' and type_message == 'response':
+            user = User.objects.get(id=user_id)
+            print(user.id)
+            group = GroupDetails.objects.get(id=int(group_id))
+            if group.invitation1 == False and user:
+                group.user1 = User.objects.get(id=user_id)
+                group.invitation1 = True
+                group.save()
+            elif group.invitation2 == False and user:
+                group.user2 = User.objects.get(id=user_id)
+                group.invitation2 = True
+                group.save()
 
 
 class ChatPrivateConsumer(AsyncWebsocketConsumer):

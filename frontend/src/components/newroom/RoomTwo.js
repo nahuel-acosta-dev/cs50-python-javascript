@@ -4,14 +4,13 @@ import ShowMsj from './ShowMsj';
 import ItemService from '../../services/ItemService';
 
 const RoomTwo = ({users, myUser, groupDetails, setGroupDetails, getGroupDetails}) =>{
-let {user, updateToken, loading, authTokens} = useContext(AuthContext);
+let {user, authTokens} = useContext(AuthContext);
 const [contact, setContact] = useState([]);
 const [thread, setThread] = useState([]);
 const [mostrar, setMostrar] = useState([]);
 const [socket, setSocket] = useState();
 
 let getThreads = async (otherUser) => {
-    if(loading)updateToken();
     let response = await ItemService.getItem(`newroom/${otherUser.username}`, authTokens);
     console.log(response);
     if(response.status === 200){

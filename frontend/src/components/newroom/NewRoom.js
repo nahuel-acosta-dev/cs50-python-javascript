@@ -26,7 +26,6 @@ const NewRoom = () => {
 
     let getGroupDetails = async () =>{
         try{
-            if(loading)updateToken();
             let response = await ItemService.getItem('group/get_group_details', authTokens);
             if(response.status === 200){
                 setGroupDetails(response.data);
@@ -37,7 +36,7 @@ const NewRoom = () => {
         }
         catch{
             console.log('no se han encontrado grupos');
-            setNotEncounter(true)
+            setNotEncounter(true);
         }
     }
 
@@ -53,7 +52,6 @@ const NewRoom = () => {
 
 
     useEffect(() => {
-        if(loading)updateToken();
         getUsers();
         getMyUser();
         getGroupDetails();

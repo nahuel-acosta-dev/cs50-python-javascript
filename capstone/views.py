@@ -16,7 +16,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 
 from .serializers import CoinsSerializer
-from .models import User, Coins, GroupDetails, Message, ChatModel
+from .models import User, Coins, GroupDetails, Message, ChatModel, Invitations
 
 
 # ----------------Token Views-------------------------
@@ -125,9 +125,26 @@ def getCoins(request):
 def getAllCoins(request):
     user = request.user
     print(user.id)
-    coins = Coins.objects.all()
+    coins = Coins.objects.exclude(user_id=user.id)
     serializer = CoinsSerializer(coins, many=True)
     return Response(serializer.data)
+
+# ------------------------------
+
+# -----------Invitations Views-------------
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getInvitations(request):
+    try:
+        rooms = Invitations.objects.filter(room=f"chat_{request.user.id}")
+        if rooms:
+            return Response([room.serialize() for room in rooms], status=200)
+        else:
+            return Response({"message": "No se ha encontrado Invitaciones de grupo disponible"}, status=204)
+    except:
+        return Response({"message": "No se ha encontrado Invitaciones de grupo disponible"}, status=400)
 
 # ------------------------------
 
@@ -196,7 +213,7 @@ def getGroupDetails(request):
         if details:
             return Response(details.serialize(), status=200)
         else:
-            return Response({"message": "No se ha encontrado ningun grupo disponible"}, status=400)
+            return Response({"message": "No se ha encontrado ningun grupo disponible"}, status=204)
     except:
         return Response({"message": "No se ha encontrado ningun grupo disponible"}, status=400)
 
@@ -210,7 +227,7 @@ def deleteGroupDetails(request, id):
             details.delete()
             return Response({"message": "Your last group was deleted"}, status=200)
         else:
-            return Response({"message": "No available group found"}, status=400)
+            return Response({"message": "No available group found"}, status=204)
     except:
         return Response({"message": "No available group found"}, status=400)
 

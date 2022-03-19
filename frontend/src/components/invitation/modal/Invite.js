@@ -1,16 +1,13 @@
-import React,{useState,useEffect, useContext, memo} from 'react';
-import AuthContext from '../../../contexts/AuthContext';
-import Button from 'react-bootstrap/Button';
+import React,{useState,useEffect, memo} from 'react';
+import Buttons from './buttons/Buttons';
 
-const Invite = ({otherUser, onHide}) => {
+const Invite = ({otherUser, onHide, group}) => {
     const [stateInvitation, setStateInvitation] = useState(false);
     const chatSocket = new WebSocket(`ws://localhost:8000/ws/chat/${otherUser['id']}/`);
-    let {user} = useContext(AuthContext);
     console.log(chatSocket);
 
     const closeOnHide = () => {
         if(!stateInvitation)chatSocket.close(1000, 'no invite');
-
         onHide();
     }
 
@@ -28,29 +25,13 @@ const Invite = ({otherUser, onHide}) => {
         readyWebSocket();
       }, [])
 
-      function enviar(e){
-        chatSocket.send(JSON.stringify({
-          type:'message',
-          message:`Invitacion de ${user.username}`,
-          name:user.username
-        }))
-        setStateInvitation(true);
-
-        setInterval(() => {
-            chatSocket.close(1000, 'no responsing');
-            console.log('Fue el intervalo');
-        }, 10000);
-        
-        e.preventDefault();
-
-      }
 
       chatSocket.onmessage = (message)=>{
         const dataFromserver = JSON.parse(message.data);
         if (dataFromserver){
             if(otherUser.username === dataFromserver.name){
                 chatSocket.close(1000, 'thanks for response');
-                alert("message: " + dataFromserver.message
+                alert("reponse: " + dataFromserver.response
                 + "\nname: " + dataFromserver.name);
               }
         }
@@ -58,8 +39,8 @@ const Invite = ({otherUser, onHide}) => {
 
       return (
           <div>
-              <Button variant="danger" onClick={(e) => enviar(e)}>invitar</Button>
-              <Button onClick={closeOnHide}>Close</Button>
+              <Buttons variant="danger" closeOnHide={closeOnHide} group={group}
+              chatSocket={chatSocket} setStateInvitation={setStateInvitation}/>
           </div>
           )
 }

@@ -9,7 +9,12 @@ urlpatterns = [
     path("login",  views.index),
     path("register", views.index),
     path("logout", views.index),
+
+    # Generals
     path("invitation", views.index),
+    path('invitation/invitate', views.index),
+    path("invitation/create", views.index),
+    path('receive-invitations', views.index),
 
     # Practicas
     path("group-invitation", views.index),
@@ -17,6 +22,5 @@ urlpatterns = [
     path("newroom", views.index),
     path("newroom/invitate", views.index),
     path("newroom/create", views.index),
-    path("notification", views.index),
-    path('receive-invitations', views.index)
+    path("notification", views.index)
 ]

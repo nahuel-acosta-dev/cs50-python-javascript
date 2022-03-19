@@ -2,7 +2,7 @@ import React, {memo, useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import UserModal from '../modal/UserModal';
 
-const TableUser = ({coin}) => {
+const TableUser = ({coin, group}) => {
     const [modalShow, setModalShow] = useState(false);
     console.log('este es el id:' + coin.user['id']);
 
@@ -19,7 +19,7 @@ const TableUser = ({coin}) => {
             </tr>
 
             <UserModal show={modalShow} user={coin.user}
-            onHide={() => setModalShow(false)}/>
+            onHide={() => setModalShow(false)} group={group}/>
         </>
     )
 }

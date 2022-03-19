@@ -1,6 +1,6 @@
-import React, {useState, memo} from 'react';
+import React, {useState} from 'react';
 
-const Input = ({chatSocket, nombre}) =>{
+const Input = ({chatSocket, nombre, myId, group}) =>{
     const [msj,setmsj] = useState('');
 
     function actualizarMsj(e){
@@ -10,8 +10,14 @@ const Input = ({chatSocket, nombre}) =>{
       function enviar(e){
         chatSocket.send(JSON.stringify({
           type:'message',
-          message:msj,
-          name:nombre
+          type_message: 'response',
+          response:msj,
+          name:nombre,
+          group_id:group.id,
+          user_id:myId,
+          title:'null',
+          theme:'null',
+          description:'null'
         }))
         setmsj('');
         e.preventDefault();

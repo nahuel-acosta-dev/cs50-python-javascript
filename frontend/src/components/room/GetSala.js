@@ -1,8 +1,6 @@
-import React, {useState,useEffect, useContext} from 'react';
+import React, {useState,useEffect} from 'react';
 import ItemService from '../../services/ItemService';
-import AuthContext from '../../contexts/AuthContext';
 const GetSala = ({roomName, userName, messages}) =>{
-    let {user} = useContext(AuthContext);
     const chatSocket = new WebSocket(`ws://localhost:8000/ws/${roomName}/`);
     console.log(messages);
     

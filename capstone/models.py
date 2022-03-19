@@ -64,7 +64,7 @@ class GroupDetails(models.Model):
     active = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"{self.user_id}"
+        return f"{self.user.username}"
 
     def serialize(self):
         return{
@@ -93,15 +93,23 @@ class RegisterGroup(models.Model):
         "Group", on_delete=models.CASCADE, null=False, related_name="register_group")
 
 
-class Notification(models.Model):
-    username = models.CharField(max_length=255)
-    room = models.CharField(max_length=255)
-    content = models.TextField()
+class Invitations(models.Model):
+    type_message = models.CharField(max_length=100)
+    room = models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
+    message = models.CharField(max_length=100)
     date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} {self.room} {self.type_message}"
 
     def serialize(self):
         return{
-            "content": self.content,
+            'type_message': self.type_message,
+            'room': self.room,
+            'name': self.name,
+            'msg': self.message,
+            'date': self.date
         }
 
 

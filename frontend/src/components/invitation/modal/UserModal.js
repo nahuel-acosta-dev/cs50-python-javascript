@@ -24,7 +24,7 @@ const UserModal = (props) => {
         <Modal.Footer>
         {
             props.show &&
-            <Invite otherUser={props.user} onHide={props.onHide}/>
+            <Invite otherUser={props.user} onHide={props.onHide} group={props.group}/>
           }
         </Modal.Footer>
       </Modal>

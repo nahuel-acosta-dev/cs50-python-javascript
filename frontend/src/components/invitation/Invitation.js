@@ -1,33 +1,39 @@
 import React, {useState, useEffect, useContext} from 'react';
-import AuthContext from '../../contexts/AuthContext';
+import Loading from '../loading/Loading';
+import ItemContext from '../../contexts/ItemContext';
 import Table from 'react-bootstrap/Table';
-import ItemService from '../../services/ItemService';
 import TableUser from './tableuser/TableUser';
 
-const Invitation = () => {
+const Invitation = ({groupDetails, setHide}) => {
     const [coins, setCoins] = useState([]);
-    let {authTokens, logoutUser} = useContext(AuthContext);
+    const [loading, setLoading] = useState(false);
+    let {getItemContext} = useContext(ItemContext);
 
-    const getItem = async (url, set) => {
-        let response = await ItemService.getItem(url, authTokens);
-        if(response.status === 200){
-            console.log(response.data);
-            set(response.data);}
-        else if(response.statusText === 'Unauthorized')logoutUser();
+    const getCoins = async () => {
+        try{
+        getItemContext('allcoins', setCoins);}
+        catch{
+            console.log('Error loading user coins');}
     }
 
+    setTimeout(() =>{
+        setLoading(true);
+    }, 2000);
+
     useEffect(() => {
-        getItem('allcoins', setCoins); //get coins 
+        setHide(true);
+        getCoins(); //get coins 
+        return () => setHide(false);
     }, []);
 
     return(
         <>
-        <Table striped bordered hover variant="info">
+        {!coins || !loading ?
+            <Loading />
+            :            
+            <Table striped bordered hover variant="info">
                 <thead>
-                    <tr>
-                    {/*poner un boton reload con el icono de reload, 
-                        para que recargue usuarios disponibles*/}
-                    
+                    <tr>                    
                     <th>Invitation</th>
                     <th>Price</th>
                     <th>coins</th>
@@ -37,10 +43,10 @@ const Invitation = () => {
                 </thead>
                 <tbody>
                     {coins.map(coin => (
-                        <TableUser key={coin.id} coin={coin} />
+                        <TableUser key={coin.id} coin={coin} setHide={setHide} group={groupDetails}/>
                     ))}
                 </tbody>
-            </Table>
+            </Table>}
         </>
     )
 

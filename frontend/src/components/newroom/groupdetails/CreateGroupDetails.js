@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import {Navigate} from "react-router-dom";
 
 const CreateGroupDetails = ({ setGroupDetails, groupDetails, setOcultar, notEncounter}) => {
-    let {loading, updateToken, authTokens} = useContext(AuthContext);
+    let {authTokens} = useContext(AuthContext);
     const [back, setBack] = useState(false);
     const [redInvitate, setRedInvitate] = useState(false);
 
@@ -46,7 +46,6 @@ const CreateGroupDetails = ({ setGroupDetails, groupDetails, setOcultar, notEnco
     }
 
     useEffect(() => {
-        if(loading) updateToken();
         setOcultar(true);
     }, [])
 

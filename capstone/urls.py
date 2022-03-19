@@ -20,6 +20,7 @@ urlpatterns = [
     path('coins', views.getCoins),
     path("allcoins", views.getAllCoins, name="allcoins"),
     path("allusers", views.allUsers, name="allusers"),
+    path("allinvitations", views.getInvitations, name="allinvitations"),
 
     path("group/create_group_details", views.createGroupDetails),
     path("group/get_group_details", views.getGroupDetails),

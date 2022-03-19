@@ -2,12 +2,12 @@ import React, {useContext, useEffect} from 'react';
 import AuthContext from '../../contexts/AuthContext';
 import Chat from './Chat';
 
-const ReInvitations = () => {
+const ReInvitations = ({invitations}) => {
     let {user} = useContext(AuthContext);
     const chatSocket = new WebSocket(`ws://localhost:8000/ws/chat/${user.user_id}/`);
-    let nombre = user.username;
     
     console.log(chatSocket);
+    console.log(invitations);
 
     let readyWebSocket = () =>{
       chatSocket.onopen = () => {
@@ -40,7 +40,11 @@ const ReInvitations = () => {
 
     return (
     <>
-      <Chat nombre={nombre} chatSocket={chatSocket}/>      
+    {invitations === 'void' &&
+    <h1>No hay invitaciones</h1>
+    }
+      <Chat nombre={user.username} myId={user.user_id} chatSocket={chatSocket} 
+      invitations={invitations}/>      
     </>
     )
 }
