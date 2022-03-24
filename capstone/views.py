@@ -15,7 +15,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
 
 
-from .serializers import CoinsSerializer
+from .serializers import CoinsSerializer, GroupDetailsSerializer
 from .models import User, Coins, GroupDetails, Message, ChatModel, Invitations
 
 
@@ -40,7 +40,7 @@ class MyTokenObtainPairView(TokenObtainPairView):
 
 grupos = GroupDetails.objects.all()
 
-print(len(grupos))
+# print(len(grupos))
 
 
 @api_view(['GET'])
@@ -113,10 +113,8 @@ def createCoins(user):
 @permission_classes([IsAuthenticated])
 def getCoins(request):
     user = request.user
-    print(user.id)
     coins = Coins.objects.filter(user_id=user.id)
     serializer = CoinsSerializer(coins, many=True)
-    print(serializer.data)
     return Response(serializer.data)
 
 
@@ -208,8 +206,22 @@ def modGroupDetails(request, id):
 @permission_classes([IsAuthenticated])
 def getGroupDetails(request):
     try:
-        details = GroupDetails.objects.get(
-            user_id=request.user.id, active=True)
+        details = GroupDetails.objects.get(user_id=request.user.id,
+                                           active=True)
+        if details:
+            return Response(details.serialize(), status=200)
+
+        else:
+            return Response({"message": "No se ha encontrado ningun grupo disponible"}, status=204)
+    except:
+        return Response({"message": "No se ha encontrado ningun grupo disponible"}, status=400)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getIdGroupDetails(request, id):
+    try:
+        details = GroupDetails.objects.get(id=id, active=True)
         if details:
             return Response(details.serialize(), status=200)
         else:

@@ -1,7 +1,7 @@
 import React,{useState, memo} from 'react';
 import Button from 'react-bootstrap/Button';
 
-const Buttons = ({setResponse, enviar}) => {
+const Buttons = ({enviar, setResponse}) => {
     const [touchButton, setTouchButton] = useState(false);
 
     const agree = (e) => {
@@ -13,7 +13,6 @@ const Buttons = ({setResponse, enviar}) => {
     const reject = (e) => {
         setTouchButton(true);
         enviar(e, false);
-        setResponse(false);
     }
 
     return(
@@ -26,7 +25,6 @@ const Buttons = ({setResponse, enviar}) => {
             </div>)
             :
             (<p>Gracias por responder</p>)
-            
             }
         </>
     )

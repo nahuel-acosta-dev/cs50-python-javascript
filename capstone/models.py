@@ -67,14 +67,28 @@ class GroupDetails(models.Model):
         return f"{self.user.username}"
 
     def serialize(self):
-        return{
+        data = {
             "id": self.id,
             "user": self.user_id,
+            "user_username": self.user.username,
             "name": self.name,
             "theme": self.theme,
             "description": self.description,
             "active": self.active
         }
+        if self.user1_id:
+            data['user1'] = self.user1_id
+            data['user1_username'] = self.user1.username
+        else:
+            data['user1'] = None
+
+        if self.user2_id:
+            data['user2'] = self.user2_id
+            data['user2_username'] = self.user2.username
+        else:
+            data['user2'] = None
+
+        return data
 
 
 class Group(models.Model):

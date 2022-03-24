@@ -43,7 +43,7 @@ const Invitation = ({groupDetails, setHide}) => {
                 </thead>
                 <tbody>
                     {coins.map(coin => (
-                        <TableUser key={coin.id} coin={coin} setHide={setHide} group={groupDetails}/>
+                        <TableUser key={coin.id} coin={coin} group={groupDetails} />
                     ))}
                 </tbody>
             </Table>}

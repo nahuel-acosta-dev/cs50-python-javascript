@@ -12,6 +12,7 @@ export const ItemProvider = ({children}) => {
         let response = await ItemService.getItem(url, authTokens);
             if(response.status === 200){
                 set(response.data);
+                console.log('response.data:');
                 console.log(response.data);
             }
             else if(response.statusText === 'Unauthorized')logoutUser();

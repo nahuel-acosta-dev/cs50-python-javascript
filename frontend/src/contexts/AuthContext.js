@@ -15,7 +15,6 @@ export const AuthProvider = ({children}) => {
   let loginUser = async (e) => {
     e.preventDefault();
     console.log("formulario enviado");
-    console.log(e.target.password.value);
     let response = await fetch('http://127.0.0.1:8000/capstone_api/token/', {
       method: 'POST',
       headers: {
@@ -25,8 +24,6 @@ export const AuthProvider = ({children}) => {
       'password': e.target.password.value})
     })
     let data = await response.json();
-    console.log('data:', data);
-    console.log('response:', response);
     if(response.status === 200){
       setAuthTokens(data);
       setUser(jwt_decode(data.access));
@@ -75,10 +72,6 @@ export const AuthProvider = ({children}) => {
 
 
   useEffect(()=> {
-    /*if(authTokens){
-      setUser(jwt_decode(authTokens.access))
-    }
-    setLoading(false);*/
 
     if(loading)updateToken();
     

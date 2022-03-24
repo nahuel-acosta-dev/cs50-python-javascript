@@ -1,4 +1,4 @@
-import React,{useState,useEffect, memo} from 'react';
+import React,{useState,useEffect} from 'react';
 import Buttons from './buttons/Buttons';
 
 const Invite = ({otherUser, onHide, group}) => {
@@ -10,6 +10,7 @@ const Invite = ({otherUser, onHide, group}) => {
         if(!stateInvitation)chatSocket.close(1000, 'no invite');
         onHide();
     }
+    
 
     let readyWebSocket = () =>{
         chatSocket.onopen = () => {
@@ -31,11 +32,12 @@ const Invite = ({otherUser, onHide, group}) => {
         if (dataFromserver){
             if(otherUser.username === dataFromserver.name){
                 chatSocket.close(1000, 'thanks for response');
-                alert("reponse: " + dataFromserver.response
-                + "\nname: " + dataFromserver.name);
-              }
+                if(dataFromserver.response == 'true'){
+                  console.log('response: ' + dataFromserver.response);
+                }
+            }
+          }
         }
-    }
 
       return (
           <div>

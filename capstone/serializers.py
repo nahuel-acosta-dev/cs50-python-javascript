@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers, validators
-from .models import Coins, User
+from .models import Coins, User, GroupDetails
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -18,5 +18,9 @@ class CoinsSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class DataCoinsSerializer(serializers.ModelSerializer):
-    pass
+class GroupDetailsSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+
+    class Meta:
+        model = GroupDetails
+        fields = '__all__'

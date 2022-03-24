@@ -1,6 +1,6 @@
 import React,{memo} from 'react';
 
-export default memo(function Cajitachat(props){
+export default function Cajitachat(props){
     console.log('el siguiente es');
 
     return(
@@ -18,4 +18,3 @@ export default memo(function Cajitachat(props){
         </div>
     )
 }
-)

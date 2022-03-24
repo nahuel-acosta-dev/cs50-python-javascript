@@ -83,7 +83,7 @@ class CapstoneRoomConsumer(AsyncWebsocketConsumer):
     @database_sync_to_async
     def update_group(self, group_id, user_id, response, type_message):
         print(response)
-        if response == 'true' and type_message == 'response':
+        if response == True and type_message == 'response':
             user = User.objects.get(id=user_id)
             print(user.id)
             group = GroupDetails.objects.get(id=int(group_id))

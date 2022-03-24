@@ -12,8 +12,7 @@ export default function Cajitaazul(props){
                 <div className="row subCajitaAzul">
                     <div className="row">{props.data.msg}</div>
                     {props.data.type === 'invitation' &&
-                        <Buttons response={props.data.msg} 
-                        enviar={props.enviar} setResponse={props.setResponse}/>
+                        <Buttons enviar={props.enviar} setResponse={props.setResponse}/>
                     }
                 </div>
             </div>

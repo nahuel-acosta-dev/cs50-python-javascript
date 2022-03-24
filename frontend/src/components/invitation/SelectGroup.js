@@ -2,22 +2,21 @@ import React, {useState, useEffect, useContext} from 'react';
 import Invitation from './Invitation';
 import CreateGroupDetails from './group/CreateGroupDetails';
 import ItemContext from '../../contexts/ItemContext';
-import {Routes, Route, Navigate, Link} from "react-router-dom";
+import {Routes, Route, Link} from "react-router-dom";
 
 const SelectGroup = () => {
     const [groupDetails, setGroupDetails] = useState();  
-    const [notEncounter, setNotEncounter] = useState(false);  
+    const [notEncounter, setNotEncounter] = useState(false);
     const [hide, setHide] = useState(false);
     let {getItemContext} = useContext(ItemContext);
 
-    let getGroupDetails = async () =>{
+    let getGroupDetails = () =>{
         try {getItemContext('group/get_group_details', setGroupDetails);}
             
         catch{
-            console.log('no se han encontrado grupos');
+            console.log('no groups found');
             setNotEncounter(true);}
         }
-
     
 
     useEffect(() => {
@@ -36,7 +35,7 @@ const SelectGroup = () => {
             
                 <Routes>
                     <Route path="invitate" 
-                    element={<Invitation groupDetails={groupDetails}setHide={setHide}/>} />
+                    element={<Invitation groupDetails={groupDetails} setHide={setHide}/>} />
                     <Route path="create" 
                     element={<CreateGroupDetails setHide={setHide} setGroupDetails={setGroupDetails} 
                     groupDetails={groupDetails} notEncounter={notEncounter}/>} />

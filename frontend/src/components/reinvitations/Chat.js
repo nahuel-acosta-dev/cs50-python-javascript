@@ -2,10 +2,12 @@ import React, {useState} from 'react';
 import ApiInvitations from './ApiInvitations';
 import Cajitaazul from './models/Cajitaazul';
 import Cajitachat from './models/Cajitachat';
+import LoadingModal from './Modal/LoadingModal';
 
 const Chat = ({nombre, myId,chatSocket, invitations}) => {
     const [converzacion, setconverzacion] = useState([]);
-    const [setResponse, response] = useState(false);
+    const [groupId, setGroupId] = useState();
+    const [response, setResponse] = useState(false);
     console.log(converzacion);
 
       function enviar(e, answer){
@@ -14,12 +16,13 @@ const Chat = ({nombre, myId,chatSocket, invitations}) => {
           type_message: 'response',
           response: answer,
           name:nombre,
-          group_id:converzacion[converzacion.length - 1],
+          group_id:converzacion[converzacion.length - 1].id,
           user_id:myId,
           title:'null',
           theme:'null',
           description:'null'
         }))
+        if(answer)setGroupId(converzacion[converzacion.length - 1].id);
         e.preventDefault();
       }
 
@@ -50,13 +53,16 @@ const Chat = ({nombre, myId,chatSocket, invitations}) => {
                     {converzacion.map((m, i)=>
                     <div key={i}>
                       {m.name==nombre? 
-                          (<Cajitachat data={m} response={response}/>):
+                          (<Cajitachat data={m}/>):
                               (<Cajitaazul data={m} enviar={enviar} setResponse={setResponse}/>)
                           }
                     </div>)}
                   </div>
               </div>
             </div>
+            {response &&
+                  <LoadingModal groupId={groupId} chatSocket={chatSocket}/>
+            }
         </div>
       </>
       )

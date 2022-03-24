@@ -18,8 +18,8 @@ const TableUser = ({coin, group}) => {
                 <td>{coin.user['username']}</td>
             </tr>
 
-            <UserModal show={modalShow} user={coin.user}
-            onHide={() => setModalShow(false)} group={group}/>
+            <UserModal show={modalShow} user={coin.user} 
+                onHide={() => setModalShow(false)} group={group}/>
         </>
     )
 }
