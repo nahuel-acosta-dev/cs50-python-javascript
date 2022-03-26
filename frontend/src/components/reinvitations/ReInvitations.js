@@ -11,12 +11,12 @@ const ReInvitations = ({invitations}) => {
 
     let readyWebSocket = () =>{
         chatSocket.onopen = () => {
-          console.log('WebSocket conectado');
+          console.log('Connected WebSocket');
         };
 
         chatSocket.onclose = function (evt) {
           console.log(evt.reason);
-          console.log('WebSocket desconectado');
+          console.log('WebSocket disconnected');
         };
 
         chatSocket.onerror = function(e){

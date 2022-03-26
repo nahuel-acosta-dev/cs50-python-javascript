@@ -1,8 +1,8 @@
 import React, {useContext} from 'react';
-import AuthContext from '../../../../contexts/AuthContext';
-import Loading from '../../../loading/Loading';
+import AuthContext from '../../../../../contexts/AuthContext';
+import Loading from '../../../../loading/Loading';
 
-const OtherUser = ({group, reloadItemGroupDetails}) => {
+const OtherUser = ({group}) => {
     let {user} = useContext(AuthContext);
 
     const loadingOtherUser = () => {
@@ -22,7 +22,7 @@ const OtherUser = ({group, reloadItemGroupDetails}) => {
         else if(group.user1 !== null && group.user2 === user.user_id){
             return group.user1_username;
         }
-        else return <Loading />;
+        else return <span>An error occurred while trying to show user 2</span>;
     }
 
     return(

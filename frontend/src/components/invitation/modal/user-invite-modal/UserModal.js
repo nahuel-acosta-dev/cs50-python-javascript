@@ -5,8 +5,7 @@ import Invite from './Invite';
 const UserModal = (props) => {
 
     return (
-    <>
-      <Modal {...props} size="lg" 
+      <Modal onHide={props.onHide} show={props.show} size="lg" 
        aria-labelledby="contained-modal-title-vcenter" centered>
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
@@ -24,11 +23,11 @@ const UserModal = (props) => {
         <Modal.Footer>
         {
             props.show &&
-            <Invite otherUser={props.user} onHide={props.onHide} group={props.group} />
+            <Invite otherUser={props.user} onHide={props.onHide} 
+            group={props.group} getGroup={props.getGroup}/>
           }
         </Modal.Footer>
       </Modal>
-    </>
     );
   }
   

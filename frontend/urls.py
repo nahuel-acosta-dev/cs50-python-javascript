@@ -15,6 +15,7 @@ urlpatterns = [
     path('invitation/invitate', views.index),
     path("invitation/create", views.index),
     path('receive-invitations', views.index),
+    path('invitation/pre_room', views.index),
 
     # Practicas
     path("group-invitation", views.index),

@@ -1,8 +1,8 @@
 import React, {memo, useState} from 'react';
 import Button from 'react-bootstrap/Button';
-import UserModal from '../modal/UserModal';
+import UserModal from '../modal/user-invite-modal/UserModal';
 
-const TableUser = ({coin, group}) => {
+const TableUser = ({coin, group, getGroup}) => {
     const [modalShow, setModalShow] = useState(false);
     console.log('este es el id:' + coin.user['id']);
 
@@ -18,8 +18,8 @@ const TableUser = ({coin, group}) => {
                 <td>{coin.user['username']}</td>
             </tr>
 
-            <UserModal show={modalShow} user={coin.user} 
-                onHide={() => setModalShow(false)} group={group}/>
+            <UserModal show={modalShow} user={coin.user} getGroup={getGroup}
+            onHide={() => setModalShow(false)} group={group}/>
         </>
     )
 }

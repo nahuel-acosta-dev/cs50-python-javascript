@@ -23,6 +23,8 @@ const Chat = ({nombre, myId,chatSocket, invitations}) => {
           description:'null'
         }))
         if(answer)setGroupId(converzacion[converzacion.length - 1].id);
+        //Hay un error al tomar el ultimo converzacion, ya que si me envia otra invitacion otro usuario
+        //antes de responder se reemplazaria el grupo al que quiero responder
         e.preventDefault();
       }
 

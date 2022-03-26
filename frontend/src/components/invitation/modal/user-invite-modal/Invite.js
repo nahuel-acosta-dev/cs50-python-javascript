@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import Buttons from './buttons/Buttons';
 
-const Invite = ({otherUser, onHide, group}) => {
+const Invite = ({otherUser, onHide, group, getGroup}) => {
     const [stateInvitation, setStateInvitation] = useState(false);
     const chatSocket = new WebSocket(`ws://localhost:8000/ws/chat/${otherUser['id']}/`);
     console.log(chatSocket);
@@ -32,7 +32,11 @@ const Invite = ({otherUser, onHide, group}) => {
         if (dataFromserver){
             if(otherUser.username === dataFromserver.name){
                 chatSocket.close(1000, 'thanks for response');
-                if(dataFromserver.response == 'true'){
+                console.log(dataFromserver);
+                console.log(dataFromserver.response);
+                if(dataFromserver.response == true){
+                  console.log('entre');
+                  getGroup();
                   console.log('response: ' + dataFromserver.response);
                 }
             }

@@ -2,6 +2,7 @@ import React, {useState, useEffect, useContext} from 'react';
 import Invitation from './Invitation';
 import CreateGroupDetails from './group/CreateGroupDetails';
 import ItemContext from '../../contexts/ItemContext';
+import PreRoom from './pre-room/PreRoom';
 import {Routes, Route, Link} from "react-router-dom";
 
 const SelectGroup = () => {
@@ -34,8 +35,11 @@ const SelectGroup = () => {
             }
             
                 <Routes>
-                    <Route path="invitate" 
-                    element={<Invitation groupDetails={groupDetails} setHide={setHide}/>} />
+                    <Route path="invitate/*" 
+                    element={<Invitation groupDetails={groupDetails} setHide={setHide} 
+                    getGroup={getGroupDetails}/>} />
+                    <Route path="pre_room" 
+                    element={<PreRoom groupDetails={groupDetails} setHide={setHide}/>} />
                     <Route path="create" 
                     element={<CreateGroupDetails setHide={setHide} setGroupDetails={setGroupDetails} 
                     groupDetails={groupDetails} notEncounter={notEncounter}/>} />

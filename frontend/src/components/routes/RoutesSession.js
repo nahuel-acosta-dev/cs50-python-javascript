@@ -6,7 +6,6 @@ import Home from './../home/Home';
 import AuthContext from "../../contexts/AuthContext";
 import Room from '../room/Room';
 import NewRoom from '../newroom/NewRoom';
-import Invitation from '../invitation/Invitation';
 import SelectGroup from '../invitation/SelectGroup';
 import GetItems from '../reinvitations/GetItems';
 
@@ -32,7 +31,7 @@ const RoutesSession = () => {
                     <Route exact path="/invitation/*" element={!user ? <Navigate to="/login"/> : <SelectGroup/>} />
                     <Route exact path="/receive-invitations/*" element={!user ? <Navigate to="/login"/> : <GetItems/>} />
 
-                    <Route exact path="/room" element={!user ? <Navigate to="/login"/> : <Room />} />
+                    <Route exact path="/room/*" element={!user ? <Navigate to="/login"/> : <Room />} />
                     <Route exact path="/newroom/*" element={!user ? <Navigate to="/login"/> : <NewRoom />} />
                 </Routes>
         </Router>

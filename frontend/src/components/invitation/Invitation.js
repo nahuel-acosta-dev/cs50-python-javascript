@@ -3,10 +3,14 @@ import Loading from '../loading/Loading';
 import ItemContext from '../../contexts/ItemContext';
 import Table from 'react-bootstrap/Table';
 import TableUser from './tableuser/TableUser';
+import {Navigate, Routes, Route} from "react-router-dom";
 
-const Invitation = ({groupDetails, setHide}) => {
+const Invitation = ({groupDetails, setHide, getGroup}) => {
     const [coins, setCoins] = useState([]);
     const [loading, setLoading] = useState(false);
+    if(groupDetails)
+        console.log(groupDetails.active)
+
     let {getItemContext} = useContext(ItemContext);
 
     const getCoins = async () => {
@@ -43,10 +47,16 @@ const Invitation = ({groupDetails, setHide}) => {
                 </thead>
                 <tbody>
                     {coins.map(coin => (
-                        <TableUser key={coin.id} coin={coin} group={groupDetails} />
+                        <TableUser key={coin.id} coin={coin} group={groupDetails}
+                        getGroup={getGroup} />
                     ))}
                 </tbody>
             </Table>}
+
+            {groupDetails &&
+                groupDetails.user1 && groupDetails.user2 &&
+                    <Navigate to="/invitation/pre_room" />
+            }
         </>
     )
 
