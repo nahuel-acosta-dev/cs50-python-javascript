@@ -3,6 +3,7 @@ import Invitation from './Invitation';
 import CreateGroupDetails from './group/CreateGroupDetails';
 import ItemContext from '../../contexts/ItemContext';
 import PreRoom from './pre-room/PreRoom';
+import Room from '../private-room/Room';
 import {Routes, Route, Link} from "react-router-dom";
 
 const SelectGroup = () => {
@@ -40,6 +41,8 @@ const SelectGroup = () => {
                     getGroup={getGroupDetails}/>} />
                     <Route path="pre_room" 
                     element={<PreRoom groupDetails={groupDetails} setHide={setHide}/>} />
+                    <Route path="private_room/room" 
+                    element={<Room groupDetails={groupDetails} />} />
                     <Route path="create" 
                     element={<CreateGroupDetails setHide={setHide} setGroupDetails={setGroupDetails} 
                     groupDetails={groupDetails} notEncounter={notEncounter}/>} />

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, memo} from 'react';
 import Button from 'react-bootstrap/Button';
 import {Navigate} from "react-router-dom";
 
@@ -47,7 +47,7 @@ const ReadyRoom = ({groupDetails}) => {
             <Button variant="danger" onClick={(e) => enviar(e)}>Empezar</Button>
 
             {redirectRoom &&
-                <Navigate to="/room" />
+                <Navigate to="/invitation/private_room/room" />
             }
         </>
     )

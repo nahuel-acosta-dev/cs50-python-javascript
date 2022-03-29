@@ -1,7 +1,7 @@
 import React, {useState,useEffect} from 'react';
 
 
-const GetSala = ({roomName, userName, messages}) =>{
+const GetSala = ({roomName, username, messages}) =>{
     const chatSocket = new WebSocket(`ws://localhost:8000/ws/${roomName}/`);
     console.log(messages);
     
@@ -30,7 +30,7 @@ const GetSala = ({roomName, userName, messages}) =>{
 
         chatSocket.send(JSON.stringify({
             'message': message,
-            'username': userName,
+            'username': username,
             'room': roomName
         }));
 
@@ -43,7 +43,7 @@ const GetSala = ({roomName, userName, messages}) =>{
             <section className="hero is-primary">
                 <div className="hero-body">
                     <p className="title">
-                        Chatty {userName}
+                        Chatty {username}
                     </p>
                     <p className="subtitle">
                         A simple chat built with Django, Channels and Redis {roomName}
@@ -76,7 +76,7 @@ const GetSala = ({roomName, userName, messages}) =>{
             </div>
         </div>
 
-        <small className="has-text-grey-light">Your username: {userName}</small>
+        <small className="has-text-grey-light">Your username: {username}</small>
     </form>
 </div>
     )

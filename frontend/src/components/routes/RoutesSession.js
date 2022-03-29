@@ -30,7 +30,7 @@ const RoutesSession = () => {
                     <Route exact path="/login" element={user ? <Navigate to="/"/> : <Login />}/>
                     <Route exact path="/invitation/*" element={!user ? <Navigate to="/login"/> : <SelectGroup/>} />
                     <Route exact path="/receive-invitations/*" element={!user ? <Navigate to="/login"/> : <GetItems/>} />
-
+                    <Route exact path="/private_room/room" element={!user ? <Navigate to="/login"/> : <Room />} />
                     <Route exact path="/room/*" element={!user ? <Navigate to="/login"/> : <Room />} />
                     <Route exact path="/newroom/*" element={!user ? <Navigate to="/login"/> : <NewRoom />} />
                 </Routes>

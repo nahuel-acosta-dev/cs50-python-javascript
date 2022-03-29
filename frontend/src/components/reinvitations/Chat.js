@@ -3,8 +3,10 @@ import ApiInvitations from './ApiInvitations';
 import Cajitaazul from './models/Cajitaazul';
 import Cajitachat from './models/Cajitachat';
 import LoadingModal from './Modal/LoadingModal';
+import {Navigate} from "react-router-dom";
 
 const Chat = ({nombre, myId,chatSocket, invitations}) => {
+    const [redirectRoom, setRedirectRoom] = useState(false);
     const [converzacion, setconverzacion] = useState([]);
     const [groupId, setGroupId] = useState();
     const [response, setResponse] = useState(false);
@@ -41,7 +43,8 @@ const Chat = ({nombre, myId,chatSocket, invitations}) => {
             ]);
         }
       }
-      
+
+
       return(
         <>
         <div>
@@ -62,8 +65,10 @@ const Chat = ({nombre, myId,chatSocket, invitations}) => {
                   </div>
               </div>
             </div>
+            {redirectRoom == 'ready' &&
+            <Navigate to="/room"/>}
             {response &&
-                  <LoadingModal groupId={groupId} chatSocket={chatSocket}/>
+                  <LoadingModal groupId={groupId} chatSocket={chatSocket} setRedirectRoom={setRedirectRoom}/>
             }
         </div>
       </>

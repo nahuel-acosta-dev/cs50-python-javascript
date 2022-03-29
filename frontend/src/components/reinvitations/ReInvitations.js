@@ -4,6 +4,7 @@ import Chat from './Chat';
 
 const ReInvitations = ({invitations}) => {
     let {user} = useContext(AuthContext);
+    console.log(user.user_id);
     const chatSocket = new WebSocket(`ws://localhost:8000/ws/chat/${user.user_id}/`);
     
     console.log(chatSocket);
@@ -26,7 +27,7 @@ const ReInvitations = ({invitations}) => {
     }
 
     useEffect(() =>{
-        readyWebSocket();
+      readyWebSocket();
 
         return () => {
             chatSocket.close(1000, 'out');
@@ -40,11 +41,11 @@ const ReInvitations = ({invitations}) => {
 
     return (
     <>
-    {invitations === 'void' &&
-    <h1>No hay invitaciones</h1>
-    }
-      <Chat nombre={user.username} myId={user.user_id} chatSocket={chatSocket} 
-      invitations={invitations}/>      
+      {invitations === 'void' &&
+      <h1>No hay invitaciones</h1>
+      }
+        <Chat nombre={user.username} myId={user.user_id} chatSocket={chatSocket} 
+        invitations={invitations}/>      
     </>
     )
 }
