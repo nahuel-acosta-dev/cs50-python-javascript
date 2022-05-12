@@ -6,7 +6,7 @@ const gulp = require('gulp'),
     reload = browserSync.reload;
 
     gulp.task('sass', () =>
-        gulp.src('./static/scss/*.scss')
+        gulp.src('./static/scss/**/*.scss')
             .pipe(sass())
             .pipe(autoprefixer({
                 version: ['last 2 versions']
@@ -24,5 +24,5 @@ const gulp = require('gulp'),
             proxy: 'localhost:8000'
         });
         gulp.watch(['./**/*.{scss,css,html,py,js}']).on('change', browserSync.reload);
-        gulp.watch('./static/scss/*.scss', gulp.series('sass'));
+        gulp.watch('./static/scss/**/*.scss', gulp.series('sass'));
     });

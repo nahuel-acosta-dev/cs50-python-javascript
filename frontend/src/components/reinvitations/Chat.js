@@ -1,12 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, memo} from 'react';
 import ApiInvitations from './ApiInvitations';
 import Cajitaazul from './models/Cajitaazul';
 import Cajitachat from './models/Cajitachat';
 import LoadingModal from './Modal/LoadingModal';
-import {Navigate} from "react-router-dom";
+import {Routes, Route, Navigate, useNavigate} from 'react-router-dom';
 
 const Chat = ({nombre, myId,chatSocket, invitations}) => {
-    const [redirectRoom, setRedirectRoom] = useState(false);
     const [converzacion, setconverzacion] = useState([]);
     const [groupId, setGroupId] = useState();
     const [response, setResponse] = useState(false);
@@ -27,6 +26,7 @@ const Chat = ({nombre, myId,chatSocket, invitations}) => {
         if(answer)setGroupId(converzacion[converzacion.length - 1].id);
         //Hay un error al tomar el ultimo converzacion, ya que si me envia otra invitacion otro usuario
         //antes de responder se reemplazaria el grupo al que quiero responder
+        //Cre q No hay error, ya que solo toma el grupo si es true
         e.preventDefault();
       }
 
@@ -43,6 +43,13 @@ const Chat = ({nombre, myId,chatSocket, invitations}) => {
             ]);
         }
       }
+
+
+      useEffect(() => {
+        return () => {
+        setGroupId();
+        setResponse(false);}
+      }, [])
 
 
       return(
@@ -65,15 +72,14 @@ const Chat = ({nombre, myId,chatSocket, invitations}) => {
                   </div>
               </div>
             </div>
-            {redirectRoom == 'ready' &&
-            <Navigate to="/room"/>}
+
             {response &&
-                  <LoadingModal groupId={groupId} chatSocket={chatSocket} setRedirectRoom={setRedirectRoom}/>
-            }
+                <LoadingModal groupId={groupId} chatSocket={chatSocket}/>
+              }                        
         </div>
       </>
       )
 
 }
 
-export default Chat;
+export default memo(Chat);

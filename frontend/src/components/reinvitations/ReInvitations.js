@@ -4,7 +4,6 @@ import Chat from './Chat';
 
 const ReInvitations = ({invitations}) => {
     let {user} = useContext(AuthContext);
-    console.log(user.user_id);
     const chatSocket = new WebSocket(`ws://localhost:8000/ws/chat/${user.user_id}/`);
     
     console.log(chatSocket);

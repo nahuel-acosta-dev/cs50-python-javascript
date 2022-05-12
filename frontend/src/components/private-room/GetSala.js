@@ -1,8 +1,8 @@
-import React, {useState,useEffect} from 'react';
+import React, {memo} from 'react';
 
 
 const GetSala = ({roomName, username, messages}) =>{
-    const chatSocket = new WebSocket(`ws://localhost:8000/ws/${roomName}/`);
+    const chatSocket = new WebSocket(`ws://localhost:8000/ws/private_room/${roomName}/`);
     console.log(messages);
     
         chatSocket.onmessage = function(e) {
@@ -57,7 +57,7 @@ const GetSala = ({roomName, username, messages}) =>{
             <div id="chat-messages">
             {messages.map((message, i) => (
                 <li key={i}>
-                    {message.content}
+                    <strong>{message.username}</strong>: {message.content}
                 </li>
             ))}
             </div>
@@ -82,4 +82,4 @@ const GetSala = ({roomName, username, messages}) =>{
     )
 }
 
-export default GetSala;
+export default memo(GetSala);

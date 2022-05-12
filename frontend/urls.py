@@ -5,6 +5,7 @@ from . import views
 app_name = 'frontend'
 
 urlpatterns = [
+    path("quickideas",  views.index),
     path("",  views.index),
     path("login",  views.index),
     path("register", views.index),
@@ -15,16 +16,13 @@ urlpatterns = [
     path('invitation/invitate', views.index),
     path("invitation/create", views.index),
     path('receive-invitations', views.index),
+    path('receive-invitations/loading-users', views.index),
     path('invitation/pre_room', views.index),
-    path('private_room/room', views.index),
-    path('invitation/private_room/room', views.index),
-    path('receive-invitations/private_room/room', views.index),
+    #path('private_room/room', views.index),
+    path('private_room/<str:room>/<str:myuser>/<str:id>', views.index),
 
     # Practicas
     path("group-invitation", views.index),
     path("room", views.index),
-    path("newroom", views.index),
-    path("newroom/invitate", views.index),
-    path("newroom/create", views.index),
     path("notification", views.index)
 ]

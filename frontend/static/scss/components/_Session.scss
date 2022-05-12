@@ -1,0 +1,74 @@
+@mixin dim{
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+.cont-session{
+    overflow: auto;
+    width: 100vw;
+    height: 100vh;
+    padding-top: 3%;
+    padding-bottom: 10%;
+    background-image: url("../images/silhouettes-5450887_1280.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size:cover;
+    .title-session{
+        @include dim;
+        text-align: center;
+        h2{
+        font-size: 3em;
+        font-weight: 400;}
+    }
+    .frame-session{
+        font-weight: bold;
+        padding: 2%;
+        @include dim;
+        border: 1px solid $gray-color;
+        border-radius: 3px;
+        box-shadow: 0 0 10px $pink-color;
+   
+            .session-link{
+                text-decoration: none;
+                color:$ink-color;
+            }
+            
+            .session-link:hover{
+                text-decoration:underline;
+            }   
+        
+    }
+}
+
+
+/*----------Responsive--------*/
+
+@mixin session-lg{
+    .cont-session{
+        padding-top: 4%;
+        padding-bottom: 0;
+        word-wrap: break-word;
+        .title-session{
+            h2{
+                font-size: 2em;
+            }
+        }
+    }
+}
+
+@mixin session-sm{
+    .cont-session{
+        padding:auto;
+        .title-session{
+            width: 90%;
+           text-align: center;
+        }
+        .frame-session{
+            width: 90%;
+            height: 90%;
+        }
+
+    }
+}

@@ -1,8 +1,7 @@
-import React, {useContext} from 'react';
-import AuthContext from '../../../../../contexts/AuthContext';
+import React from 'react';
 import Loading from '../../../../loading/Loading';
 
-const OtherUser = ({group, myUser, otherUser}) => {
+const OtherUser = ({group, myUser}) => {
 
     const loadingOtherUser = () => {
         if(group.user1 === null && group.user2 === null){
@@ -24,14 +23,8 @@ const OtherUser = ({group, myUser, otherUser}) => {
         else return <span>An error occurred while trying to show user 2</span>;
     }
 
-    //return loadingOtherUser();
+    return loadingOtherUser();
 
-    return (
-        <>
-       {!otherUser ?
-        (<Loading />) :
-        (<span>{otherUser}</span>)}</>
-    )
         
 }
 

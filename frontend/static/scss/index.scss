@@ -1,4 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap');
+@import './config/variables';
+@import './config/Basic.scss';
+@import './components/Collapse';
+@import './components/Header';
+@import './pages/PreHome';
+@import './pages/SelectGroup';
+@import './components/Session';
+@import './components/FormCreate';
+@import './components/Table';
+@import './components/Loading';
+@import './extras/Title';
+@import './extras/Responsive.scss';
+
 /*Clone Whatsap*/
+/*
 .back-top {
   background-color: #009688;
   height: 15vh;
@@ -59,13 +74,10 @@
 
 .message-box {
   background-color: #f0f0f0;
-}
+}*/
 /*-------------------------------*/
 
-h1 {
-  color: blue;
-}
-
+/*
 .pantalla {
   display: flex;
   margin: auto;
@@ -214,3 +226,4 @@ h1 {
   border-color: 5px solid black;
   background-color: #c7c7c7;
 }
+*/

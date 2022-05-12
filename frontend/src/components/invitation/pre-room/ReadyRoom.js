@@ -1,11 +1,15 @@
 import React, {useEffect, useState, memo} from 'react';
 import Button from 'react-bootstrap/Button';
+import Loading from '../../loading/Loading';
 import {Navigate} from "react-router-dom";
 
 const ReadyRoom = ({groupDetails}) => {
     const [redirectRoom, setRedirectRoom] = useState(false);
+    const [userOut, setUserOut] = useState(false);
     let roomName = groupDetails.name.replace(/ /g, '_');
+    let encryptedPath;
     const Socket = new WebSocket(`ws://localhost:8000/ws/private/pre_room/${roomName}_${groupDetails.user}`);
+    if(groupDetails.user && roomName)encryptedPath = `${roomName}_${groupDetails.user}`;
 
     let readyWebSocket = () =>{
         Socket.onopen = () => {
@@ -34,6 +38,14 @@ const ReadyRoom = ({groupDetails}) => {
         setRedirectRoom(true);
         e.preventDefault();
       }
+      
+      Socket.onmessage = (message)=> {
+        const dataFromserver = JSON.parse(message.data);
+        if (dataFromserver){
+            if(dataFromserver.message == 'out' && dataFromserver.username != group.user_username){
+              setUserOut(dataFromserver.username)}
+        }
+      }
 
     useEffect(() =>{
         readyWebSocket();
@@ -42,12 +54,36 @@ const ReadyRoom = ({groupDetails}) => {
 
 
     return(
-        <>
-            <h1>Cargando usuarios...</h1>
-            <Button variant="danger" onClick={(e) => enviar(e)}>Empezar</Button>
+        <>{groupDetails.user1 == null && groupDetails.user2 == null &&
+            (<h1>Cargando usuarios...</h1>)
+          }
+
+          {!userOut ?
+          (groupDetails.user1 == null ?
+          (<Loading />) :
+          <p>{groupDetails.user1_username}</p>)
+          :
+          (userOut == groupDetails.user1_username ?
+          (<p>El user 1 se ha salido</p>)
+          :
+          <p>{groupDetails.user1_username}</p>)
+          }
+
+          {!userOut ?
+          (groupDetails.user2 == null ?
+          (<Loading />) :
+          <p>{groupDetails.user2_username}</p>)
+          :
+          (userOut == groupDetails.user2_username ?
+          (<p>El user 2 se ha salido</p>)
+          :
+          <p>{groupDetails.user2_username}</p>)
+          }
+
+          <Button variant="danger" onClick={(e) => enviar(e)}>Empezar</Button>
 
             {redirectRoom &&
-                <Navigate to="/invitation/private_room/room" />
+                <Navigate to={`/private_room/${btoa(encryptedPath)}/${btoa(groupDetails.user_username)}/${btoa(groupDetails.user)}`} />
             }
         </>
     )

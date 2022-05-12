@@ -1,12 +1,14 @@
 import React from 'react';
+import Spinner from 'react-bootstrap/Spinner';
+import Row from 'react-bootstrap/Row';
 
 const Loading = () => {
 
 
     return (
-    <div>
-        <p>cargando...</p>
-    </div>
+        <Row className="loading align-items-center">
+            <Spinner id="spiner2" className="spiner" animation="grow" />
+        </Row>
     )
 
 }

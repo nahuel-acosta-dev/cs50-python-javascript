@@ -25,7 +25,9 @@ const GetItems = () => {
 
     useEffect(() => {
         getInvitations();
-        return () => setInvitations([]);
+        return () => {setInvitations();
+            setLoading(false);
+        }
     }, []);
 
     return (

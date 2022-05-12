@@ -1,0 +1,24 @@
+
+
+/*-------------------media-device--------------*/
+@mixin collapse-nav-links-center{
+    .nav-links{
+        
+        a{
+            margin-left: 10%;
+            margin-top: 1%;
+        }
+        button{
+            margin-left: 10%;
+            padding: 0;
+        }
+    }
+}
+
+@mixin collapse-nav-img-none{
+    .navbar-brand{
+        img {
+            display: none!important;
+        }
+    }
+}

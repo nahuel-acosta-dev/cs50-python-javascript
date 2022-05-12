@@ -1,18 +1,17 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
+import AuthContext from '../../contexts/AuthContext';
 import GetSala from './GetSala';
+import Loading from '../loading/Loading';
+import { useParams } from 'react-router-dom';
 
 const Room = () =>{
-    const [roomName, setRoomName] = useState('');
-    const [userName, setUserName] = useState('');
     const [entrada, setEntrada] = useState(false);
     const [messages, setMessages] = useState([]);
+    let {user} = useContext(AuthContext);
+    let {room, myuser, id} = useParams();
 
-    const getData =async (e) => { 
-        e.preventDefault();
-        console.log(e.target.roomname.value);
-        setRoomName(e.target.roomname.value);
-        setUserName(e.target.username.value);
-        let response = await fetch(`http://127.0.0.1:8000/capstone_api/messages/${e.target.roomname.value}`,
+    const getData = async () => { 
+        let response = await fetch(`http://127.0.0.1:8000/capstone_api/messages/${atob(room)}`,
         {
             method: 'GET',
             headers: {
@@ -27,60 +26,32 @@ const Room = () =>{
             console.log(messages);
         }
         else{
-            alert('hiciste algo mal')
+            console.log('error getting api data');
         }
         
         setEntrada(true);
         
     }
 
+    
+    
+
+    useEffect(() => {
+        getData();
+    }, [])
+
 
 return (
     
     <>
     {!entrada ?
-        (<form className="columns is-multiline" onSubmit={(e) => getData(e)} >
-             <div className="column is-6 is-offset-3 mb-6">
-                    <section className="hero is-primary">
-                        <div className="hero-body">
-                            <p className="title">
-                                Chatty
-                            </p>
-                            <p className="subtitle">
-                                A simple chat built with Django, Channels and Redis
-                             </p>
-                        </div>
-                    </section>
-                </div>
-                <div className="column is-4 is-offset-4">
-                    <div className="field">
-                        <label>Room name</label>
-
-            <div className="control">
-                    <input className="input" type="text" placeholder="Room name" id="room-name-input" 
-                    name="roomname"/>
-                </div>
-            </div>
-
-                    <div className="field">
-                        <label>Username</label>
-
-                        <div className="control">
-                            <input className="input" type="text" placeholder="Username" 
-                            id="username-input" name="username"/>
-                        </div>
-                    </div>
-
-                    <div className="field">
-                        <div className="control">
-                            <button type="submit" className="button is-info" id="room-name-submit">Submit</button>
-                        </div>
-                    </div>
-                </div>
-            </form>):(
-                <>
-            <GetSala roomName={roomName} userName={userName} messages={messages} />
-            </>
+        (<Loading/>):(
+        <>{atob(id) == user.user_id ?
+            <GetSala roomName={atob(room)} username={atob(myuser)} messages={messages} />
+            :
+            <h1>Error no se encontro la sala o no estas incluido en el grupo</h1>
+        }
+        </>
             )
     }
     </>

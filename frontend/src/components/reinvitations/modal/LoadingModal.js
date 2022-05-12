@@ -1,12 +1,14 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect, useContext, memo} from 'react';
 import Modal from 'react-bootstrap/Modal';
 import LoadUsers from './loadusers/LoadUsers';
+import LoadRoute from './loadusers/LoadRoute';
 import AuthContext from '../../../contexts/AuthContext';
 import ItemContext from '../../../contexts/ItemContext';
 import Loading from '../../loading/Loading';
 
 
-const LoadingModal = ({groupId, chatSocket, setRedirectRoom}) => {
+
+const LoadingModal = ({groupId, chatSocket}) => {
     const [show, setShow] = useState(true);
     const [group, setGroup] = useState();
     let {getItemContext} = useContext(ItemContext);
@@ -25,18 +27,19 @@ const LoadingModal = ({groupId, chatSocket, setRedirectRoom}) => {
     useEffect(() => {
       if(group)console.log(group);
       else setTimeout(getGroupDetails(), 5000)
-        chatSocket.close(1000, 'invitation accepted, waiting in waiting room');
+      chatSocket.close(1000, 'invitation accepted, waiting in waiting room');   
     }, []);
 
-  
     return (
-      <>{!group ?
+      <>
+      
+      {!group ?
         <Loading />
         :
         <Modal show={show} fullscreen={'xxl-down'} onHide={() => setShow(false)}>
         {
-          <LoadUsers group={group} getGroupDetails={getGroupDetails} 
-          setRedirectRoom={setRedirectRoom} myUser={myUser} myUsername={myUsername}/>
+          <LoadRoute group={group} getGroupDetails={getGroupDetails} 
+          myUser={myUser} myUsername={myUsername} setShow={setShow}/>
         }
         </Modal>}
       </>
@@ -44,4 +47,4 @@ const LoadingModal = ({groupId, chatSocket, setRedirectRoom}) => {
     
 }
 
-export default LoadingModal;
+export default memo(LoadingModal);

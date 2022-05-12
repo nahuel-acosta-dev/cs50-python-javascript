@@ -10,12 +10,13 @@ const TableUser = ({coin, group, getGroup}) => {
         <>
             <tr>
                 <td>
-                    <Button variant="info" 
+                    <Button variant="light" 
                     onClick={() => setModalShow(true)}>Invitate</Button>
                 </td>
                 <td>{coin.price}</td>
                 <td>{coin.coins}</td>
                 <td>{coin.user['username']}</td>
+                <td colSpan={1}></td>
             </tr>
 
             <UserModal show={modalShow} user={coin.user} getGroup={getGroup}
