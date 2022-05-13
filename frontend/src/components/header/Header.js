@@ -37,8 +37,8 @@ const Header = () => {
                     <Navbar.Text className="my-navbar-text">
                         <Row>
                                 <Col md className="my-nav-links nav-links"><Link to="/">Home</Link></Col>
-                                <Col md className="my-nav-links nav-links"><Link to="/invitation">Invitation</Link></Col>
-                                <Col md className="my-nav-links nav-links"><Link to="/receive-invitations">Receive Invitations</Link></Col>
+                                <Col md className="my-nav-links nav-links"><Link to="/invitation">Invitate</Link></Col>
+                                <Col md className="my-nav-links nav-links"><Link to="/receive-invitations">Invitations</Link></Col>
                                 <Col md className="my-nav-links nav-links"><Button className="my-btn-link" variant="link" onClick={logoutUser}>Logout</Button></Col>
                         </Row>
                     </Navbar.Text>

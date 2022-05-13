@@ -1,0 +1,51 @@
+.pantalla{
+    width:50%;
+    height:80%;
+    background: rgba(143, 194, 253, 0.15);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+#elCuerpo {
+    width: 90%;
+    height: 90%;
+    background: #f0ebeb;
+    border-radius: 8px;
+    padding-top: 12px;
+    padding-right: 10px;
+    padding-left: 10px;
+    overflow: hidden;
+    overflow-y: scroll;
+  }
+
+  .contMessage {
+    height: auto;
+    padding: 12px;
+  }
+  
+  .cajitachat {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    width: 348px;
+    min-height: 51px;
+    height: auto;
+  }
+
+  .textoCajita {
+    min-width: 200px;
+    background: #7cdc6c;
+    border-radius: 10px 10px 0px 10px;
+    min-height: 36px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: cursive;
+    word-wrap: break-word;
+  }
+  

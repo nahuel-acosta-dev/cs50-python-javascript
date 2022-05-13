@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from 'react';
 import AuthContext from '../../contexts/AuthContext';
-import Chat from './Chat';
+import Invitations from './Invitations';
 
 const ReInvitations = ({invitations}) => {
     let {user} = useContext(AuthContext);
@@ -39,13 +39,13 @@ const ReInvitations = ({invitations}) => {
 
 
     return (
-    <>
+    <section className="cont-receive-invitations">
       {invitations === 'void' &&
       <h1>No hay invitaciones</h1>
       }
-        <Chat nombre={user.username} myId={user.user_id} chatSocket={chatSocket} 
+        <Invitations nombre={user.username} myId={user.user_id} chatSocket={chatSocket} 
         invitations={invitations}/>      
-    </>
+    </section>
     )
 }
 

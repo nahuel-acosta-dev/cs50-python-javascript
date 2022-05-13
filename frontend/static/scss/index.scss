@@ -5,10 +5,12 @@
 @import './components/Header';
 @import './pages/PreHome';
 @import './pages/SelectGroup';
+@import './pages/ReInvitations';
 @import './components/Session';
 @import './components/FormCreate';
 @import './components/Table';
 @import './components/Loading';
+@import './components/Invitations';
 @import './extras/Title';
 @import './extras/Responsive.scss';
 
@@ -77,19 +79,7 @@
 }*/
 /*-------------------------------*/
 
-/*
-.pantalla {
-  display: flex;
-  margin: auto;
-  width: 436px;
-  height: 577px;
-  background: rgba(143, 194, 253, 0.15);
-  border-radius: 12px;
-  flex-direction: column;
-  align-content: center;
-  align-items: center;
-  justify-content: center;
-}
+
 .enviar {
   display: flex;
   margin: auto;
@@ -108,6 +98,7 @@
   border: solid 0px;
   margin-left: 2%;
 }
+
 .chat {
   width: 248px;
   height: 29px;
@@ -115,44 +106,9 @@
   border-radius: 5px;
   border: solid 0px;
 }
-#elCuerpo {
-  width: 375px;
-  height: 423px;
-  background: #f0ebeb;
-  border-radius: 8px;
-  margin-top: 9%;
-  padding-top: 12px;
-  padding-right: 50px;
-  overflow: hidden;
-  overflow-y: scroll;
-}
 
-.contMessage {
-  height: auto;
-  padding: 12px;
-}
 
-.cajitachat {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  width: 348px;
-  min-height: 51px;
-  height: auto;
-}
 
-.textoCajita {
-  min-width: 200px;
-  background: #7cdc6c;
-  border-radius: 10px 10px 0px 10px;
-  min-height: 36px;
-  height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: cursive;
-  word-wrap: break-word;
-}
 
 .subCajitaAzul {
   margin-left: auto;
@@ -226,4 +182,3 @@
   border-color: 5px solid black;
   background-color: #c7c7c7;
 }
-*/

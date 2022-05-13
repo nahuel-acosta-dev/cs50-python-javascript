@@ -5,7 +5,7 @@ import Cajitachat from './models/Cajitachat';
 import LoadingModal from './Modal/LoadingModal';
 import {Routes, Route, Navigate, useNavigate} from 'react-router-dom';
 
-const Chat = ({nombre, myId,chatSocket, invitations}) => {
+const Invitations = ({nombre, myId,chatSocket, invitations}) => {
     const [converzacion, setconverzacion] = useState([]);
     const [groupId, setGroupId] = useState();
     const [response, setResponse] = useState(false);
@@ -54,32 +54,30 @@ const Chat = ({nombre, myId,chatSocket, invitations}) => {
 
       return(
         <>
-        <div>
             <div className="pantalla">
-              <div id="elCuerpo">
-                <div className="contMessage">
-                  {!invitations ?
-                  null:
-                  (<ApiInvitations invitations={invitations} nombre={nombre}/>)}
+                <div id="elCuerpo">
+                  <div className="contMessage">
+                    {!invitations ?
+                    null:
+                    (<ApiInvitations invitations={invitations} nombre={nombre}/>)}
 
-                    {converzacion.map((m, i)=>
-                    <div key={i}>
-                      {m.name==nombre? 
-                          (<Cajitachat data={m}/>):
-                              (<Cajitaazul data={m} enviar={enviar} setResponse={setResponse}/>)
-                          }
-                    </div>)}
-                  </div>
-              </div>
+                      {converzacion.map((m, i)=>
+                      <div key={i}>
+                        {m.name==nombre? 
+                            (<Cajitachat data={m}/>):
+                                (<Cajitaazul data={m} enviar={enviar} setResponse={setResponse}/>)
+                            }
+                      </div>)}
+                    </div>
+                </div>
             </div>
 
             {response &&
                 <LoadingModal groupId={groupId} chatSocket={chatSocket}/>
               }                        
-        </div>
-      </>
+        </>
       )
 
 }
 
-export default memo(Chat);
+export default memo(Invitations);
