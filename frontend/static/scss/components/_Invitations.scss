@@ -1,51 +1,95 @@
 .pantalla{
     width:50%;
-    height:80%;
+    height:90%;
     background: rgba(143, 194, 253, 0.15);
+    border: 1px solid black;
     border-radius: 12px;
-    display: flex;
+    @include display-center-center;
     flex-direction: column;
-    align-content: center;
-    align-items: center;
-    justify-content: center;
+    padding: 1px 1px 1px 1px;
+
+    #elCuerpo {
+      width: 95%;
+      height: 90%;
+      background: #f0ebeb;
+      border-radius: 8px;
+      padding-top: 12px;
+      padding-right: 10px;
+      padding-left: 10px;
+      overflow: hidden;
+      overflow-y: scroll;
+
+      .contMessage {
+        height: auto;
+        padding: 12px;
+        
+      }
+      
+    }
 }
 
-#elCuerpo {
-    width: 90%;
-    height: 90%;
-    background: #f0ebeb;
-    border-radius: 8px;
-    padding-top: 12px;
-    padding-right: 10px;
-    padding-left: 10px;
-    overflow: hidden;
-    overflow-y: scroll;
-  }
 
-  .contMessage {
-    height: auto;
-    padding: 12px;
-  }
-  
   .cajitachat {
+    margin-top: 10px;
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
-    width: 348px;
+    width: 100%;
     min-height: 51px;
     height: auto;
   }
 
+  .cont-response{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    width: 100%;
+    min-height: 51px;
+    height: auto;
+  }
+
+  .text-response{
+    min-width: 200px;
+    width: 80%;
+    background: #7c99ff;
+    border-radius: 0px 0px 0px 10px;
+    min-height: 36px;
+    margin-right: calc(50px + 2%);
+    height: auto;
+    @include display-center-center;
+    font-family: cursive;
+    word-wrap: break-word;
+  }
+
+  .subCajitaAzul {
+    @include margin-auto-auto;
+    height: auto;
+    width: 90%;
+  }
+
   .textoCajita {
     min-width: 200px;
-    background: #7cdc6c;
-    border-radius: 10px 10px 0px 10px;
+    width: 80%;
+    background: #7c99ff;
+    border-radius: 10px 10px 0px 0px;
     min-height: 36px;
     height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include display-center-center;
     font-family: cursive;
     word-wrap: break-word;
   }
   
+  .avatarAzul {
+    @include display-center-center;
+    margin-left: 2%;
+    width: 50px;
+    height: 50px;
+    background: #7c99ff;
+    border-radius: 50%;
+    font-family: fantasy;
+    color: #4a4a4a;
+  }
+
+  .title-invitations{
+   text-align: center;
+  }

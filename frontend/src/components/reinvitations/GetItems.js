@@ -20,7 +20,7 @@ const GetItems = () => {
 
     setTimeout(() =>{
         setLoading(true);
-    }, 2000);
+    }, 1000);
 
 
     useEffect(() => {
@@ -33,7 +33,10 @@ const GetItems = () => {
     return (
         <>
             {!invitations || !loading ?
-            <Loading />:
+            <div className="cont-reInvitations-loading">
+                <Loading />
+            </div>
+            :
             <ReInvitations invitations={invitations}/>}
         </>
     )

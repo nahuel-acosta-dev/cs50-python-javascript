@@ -18,7 +18,7 @@ const Header = () => {
 
     return (
     <header className={hdrClass ? 'header-none':'none'}>
-        <Navbar bg="dark" variant="dark" className="row nav-bar" expand="md" >
+        <Navbar bg="dark" variant="dark" className="row nav-bar" expand="md" sticky="top">
             <Container className="container-preHome">
                 <Navbar.Toggle />
                 <Navbar.Brand>

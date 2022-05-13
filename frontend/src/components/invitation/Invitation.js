@@ -33,7 +33,9 @@ const Invitation = ({groupDetails, setHide, getGroup}) => {
     return(
         <>
         {!coins || !loading ?
+        <div className="cont-invitations-loading">
             <Loading />
+        </div>
             :            
             <Table striped bordered hover variant="dark" responsive="sm">
                 <thead>

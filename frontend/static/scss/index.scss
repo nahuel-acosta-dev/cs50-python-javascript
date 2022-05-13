@@ -6,6 +6,7 @@
 @import './pages/PreHome';
 @import './pages/SelectGroup';
 @import './pages/ReInvitations';
+@import './pages/Home';
 @import './components/Session';
 @import './components/FormCreate';
 @import './components/Table';
@@ -14,162 +15,18 @@
 @import './extras/Title';
 @import './extras/Responsive.scss';
 
-/*Clone Whatsap*/
-/*
-.back-top {
-  background-color: #009688;
-  height: 15vh;
-}
-
-.back-main {
-  background-color: #d9dbd5;
-  height: 85vh;
-}
-
-.back-container {
-  position: relative;
-}
-
-.front-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-}
-.front-container1 {
-  position: absolute;
-  top: 20px;
-  left: 0;
-  right: 0;
-}
-
-.chat-top {
-  background-color: #ededed;
-  min-height: 50px;
-}
-
-.profile-image {
-  margin-top: 7px;
-  height: 30px;
-  width: 30px;
-}
-
-.contacts {
-  background-color: #ffffff;
-  min-height: 600px;
-}
-
-.contact-table-scroll {
-  overflow-y: scroll;
-  height: 600px;
-}
-
-.message-area {
-  background-color: #e4e1de;
-  min-height: 600px;
-}
-
-.message-table-scroll {
-  overflow-y: scroll;
-  height: 550px;
-}
-
-.message-box {
-  background-color: #f0f0f0;
-}*/
-/*-------------------------------*/
-
-
-.enviar {
-  display: flex;
-  margin: auto;
-  width: 371px;
-  height: 67px;
-  background: #d3bdbd;
-  border-radius: 9px;
-  align-items: center;
-  justify-content: center;
-}
-.botonEnviar {
-  width: 67px;
-  height: 28px;
-  background: #f2fbfb;
-  border-radius: 6px;
-  border: solid 0px;
-  margin-left: 2%;
-}
-
-.chat {
+/*.chat {
   width: 248px;
   height: 29px;
   background: #ffffff;
   border-radius: 5px;
   border: solid 0px;
-}
+}*/
 
 
-
-
-.subCajitaAzul {
-  margin-left: auto;
-  margin-right: auto;
-  height: auto;
-  width: 90%;
-}
-
-.avatar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 2%;
-  width: 50px;
-  height: 50px;
-  background: #7cdc6c;
-  border-radius: 50%;
-  font-family: fantasy;
-  color: #4a4a4a;
-}
-.cajitachatAzul {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-end;
-  width: 348px;
-  min-height: 51px;
-  height: auto;
-  margin-top: 10px;
-  word-wrap: break-word;
-}
-
-.textoCajitaAzul {
-  min-width: 200px;
-  width: auto;
-  background: #7c99ff;
-  border-radius: 10px 10px 10px 0px;
-  min-height: 36px;
-  height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: cursive;
-  margin-left: 2%;
-  padding: 10px;
-}
 
 .button1 {
   margin-right: 4px;
-}
-
-.avatarAzul {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 2%;
-  width: 50px;
-  height: 50px;
-  background: #7c99ff;
-  border-radius: 50%;
-  font-family: fantasy;
-  color: #4a4a4a;
 }
 
 .noti {

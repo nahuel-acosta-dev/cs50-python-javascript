@@ -8,7 +8,7 @@ const ApiInvitations = ({invitations, nombre}) => {
         <>
             {invitations.map((m, i) =>
             <div key={i}>
-                {m.name==nombre? 
+                {m.name == nombre ? 
                     (<Cajitachat data={m} />):
                     (<Cajitaazul data={m}/>)
                 }

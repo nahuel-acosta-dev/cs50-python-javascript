@@ -1,11 +1,12 @@
-import React, {useState, useEffect, memo} from 'react';
+import React, {useState, useEffect, memo, useRef} from 'react';
 import ApiInvitations from './ApiInvitations';
 import Cajitaazul from './models/Cajitaazul';
 import Cajitachat from './models/Cajitachat';
 import LoadingModal from './Modal/LoadingModal';
-import {Routes, Route, Navigate, useNavigate} from 'react-router-dom';
+import Row from 'react-bootstrap/Row'
 
 const Invitations = ({nombre, myId,chatSocket, invitations}) => {
+    const endpagemap = useRef(null);
     const [converzacion, setconverzacion] = useState([]);
     const [groupId, setGroupId] = useState();
     const [response, setResponse] = useState(false);
@@ -26,7 +27,7 @@ const Invitations = ({nombre, myId,chatSocket, invitations}) => {
         if(answer)setGroupId(converzacion[converzacion.length - 1].id);
         //Hay un error al tomar el ultimo converzacion, ya que si me envia otra invitacion otro usuario
         //antes de responder se reemplazaria el grupo al que quiero responder
-        //Cre q No hay error, ya que solo toma el grupo si es true
+        //Creo q No hay error, ya que solo toma el grupo si es true
         e.preventDefault();
       }
 
@@ -51,23 +52,32 @@ const Invitations = ({nombre, myId,chatSocket, invitations}) => {
         setResponse(false);}
       }, [])
 
+      useEffect(() => {
+        endpagemap.current?.scrollIntoView();
+      }, [converzacion])
+
 
       return(
-        <>
+        <Row>
+          <h3 className="title-invitations">Invitations</h3>
             <div className="pantalla">
+                
                 <div id="elCuerpo">
                   <div className="contMessage">
                     {!invitations ?
-                    null:
+                    null :
                     (<ApiInvitations invitations={invitations} nombre={nombre}/>)}
 
-                      {converzacion.map((m, i)=>
+                      {converzacion.map((m, i) =>
                       <div key={i}>
-                        {m.name==nombre? 
+                        {m.name == nombre ? 
                             (<Cajitachat data={m}/>):
                                 (<Cajitaazul data={m} enviar={enviar} setResponse={setResponse}/>)
                             }
                       </div>)}
+                            
+                      <div ref={endpagemap} />
+                      
                     </div>
                 </div>
             </div>
@@ -75,7 +85,7 @@ const Invitations = ({nombre, myId,chatSocket, invitations}) => {
             {response &&
                 <LoadingModal groupId={groupId} chatSocket={chatSocket}/>
               }                        
-        </>
+        </Row>
       )
 
 }

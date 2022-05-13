@@ -12,6 +12,12 @@ body {
   font-weight: 100;
 }
 
+#app {
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(150deg, #fce3ad, #985E6D);
+}
+
 /*-------------------media-device--------------*/
 .nav-bar {
   padding: 1.25em;
@@ -180,10 +186,25 @@ body {
 /*-------------------media-device--------------*/
 .cont-receive-invitations {
   width: 100vw;
-  height: 100vh;
+  height: 85vh;
   padding-top: 2%;
   display: flex;
   justify-content: center;
+}
+
+.home {
+  height: 100vh;
+  width: 100vw;
+  color: black;
+}
+.home h2 {
+  text-align: center;
+  color: black;
+}
+.home .art {
+  width: 30%;
+  height: 30%;
+  background-color: black;
 }
 
 .cont-session {
@@ -248,20 +269,41 @@ td {
   height: 40px;
 }
 
-.pantalla {
+.cont-reInvitations-loading {
+  height: 90vh;
   width: 50%;
-  height: 80%;
-  background: rgba(143, 194, 253, 0.15);
-  border-radius: 12px;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
-  flex-direction: column;
-  align-content: center;
   align-items: center;
   justify-content: center;
 }
 
-#elCuerpo {
-  width: 90%;
+.cont-invitations-loading {
+  height: 90vh;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 12%;
+}
+
+.pantalla {
+  width: 50%;
+  height: 90%;
+  background: rgba(143, 194, 253, 0.15);
+  border: 1px solid black;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 1px 1px 1px 1px;
+}
+.pantalla #elCuerpo {
+  width: 95%;
   height: 90%;
   background: #f0ebeb;
   border-radius: 8px;
@@ -271,32 +313,81 @@ td {
   overflow: hidden;
   overflow-y: scroll;
 }
-
-.contMessage {
+.pantalla #elCuerpo .contMessage {
   height: auto;
   padding: 12px;
 }
 
 .cajitachat {
+  margin-top: 10px;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  width: 348px;
+  width: 100%;
   min-height: 51px;
   height: auto;
 }
 
+.cont-response {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  width: 100%;
+  min-height: 51px;
+  height: auto;
+}
+
+.text-response {
+  min-width: 200px;
+  width: 80%;
+  background: #7c99ff;
+  border-radius: 0px 0px 0px 10px;
+  min-height: 36px;
+  margin-right: calc(50px + 2%);
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: cursive;
+  word-wrap: break-word;
+}
+
+.subCajitaAzul {
+  margin-left: auto;
+  margin-right: auto;
+  height: auto;
+  width: 90%;
+}
+
 .textoCajita {
   min-width: 200px;
-  background: #7cdc6c;
-  border-radius: 10px 10px 0px 10px;
+  width: 80%;
+  background: #7c99ff;
+  border-radius: 10px 10px 0px 0px;
   min-height: 36px;
   height: auto;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   font-family: cursive;
   word-wrap: break-word;
+}
+
+.avatarAzul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 2%;
+  width: 50px;
+  height: 50px;
+  background: #7c99ff;
+  border-radius: 50%;
+  font-family: fantasy;
+  color: #4a4a4a;
+}
+
+.title-invitations {
+  text-align: center;
 }
 
 h1 {
@@ -363,159 +454,15 @@ h1 {
     height: 90%;
   }
 }
-/*Clone Whatsap*/
-/*
-.back-top {
-  background-color: #009688;
-  height: 15vh;
-}
-
-.back-main {
-  background-color: #d9dbd5;
-  height: 85vh;
-}
-
-.back-container {
-  position: relative;
-}
-
-.front-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-}
-.front-container1 {
-  position: absolute;
-  top: 20px;
-  left: 0;
-  right: 0;
-}
-
-.chat-top {
-  background-color: #ededed;
-  min-height: 50px;
-}
-
-.profile-image {
-  margin-top: 7px;
-  height: 30px;
-  width: 30px;
-}
-
-.contacts {
-  background-color: #ffffff;
-  min-height: 600px;
-}
-
-.contact-table-scroll {
-  overflow-y: scroll;
-  height: 600px;
-}
-
-.message-area {
-  background-color: #e4e1de;
-  min-height: 600px;
-}
-
-.message-table-scroll {
-  overflow-y: scroll;
-  height: 550px;
-}
-
-.message-box {
-  background-color: #f0f0f0;
-}*/
-/*-------------------------------*/
-.enviar {
-  display: flex;
-  margin: auto;
-  width: 371px;
-  height: 67px;
-  background: #d3bdbd;
-  border-radius: 9px;
-  align-items: center;
-  justify-content: center;
-}
-
-.botonEnviar {
-  width: 67px;
-  height: 28px;
-  background: #f2fbfb;
-  border-radius: 6px;
-  border: solid 0px;
-  margin-left: 2%;
-}
-
-.chat {
+/*.chat {
   width: 248px;
   height: 29px;
   background: #ffffff;
   border-radius: 5px;
   border: solid 0px;
-}
-
-.subCajitaAzul {
-  margin-left: auto;
-  margin-right: auto;
-  height: auto;
-  width: 90%;
-}
-
-.avatar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 2%;
-  width: 50px;
-  height: 50px;
-  background: #7cdc6c;
-  border-radius: 50%;
-  font-family: fantasy;
-  color: #4a4a4a;
-}
-
-.cajitachatAzul {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-end;
-  width: 348px;
-  min-height: 51px;
-  height: auto;
-  margin-top: 10px;
-  word-wrap: break-word;
-}
-
-.textoCajitaAzul {
-  min-width: 200px;
-  width: auto;
-  background: #7c99ff;
-  border-radius: 10px 10px 10px 0px;
-  min-height: 36px;
-  height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: cursive;
-  margin-left: 2%;
-  padding: 10px;
-}
-
+}*/
 .button1 {
   margin-right: 4px;
-}
-
-.avatarAzul {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 2%;
-  width: 50px;
-  height: 50px;
-  background: #7c99ff;
-  border-radius: 50%;
-  font-family: fantasy;
-  color: #4a4a4a;
 }
 
 .noti {
