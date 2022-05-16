@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import Button from 'react-bootstrap/Button'
 
 const PreHome = () => {
@@ -15,7 +16,7 @@ const PreHome = () => {
                     cifrado que, aunque no tienen sentido para cualquier persona, sí puede ser 
                     descifrado por su destinatario original.
                 </p>
-                <Button variant="primary" size="md">Register. It's free!</Button>
+                <Link className="btn btn-primary" to="/register">Register. It's free!</Link>
             </div>
             <div className="cont-img col">
                 <img src="../../../static/images/kite-152756.svg"/>

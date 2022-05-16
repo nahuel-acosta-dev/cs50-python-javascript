@@ -3,7 +3,7 @@ import ApiInvitations from './ApiInvitations';
 import Cajitaazul from './models/Cajitaazul';
 import Cajitachat from './models/Cajitachat';
 import LoadingModal from './Modal/LoadingModal';
-import Row from 'react-bootstrap/Row'
+import Row from 'react-bootstrap/Row';
 
 const Invitations = ({nombre, myId,chatSocket, invitations}) => {
     const endpagemap = useRef(null);
@@ -59,9 +59,10 @@ const Invitations = ({nombre, myId,chatSocket, invitations}) => {
 
       return(
         <Row>
-          <h3 className="title-invitations">Invitations</h3>
+          <div className="cont-title-invitations">
+            <h3 className="title-invitations">Invitations</h3>
+          </div> 
             <div className="pantalla">
-                
                 <div id="elCuerpo">
                   <div className="contMessage">
                     {!invitations ?

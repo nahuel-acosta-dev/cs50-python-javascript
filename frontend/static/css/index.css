@@ -6,16 +6,24 @@ html {
 }
 
 body {
-  width: 99%;
-  height: 100%;
   font-size: 1rem;
+  height: 100vh;
+  width: 100vw;
   font-weight: 100;
+  background: linear-gradient(150deg, #985E6D, #985E6D);
 }
 
 #app {
-  height: 100vh;
-  width: 100vw;
+  scroll-behavior: smooth;
   background: linear-gradient(150deg, #fce3ad, #985E6D);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+}
+
+p, span {
+  font-weight: 100;
 }
 
 /*-------------------media-device--------------*/
@@ -88,6 +96,9 @@ body {
   width: 70%;
   margin-left: auto;
   margin-right: auto;
+}
+.cont-select-group .cont-table {
+  width: 95%;
 }
 
 .ocultar {
@@ -186,8 +197,7 @@ body {
 /*-------------------media-device--------------*/
 .cont-receive-invitations {
   width: 100vw;
-  height: 85vh;
-  padding-top: 2%;
+  height: 90vh;
   display: flex;
   justify-content: center;
 }
@@ -198,15 +208,26 @@ body {
   color: black;
 }
 .home h2 {
+  margin-top: 2%;
   text-align: center;
   color: black;
 }
-.home .art {
-  width: 30%;
+.home .cont-articles {
+  height: 80%;
+}
+.home .cont-articles .art {
+  width: 50%;
   height: 30%;
-  background-color: black;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: transparent;
+  text-align: center;
+}
+.home .cont-articles .art p {
+  height: auto;
 }
 
+/*--------------------media-device----------------*/
 .cont-session {
   overflow: auto;
   width: 100vw;
@@ -292,7 +313,7 @@ td {
 
 .pantalla {
   width: 50%;
-  height: 90%;
+  height: 70%;
   background: rgba(143, 194, 253, 0.15);
   border: 1px solid black;
   border-radius: 12px;
@@ -386,8 +407,41 @@ td {
   color: #4a4a4a;
 }
 
+.cont-title-invitations {
+  height: 10%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
 .title-invitations {
   text-align: center;
+}
+
+/*------------Responsive-----------*/
+.modal-content {
+  background-color: black !important;
+  color: white;
+}
+.modal-content .btn-close {
+  background-color: white;
+}
+
+.my-modal-header {
+  border-bottom: none !important;
+}
+
+.cont-avatar {
+  margin-left: 5px;
+  background-color: orange;
+}
+
+.btn-modal {
+  margin-right: 5px;
+}
+
+.my-modal-footer {
+  border-top: none !important;
 }
 
 h1 {
@@ -436,6 +490,11 @@ h1 {
   .select-group-cont-img {
     display: none;
   }
+
+  .art {
+    width: 80% !important;
+    height: 20%;
+  }
 }
 @media all and (max-width: 576px) {
   .navbar-brand img {
@@ -452,6 +511,12 @@ h1 {
   .cont-session .frame-session {
     width: 90%;
     height: 90%;
+  }
+
+  .pantalla {
+    background-color: transparent;
+    border: none;
+    height: 80%;
   }
 }
 /*.chat {

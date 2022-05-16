@@ -30,7 +30,7 @@ const SelectGroup = () => {
 
     return (
         <Row className="cont-select-group animation-cont-select-group align-content-center">
-            <Col md={6} className="select-group">
+            <Col md={6} className={`select-group ${!hide ? '':'cont-table'}`}>
                 {!hide &&
                     <div>
                         <h2>Bienvenido a la seccion de Invitaciones.</h2>

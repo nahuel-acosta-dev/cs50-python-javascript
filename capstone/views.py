@@ -28,7 +28,6 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         # Add custom claims
         token['username'] = user.username
         token['id'] = user.id
-        print(token)
         # ...
 
         return token
@@ -122,7 +121,6 @@ def getCoins(request):
 @permission_classes([IsAuthenticated])
 def getAllCoins(request):
     user = request.user
-    print(user.id)
     coins = Coins.objects.exclude(user_id=user.id)
     serializer = CoinsSerializer(coins, many=True)
     return Response(serializer.data)
@@ -200,6 +198,34 @@ def modGroupDetails(request, id):
         return Response(group.serialize(), status=200)
     else:
         return Response({'message': 'Not changes'}, status=200)
+
+
+@api_view(['PUT', 'DELETE'])
+@permission_classes([IsAuthenticated])
+def deleteUserGroupDetails(request, id):
+    data = json.loads(request.body)
+    group = GroupDetails.objects.get(id=id)
+    value = False
+    print(data['user'])
+    print(group.user1_id)
+    print(group.user1.id)
+    try:
+        if int(data['user']) == int(group.user1_id):
+            group.user1 = None
+            group.invitation1 = False
+            value = True
+        elif int(data['user']) == int(group.user2_id):
+            group.user2 = None
+            group.invitation2 = False
+            value = True
+    except:
+        return Response({'message': 'Group not encounter'}, status=204)
+
+    if value:
+        group.save()
+        return Response(group.serialize(), status=200)
+    else:
+        return Response({'message': 'Not changes'}, status=204)
 
 
 @api_view(['GET'])

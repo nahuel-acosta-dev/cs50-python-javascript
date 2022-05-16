@@ -1,26 +1,28 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Invite from './Invite';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 const UserModal = (props) => {
+    let user = props.user;
 
     return (
-      <Modal onHide={props.onHide} show={props.show} size="lg" 
+      <Modal className="invite-modal" onHide={props.onHide} show={props.show} size="lg" 
        aria-labelledby="contained-modal-title-vcenter" centered>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton className="my-modal-header">
           <Modal.Title id="contained-modal-title-vcenter">
-            Modal heading
+            <Row>
+              <Col className="cont-avatar">
+                {user.username.toUpperCase()[0]}
+              </Col>
+              <Col>
+                {user.username.toUpperCase()[0] + user.username.slice(1)}
+              </Col>
+            </Row>
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <h4>Centered Modal</h4>
-          <p>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-            dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-            consectetur ac, vestibulum at eros.
-          </p>
-        </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className="my-modal-footer">
         {
             props.show &&
             <Invite otherUser={props.user} onHide={props.onHide} 

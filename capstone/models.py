@@ -135,6 +135,20 @@ class Message(models.Model):
 
     def serialize(self):
         return{
+            "username": self.username,
+            "content": self.content,
+        }
+
+
+class PreRoom(models.Model):
+    username = models.CharField(max_length=255)
+    room = models.CharField(max_length=255)
+    content = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
+
+    def serialize(self):
+        return{
+            "username": self.username,
             "content": self.content,
         }
 

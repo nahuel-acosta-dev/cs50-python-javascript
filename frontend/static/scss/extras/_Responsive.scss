@@ -15,6 +15,7 @@ $sm: 576px;
     @include collapse-nav-links-center;
     @include pre-home-md;
     @include select-group-md;
+    @include home-md;
 }
 
 @media all and (min-width:$sm ) and (max-width: $md){
@@ -24,4 +25,5 @@ $sm: 576px;
 @media all and (max-width: $sm){
     @include collapse-nav-img-none;
     @include session-sm;
+    @include invitations-sm;
 }

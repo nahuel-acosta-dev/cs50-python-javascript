@@ -26,6 +26,8 @@ urlpatterns = [
     path("group/get_group_details", views.getGroupDetails),
     path("group/get_id_Group_Details/<int:id>", views.getIdGroupDetails),
     path("group/mod_group_details/<int:id>", views.modGroupDetails),
+    path("group/delete_user_group_details/<int:id>",
+         views.deleteUserGroupDetails),
 
 
     path("group/delete_group_details/<int:id>", views.deleteGroupDetails),

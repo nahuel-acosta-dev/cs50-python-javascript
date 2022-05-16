@@ -14,7 +14,7 @@ export default function Cajitaazul(props){
                 </div>
             </div>
             <div className="avatarAzul">
-                <h1>{props.data.name.toUpperCase()[0]}</h1>
+                {props.data.name.toUpperCase()[0]}
             </div>
         </div>
     )

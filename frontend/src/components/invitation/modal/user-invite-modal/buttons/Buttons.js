@@ -31,7 +31,7 @@ const Buttons = ({closeOnHide, chatSocket, setStateInvitation, group}) => {
 
     return(
         <>
-            <Button variant="danger" onClick={(e) => enviar(e)}>invitar</Button>
+            <Button className="btn-modal" variant="danger" onClick={(e) => enviar(e)}>invite</Button>
             <Button onClick={closeOnHide}>Close</Button>
         </>
     )
