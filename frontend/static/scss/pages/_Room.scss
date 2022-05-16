@@ -1,0 +1,92 @@
+.cont-room{
+    height: 100vh;
+    width: 90%;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    margin-left: auto;
+    margin-right: auto;
+    //background: linear-gradient(150deg,  #00c298,$gray-color, $yellow-color);
+    background-color: white;
+    .room-msj{
+        width: 90%;
+        height: 100%;
+        margin-left: auto;
+        margin-right: auto;
+
+        .inf{
+            height: 15%;
+        }
+        form{
+            height: 85%;
+            
+            .box{
+                height: 70%;
+                word-wrap: break-word;
+                overflow: hidden;
+                overflow-y: auto;
+                padding-top: 20px;
+                padding-bottom: 20px;
+                .cont-msj, .other-cont-msj{
+                    margin-top: 10px;
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: flex-end;
+                    width: 100%;
+                    min-height: 51px;
+                    height: auto;
+
+                    .my-msj {
+                        min-width: 200px;
+                        width: 40%;
+                        background: #7c99ff;
+                        border-radius: 10px 10px 10px 10px;
+                        min-height: 36px;
+                        height: auto;
+                        @include display-center-center;
+                        font-family: cursive;
+                        word-wrap: break-word;
+                      }
+                }
+                .other-cont-msj{
+                    justify-content: flex-start;
+                    .other-avatar{
+                        margin-right: 2%;
+                        background: red;
+                      }
+                    .other-msj {
+                        background: #c7a9a9;
+                        
+                    }
+                }
+            }
+            .cont-send-msj{
+                padding-left:5%;
+                height: 30%;
+                width: 100%;
+                background-color: black;
+                
+                .field{
+                    margin-top: 2%;
+                    input{
+                        margin-top: 5px;
+                        border-radius: 10px;
+                    }
+                    button{
+                        border-radius: 10px;
+                    }
+                }
+            }
+        }
+    }
+    
+}
+
+
+
+
+.cont-err{
+    height: 100vh;
+    .err-h4{
+        margin-left: 10%;
+    }
+}

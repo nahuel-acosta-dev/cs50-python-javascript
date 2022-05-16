@@ -228,6 +228,91 @@ p, span {
 }
 
 /*--------------------media-device----------------*/
+.cont-room {
+  height: 100vh;
+  width: 90%;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+}
+.cont-room .room-msj {
+  width: 90%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.cont-room .room-msj .inf {
+  height: 15%;
+}
+.cont-room .room-msj form {
+  height: 85%;
+}
+.cont-room .room-msj form .box {
+  height: 70%;
+  word-wrap: break-word;
+  overflow: hidden;
+  overflow-y: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.cont-room .room-msj form .box .cont-msj, .cont-room .room-msj form .box .other-cont-msj {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  width: 100%;
+  min-height: 51px;
+  height: auto;
+}
+.cont-room .room-msj form .box .cont-msj .my-msj, .cont-room .room-msj form .box .other-cont-msj .my-msj {
+  min-width: 200px;
+  width: 40%;
+  background: #7c99ff;
+  border-radius: 10px 10px 10px 10px;
+  min-height: 36px;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: cursive;
+  word-wrap: break-word;
+}
+.cont-room .room-msj form .box .other-cont-msj {
+  justify-content: flex-start;
+}
+.cont-room .room-msj form .box .other-cont-msj .other-avatar {
+  margin-right: 2%;
+  background: red;
+}
+.cont-room .room-msj form .box .other-cont-msj .other-msj {
+  background: #c7a9a9;
+}
+.cont-room .room-msj form .cont-send-msj {
+  padding-left: 5%;
+  height: 30%;
+  width: 100%;
+  background-color: black;
+}
+.cont-room .room-msj form .cont-send-msj .field {
+  margin-top: 2%;
+}
+.cont-room .room-msj form .cont-send-msj .field input {
+  margin-top: 5px;
+  border-radius: 10px;
+}
+.cont-room .room-msj form .cont-send-msj .field button {
+  border-radius: 10px;
+}
+
+.cont-err {
+  height: 100vh;
+}
+.cont-err .err-h4 {
+  margin-left: 10%;
+}
+
 .cont-session {
   overflow: auto;
   width: 100vw;

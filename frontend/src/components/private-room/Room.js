@@ -47,9 +47,12 @@ return (
     {!entrada ?
         (<Loading/>):(
         <>{atob(id) == user.user_id ?
-            <GetSala roomName={atob(room)} username={atob(myuser)} messages={messages} />
+            <GetSala roomName={atob(room)} username={atob(myuser)} messages={messages} 
+            setMessages={setMessages}/>
             :
-            <h1>Error no se encontro la sala o no estas incluido en el grupo</h1>
+            <div className="cont-err">
+                <h4 className="err-h4">Error the room was not found or you are not included in the group</h4>
+            </div>
         }
         </>
             )
