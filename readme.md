@@ -133,6 +133,9 @@ npm install
 ```json
 go to the frontend folder (in windows cd frontend) and apply:
 npm run dev
+
+Also in a separate terminal you can run gulp, to update in real time the changes with the following command: 
+gulp
 ```
 
 </br>
