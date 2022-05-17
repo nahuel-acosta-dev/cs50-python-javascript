@@ -2,7 +2,7 @@
 
 </br>
 
-# Overview
+# Project description
 
 This project consists of a Django API in the Backend folder, with a React interface inside the Frontend folder. This brainstorming app is called Quick Ideas. It has functions such as registration and login. Teachers will be able to create quizzes. Registered people will be able to create Groups of Ideas, where they must put a title, theme and description, later they will be able to invite whoever they want to the group of ideas recently created. Finally, the participants will be directed to a private room, where they can share their ideas related to the group's theme.
 
