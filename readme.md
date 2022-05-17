@@ -22,7 +22,7 @@ The difference between this web application and the previous projects is that th
 
 </br>
 
-# Structure
+# Structure App
 
 Next, I will explain how the application is made up.
 Folders:
@@ -73,7 +73,7 @@ Folders:
 
 ### Models in the app
 
-There are 5 models for the web application's database.
+The application has 5 models that are migrated to MySql, these are the models:.
 
 1. `User` - User model with all the functions brought in abstractUser plus some others necessary for the web application
 2. `Coins` - It manages both the amount of coins of the user and the cost of inviting said user to play (to be implemented in later versions)
