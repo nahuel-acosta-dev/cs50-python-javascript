@@ -10,7 +10,7 @@ I plan to continue developing the app to a much more mature point with more feat
 
 </br>
 
-# Justification
+# Distinctiveness and Complexity 
 
 I consider that my application meets all the requirements stated in the description of the final project. It is a web platform, oriented to be a social game and to help people. It puts into practice the vast majority of concepts taught during the course and other external concepts, such as the use of channels or the implementation of a different login than the one that django brings by default to facilitate communication with react.
 
