@@ -200,6 +200,19 @@ def modGroupDetails(request, id):
         return Response({'message': 'Not changes'}, status=200)
 
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def desactiveGroupDetails(request, id):
+    group = GroupDetails.objects.get(id=id)
+    if group.active == True:
+        group.active = False
+        group.save()
+        print("Group desactivate")
+        return Response(group.serialize(), status=200)
+    else:
+        return Response({'message': 'Not changes'}, status=204)
+
+
 @api_view(['PUT', 'DELETE'])
 @permission_classes([IsAuthenticated])
 def deleteUserGroupDetails(request, id):
@@ -278,31 +291,3 @@ def getMessages(request, room_name):
     objecto = objecto.order_by("-date").all()
     # return JsonResponse([],safe=false)
     return Response([objec.serialize() for objec in objecto])
-
-
-@api_view(['GET'])
-def getNotification(request, room_name):
-    objecto = Message.objects.filter(room=room_name)
-    objecto = objecto.order_by("-date").all()
-    # return JsonResponse([],safe=false)
-    return Response([objec.serialize() for objec in objecto])
-
-
-# clone whatsap
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])
-def chatPage(request, username):
-    user_obj = User.objects.get(username=username)
-    #users = User.objects.exclude(username='nahuel')
-    user = request.user
-    if user is None:
-        print(user.username)
-        return Response(user.serialize())
-    if request.user.id > user_obj.id:
-        # if 1 > user_obj.id:
-        thread_name = f'chat_{request.user.id}-{user_obj.id}'
-    else:
-        thread_name = f'chat_{user_obj.id}-{request.user.id}'
-    message_objs = ChatModel.objects.filter(thread_name=thread_name)
-
-    return Response([objec.serialize() for objec in message_objs])

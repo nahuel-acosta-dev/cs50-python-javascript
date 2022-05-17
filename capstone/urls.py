@@ -28,6 +28,8 @@ urlpatterns = [
     path("group/mod_group_details/<int:id>", views.modGroupDetails),
     path("group/delete_user_group_details/<int:id>",
          views.deleteUserGroupDetails),
+    path("group/desactive_group_details/<int:id>",
+         views.desactiveGroupDetails),
 
 
     path("group/delete_group_details/<int:id>", views.deleteGroupDetails),
