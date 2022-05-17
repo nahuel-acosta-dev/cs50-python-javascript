@@ -107,6 +107,12 @@ The classes that form the subsequent tables in MySql once the data has been migr
 
 </br>
 
+
+# Some tools/technologies used in the project
+- `JWT` - Used for the login that connects the backend to the frontend
+- `Django Channels` - To be able to manage the channels from the backend
+- `MySql` - Used to handle the tables in our database
+
 # Installation & how to run the application
 
 When the backend and the frontend are connected, you only need port 8000 to be able to appreciate the application.
