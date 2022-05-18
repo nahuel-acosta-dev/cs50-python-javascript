@@ -56,7 +56,7 @@ const GetSala = ({roomName, username, messages, setMessages, desactiveGroup, gro
     if(group || username != creatorUsername){
     setTimeout(() =>{
         setSmShow(true);     
-    }, 10000)
+    }, 55000)
 
     //After the indicated time has elapsed, the group is deactivated.
     setTimeout(() =>{
@@ -69,7 +69,7 @@ const GetSala = ({roomName, username, messages, setMessages, desactiveGroup, gro
         else if(username != creatorUsername){
             setRedirect(true);
         }
-    }, 20000)
+    }, 60000)
 }
 
     if(username == creatorUsername){
