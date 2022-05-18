@@ -5,8 +5,9 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import {Navigate} from "react-router-dom";
 
-const GetSala = ({roomName, username, messages, setMessages, desactiveGroup, group}) =>{
+const GetSala = ({roomName, username, messages, setMessages, desactiveGroup, group, creatorUsername}) =>{
     const chatSocket = new WebSocket(`ws://localhost:8000/ws/private_room/${roomName}/`);
+    const [redirect, setRedirect] = useState(false);
     const [smShow, setSmShow] = useState(false); 
 
     console.log(messages);
@@ -51,19 +52,29 @@ const GetSala = ({roomName, username, messages, setMessages, desactiveGroup, gro
     if(group){
         console.log(group.active)
     }
-
-    if(group){
+    //After the indicated time has elapsed, the modal is activated
+    if(group || username != creatorUsername){
     setTimeout(() =>{
         setSmShow(true);     
     }, 10000)
 
+    //After the indicated time has elapsed, the group is deactivated.
     setTimeout(() =>{
-        desactiveGroup();
-        if(group){
+        if(username == creatorUsername){
+        desactiveGroup();}
+        if(group && username == creatorUsername){
         console.log(group.active);
-    }
+        }
+
+        else if(username != creatorUsername){
+            setRedirect(true);
+        }
     }, 20000)
 }
+
+    if(username == creatorUsername){
+        if(group.active == "false")setRedirect(false);
+    }
 
     return(
     <section className="columns is-multiline cont-room">
@@ -129,8 +140,7 @@ const GetSala = ({roomName, username, messages, setMessages, desactiveGroup, gro
     </Row>
     <ModalSmall smShow={smShow} setSmShow={setSmShow}/>
     {
-    group &&
-    group.active == false &&
+    redirect &&
         <Navigate to="/"/>
     }
 </section>

@@ -12,13 +12,13 @@ I plan to continue developing the app to a much more mature point with more feat
 
 # Distinctiveness and Complexity
 
-I consider that my application meets all the requirements stated in the description of the final project. It is a web platform, oriented to be a social game and to help people. It puts into practice the vast majority of concepts taught during the course and other external concepts, such as the use of channels or the implementation of a different login than the one that django brings by default to facilitate communication with react.
+I consider that my application meets all the requirements established in the description of the final project. It is a web platform, aimed at being a social game and helping people. It puts into practice the vast majority of concepts taught during the course and other external concepts, such as the use of channels or the implementation of a login that uses a token (JWT) different from the one that django brings by default to facilitate communication with react.
 
 The backend was developed exclusively in the django framework, in which user authentication, the use of channels to facilitate communication between users in real time and route management were developed. Although react is used, the interface is contained within django and connected to django thanks to webpack.
 
 On the other hand, the user interface was designed with React JS. The web application is mobile responsive. I included a bootstrap library to make my react/front-end components mobile responsive.
 
-The difference between this web application and the previous projects is that this application uses a "self-developed" login, that is, I don't use the one that comes with django by default and I take care of configuring one that facilitates communication with react, it uses channels so that users participate in a chat in real time and thus do not have to make repeated requests to the api. And it is also a fully responsive application.
+The difference between this web application and the previous projects is that this application uses a "self-developed" login, that is, I do not use the one that comes with django by default and I am in charge of configuring one that facilitates communication with react, it uses channels so that users participate in a chat in real time and thus do not have to make repeated requests to the api. And it is also a fully responsive app.
 
 </br>
 

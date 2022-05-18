@@ -4,12 +4,14 @@ import Button from 'react-bootstrap/Button';
 const Buttons = ({enviar, setResponse, data}) => {
     const [touchButton, setTouchButton] = useState(false);
 
+    //we accept the invitation and enable the modal
     const agree = (e) => {
         setTouchButton(true);
         enviar(e, true);
         setResponse(true);
     }
 
+    //we reject the invitation and send the notice
     const reject = (e) => {
         setTouchButton(true);
         enviar(e, false);

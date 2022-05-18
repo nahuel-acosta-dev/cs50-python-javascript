@@ -16,6 +16,7 @@ const LoadingModal = ({groupId, chatSocket}) => {
     let myUser = user.user_id;
     let myUsername = user.username;
 
+    //we get the indicated group according to the id
     const getGroupDetails = () => {
       try{getItemContext(`group/get_id_Group_Details/${groupId}`, setGroup);}
       catch{

@@ -10,9 +10,10 @@ const Invitation = ({groupDetails, setHide, getGroup}) => {
     const [loading, setLoading] = useState(false);
     if(groupDetails){
         console.log(groupDetails.active)}
-
+    
     let {getItemContext} = useContext(ItemContext);
 
+    /*Call to the api getcoins, to obtain the monetary data of all the users*/
     const getCoins = async () => {
         try{
         getItemContext('allcoins', setCoins);}
@@ -20,9 +21,10 @@ const Invitation = ({groupDetails, setHide, getGroup}) => {
             console.log('Error loading user coins');}
     }
 
+    /*1 second is the minimum load time*/
     setTimeout(() =>{
         setLoading(true);
-    }, 2000);
+    }, 1000);
 
     useEffect(() => {
         setHide(true);

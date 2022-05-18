@@ -14,6 +14,7 @@ const SelectGroup = () => {
     const [hide, setHide] = useState(false);
     let {getItemContext} = useContext(ItemContext);
 
+   /* the last active group of the user is obtained, otherwise it is warned that no group was found */
     let getGroupDetails = () =>{
         try {getItemContext('group/get_group_details', setGroupDetails);}
             

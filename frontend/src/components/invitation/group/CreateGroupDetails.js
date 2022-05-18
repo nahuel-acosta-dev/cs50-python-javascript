@@ -8,6 +8,7 @@ const CreateGroupDetails = ({groupDetails, setGroupDetails, setHide, notEncounte
     let {authTokens} = useContext(AuthContext);
     const [rdtInvitate, setRdtInvitate] = useState(false);
 
+    //the last active group is deactivated
     const updateDetails = async () => {
         let updateBody = {'active': false}
         
@@ -17,6 +18,7 @@ const CreateGroupDetails = ({groupDetails, setGroupDetails, setHide, notEncounte
         console.log(updateData);
     }
 
+    //a new group is created
     const createDetails = async (e) => {
         e.preventDefault();
         let body = {

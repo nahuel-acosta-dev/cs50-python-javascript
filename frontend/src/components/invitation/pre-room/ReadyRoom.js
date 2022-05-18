@@ -8,7 +8,12 @@ const ReadyRoom = ({groupDetails}) => {
     const [userOut, setUserOut] = useState(false);
     let roomName = groupDetails.name.replace(/ /g, '_');
     let encryptedPath;
+
+    //connects to websocket
     const Socket = new WebSocket(`ws://localhost:8000/ws/private/pre_room/${roomName}_${groupDetails.user}`);
+    
+    /*if you have the creator user of the group and the name of the room, they are saved in this
+    variable to be encrypted later*/
     if(groupDetails.user && roomName)encryptedPath = `${roomName}_${groupDetails.user}`;
 
     let readyWebSocket = () =>{

@@ -6,12 +6,15 @@ const AuthContext = createContext();
 export default AuthContext;
 
 export const AuthProvider = ({children}) => {
+  /*we verify that the user token is already saved in our localstorage and
+  we save in a state*/
   let [user, setUser] = useState(() => localStorage.getItem("authTokens") ? 
   jwt_decode(localStorage.getItem("authTokens")) : null);
   let [authTokens, setAuthTokens] = useState(() => localStorage.getItem("authTokens") ? 
   JSON.parse(localStorage.getItem("authTokens")) : null);
   let [loading, setLoading] = useState(true);
 
+  //function that allows us to log in the user
   let loginUser = async (e) => {
     e.preventDefault();
     console.log("formulario enviado");
@@ -32,6 +35,7 @@ export const AuthProvider = ({children}) => {
     else alert('Something went weong!');
 }
 
+  //update the user token
   let updateToken = async () => {
     console.log('update Token called');
     let response = await fetch('http://127.0.0.1:8000/capstone_api/token/refresh/', {

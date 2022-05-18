@@ -9,6 +9,7 @@ const Buttons = ({enviar, group, setShow}) => {
     let {updateItemContext} = useContext(ItemContext);
     let navigate = useNavigate();
 
+    //we communicate that we exit the rom and return to the invitations section
     const outRoom = (e, message) => {
         let object = {'user': user.user_id};
 

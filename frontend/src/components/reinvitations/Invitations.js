@@ -12,6 +12,8 @@ const Invitations = ({nombre, myId,chatSocket, invitations}) => {
     const [response, setResponse] = useState(false);
     console.log(converzacion);
 
+
+      //send the messages to the room
       function enviar(e, answer){
         chatSocket.send(JSON.stringify({
           type:'message',

@@ -8,6 +8,7 @@ const GetItems = () => {
     const [loading, setLoading] = useState(false);
     let {getItemContext} = useContext(ItemContext);
 
+    //we get all the invitations made to the user
     const getInvitations = async () => {
 
         try{getItemContext('allinvitations', setInvitations);}

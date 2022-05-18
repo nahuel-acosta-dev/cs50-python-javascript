@@ -3,6 +3,8 @@ import Loading from '../../../../loading/Loading';
 
 const MyUser = ({group, myUser, getGroupDetails}) => {
 
+    /*We take care of verifying if our user has already been loaded, otherwise we request
+    the group every 5 seconds*/
     const showUser = () => {
         if(group.user1 === null && group.user2 === null)setTimeout(() => getGroupDetails(), 5000)
 

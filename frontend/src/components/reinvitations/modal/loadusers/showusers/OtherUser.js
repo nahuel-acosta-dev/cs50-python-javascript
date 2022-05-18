@@ -3,6 +3,9 @@ import Loading from '../../../../loading/Loading';
 
 const OtherUser = ({group, myUser}) => {
 
+
+    /*We take care of verifying that all other users are already in the group, if not
+    is found we leave it loading */
     const loadingOtherUser = () => {
         if(group.user1 === null && group.user2 === null){
             return <Loading />;
