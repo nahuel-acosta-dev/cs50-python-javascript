@@ -80,6 +80,7 @@ The application has 5 models that are migrated to MySql, these are the models:.
 3. `GroupDetails` - Contains all the group data (title, description, users, etc,)
 4. `Invitations` - handles all invite messages sent through channels
 5. `Message` - Manage all the ideas sent in the rooms
+6. `PreRoom` - Saves in the database the different interactions in the preRoom
 
 ### Views file:
 
