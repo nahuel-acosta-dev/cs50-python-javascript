@@ -6,6 +6,9 @@ from django.contrib.auth.models import AnonymousUser
 from channels.db import database_sync_to_async
 from .models import Message, User, ChatModel, Invitations, GroupDetails, PreRoom
 
+"""Lo que ocurre en estas clases es que a travez del webSocket de javascript se envian ciertos datos
+necesarios para poder conectarlo a la sala y intercambiar los mensajes con otros usuarios."""
+
 
 class CapstoneRoomConsumer(AsyncWebsocketConsumer):
     async def connect(self):
@@ -97,6 +100,8 @@ class CapstoneRoomConsumer(AsyncWebsocketConsumer):
                 group.save()
 
 
+# These messages that are exchanged here are for the preRoom,
+# to know which users enter and which ones leave
 class PreRoomPrivateConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.room_name = self.scope['url_route']['kwargs']['room_name']
@@ -120,10 +125,14 @@ class PreRoomPrivateConsumer(AsyncWebsocketConsumer):
     # Receive message from web socket
     async def receive(self, text_data):
         data = json.loads(text_data)
+        print(data['username'])
+        print(data['room'])
+        print(data['message'])
         message = data['message']
         username = data['username']
         room = data['room']
 
+        # the data is saved to later be saved in the database
         await self.save_message(username, room, message)
 
         # Send message to room group

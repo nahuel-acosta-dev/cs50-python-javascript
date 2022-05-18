@@ -16,12 +16,6 @@ admin.site.register(token_blacklist.models.OutstandingToken,
 
 admin.site.register(models.User)
 admin.site.register(models.Coins)
-admin.site.register(models.Calification)
-admin.site.register(models.Group)
-admin.site.register(models.Ideas)
-admin.site.register(models.RegisterGroup)
-admin.site.register(models.ChatModel)
 admin.site.register(models.GroupDetails)
 admin.site.register(models.Invitations)
-admin.site.register(models.PreRoom)
 admin.site.register(models.Message)

@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 const FormCreate = ({createDetails}) => {
 
     return(
-        <Form onSubmit={e => createDetails(e)} >
+        <Form onSubmit={e => createDetails(e)} className="form-group">
                 <Form.Group className="mb-3" controlId="formBasicInput1">
                     <Form.Label>Title</Form.Label>
                     <Form.Control type="text" placeholder="Insert Title" name="title" />

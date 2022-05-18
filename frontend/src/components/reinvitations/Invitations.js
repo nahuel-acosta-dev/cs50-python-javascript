@@ -39,7 +39,10 @@ const Invitations = ({nombre, myId,chatSocket, invitations}) => {
                 type: dataFromserver.type_message,
                 msg:dataFromserver.response,
                 name:dataFromserver.name,
-                id: dataFromserver.group_id
+                id: dataFromserver.group_id,
+                title: dataFromserver.title,
+                theme: dataFromserver.theme,
+                description: dataFromserver.description
               }
             ]);
         }

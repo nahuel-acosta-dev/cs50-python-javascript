@@ -6,7 +6,7 @@
     margin-left: auto;
     margin-right: auto;
     //background: linear-gradient(150deg,  #00c298,$gray-color, $yellow-color);
-    background-color: white;
+    background-color: black;
     .room-msj{
         width: 90%;
         height: 100%;
@@ -15,17 +15,22 @@
 
         .inf{
             height: 15%;
+            color: white;
         }
         form{
             height: 85%;
             
             .box{
                 height: 70%;
+                padding-left: 2%;
+                padding-right: 2%;
                 word-wrap: break-word;
                 overflow: hidden;
                 overflow-y: auto;
                 padding-top: 20px;
                 padding-bottom: 20px;
+                background-color: white;
+                border-radius: 10px;
                 .cont-msj, .other-cont-msj{
                     margin-top: 10px;
                     display: flex;

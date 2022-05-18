@@ -13,12 +13,11 @@ const MyUser = ({group, myUser, getGroupDetails}) => {
         else if(group.user2 !== null && group.user2 === myUser){
             return group.user2_username;
         }
-
-        else return <p>No pudimos obtener tu usuario en el grupo</p>;
     }
 
     useEffect(() => {
         if(group.user1 === null && group.user2 === null)setTimeout(() => getGroupDetails(), 5000)
+        else if(group.user1 === null || group.user2 === null)setTimeout(() => getGroupDetails(), 5000)
     }, [])
 
     return(

@@ -20,7 +20,7 @@ const OtherUser = ({group, myUser}) => {
         else if(group.user1 !== null && group.user2 == myUser){
             return group.user1_username;
         }
-        else return <span>An error occurred while trying to show user 2</span>;
+        else return <Loading />;
     }
 
     return loadingOtherUser();

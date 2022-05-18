@@ -33,10 +33,10 @@ const SelectGroup = () => {
             <Col md={6} className={`select-group ${!hide ? '':'cont-table'}`}>
                 {!hide &&
                     <div>
-                        <h2>Bienvenido a la seccion de Invitaciones.</h2>
+                        <h2>Welcome to the Invitations section.</h2>
                         <p>
-                            En esta seccion podras crear un grupo y luego invitar a 
-                            quienes tu quieras a el.
+                            In this section you can create a group and then invite
+                            who you want him.
                         </p>
                     </div>
                 }
@@ -57,7 +57,13 @@ const SelectGroup = () => {
                 {!hide &&
                     <div className="select-groups-cont-links">
                         <Link className="btn btn btn-dark" to="create" onClick={() => setNotEncounter(false)}>Crear un nuevo Grupo de Ideas</Link> 
-                        <Link className="btn btn btn-dark" to="invitate" onClick={() => setHide(true)} >Usar tu ultimo grupo activo</Link>
+                        {groupDetails &&
+                            groupDetails.active == true ?
+                            <Link className="btn btn btn-dark" to="invitate" onClick={() => setHide(true)} >Usar tu ultimo grupo activo</Link>
+                            :
+                            <Link className="btn btn btn-dark" to="create" onClick={() => setNotEncounter(true)} >Usar tu ultimo grupo activo</Link>
+                        }
+                        
                     </div>
                 }
             </Col>

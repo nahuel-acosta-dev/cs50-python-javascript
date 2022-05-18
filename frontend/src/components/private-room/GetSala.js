@@ -1,14 +1,20 @@
-import React, {memo} from 'react';
+import React, {useState, memo, useEffect} from 'react';
+import ModalSmall from './ModalSmall';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import {Navigate} from "react-router-dom";
 
-
-const GetSala = ({roomName, username, messages, setMessages}) =>{
+const GetSala = ({roomName, username, messages, setMessages, desactiveGroup, group}) =>{
     const chatSocket = new WebSocket(`ws://localhost:8000/ws/private_room/${roomName}/`);
+    const [smShow, setSmShow] = useState(false); 
+
     console.log(messages);
-    console.log(messages)
-        chatSocket.onmessage = function(e) {
+    if(group){
+        console.log(group.id);
+    }
+
+    chatSocket.onmessage = function(e) {
         console.log('onmessage');
 
         const data = JSON.parse(e.data);
@@ -22,9 +28,8 @@ const GetSala = ({roomName, username, messages, setMessages}) =>{
             ])
         } else {
             alert('The message is empty!');
-        }
+        };
 
-    
 
     chatSocket.onclose = function(e) {
         console.log('The socket close unexpectadly');
@@ -43,8 +48,23 @@ const GetSala = ({roomName, username, messages, setMessages}) =>{
         }));
 
     };
+    if(group){
+        console.log(group.active)
+    }
 
-    
+    if(group){
+    setTimeout(() =>{
+        setSmShow(true);     
+    }, 10000)
+
+    setTimeout(() =>{
+        desactiveGroup();
+        if(group){
+        console.log(group.active);
+    }
+    }, 20000)
+}
+
     return(
     <section className="columns is-multiline cont-room">
         <Row className="room-msj justify-content-center align-content-center">
@@ -54,7 +74,7 @@ const GetSala = ({roomName, username, messages, setMessages}) =>{
                         <h4 className="title text-center">
                             Room
                         </h4>
-                        <h5 className="has-text-grey-light">Ready {username}</h5>
+                        <h5 className="has-text-grey-light">The room only lasts 10 minutes, starts {username}</h5>
                     </div>
                 </div>
             </div>
@@ -62,7 +82,7 @@ const GetSala = ({roomName, username, messages, setMessages}) =>{
             <form className="column is-6 is-offset-3" onSubmit={(e) => messageSubmit(e)}>
                 <div className="box">
                     <div id="chat-messages">
-                    {messages.map((message, i) => (
+                    {messages.reverse().map((message, i) => (
                         message.username == username ?
                         <div key={i} className="cont-msj">
                             <div className="my-msj">
@@ -92,9 +112,9 @@ const GetSala = ({roomName, username, messages, setMessages}) =>{
                 </div>
 
                 <Row className="cont-send-msj justify-content-center">
-                    <Col xs={10} className="field">
+                    <Col xs={8} className="field">
                         <div className="control row align-content-center justify-content-center">
-                            <input className="input" type="text" placeholder="Message" name="chatmessage" />
+                            <input className="input" type="text" placeholder="Idea" name="chatmessage" />
                         </div>
                     </Col>
 
@@ -107,8 +127,16 @@ const GetSala = ({roomName, username, messages, setMessages}) =>{
                 </Row>
             </form>
     </Row>
+    <ModalSmall smShow={smShow} setSmShow={setSmShow}/>
+    {
+    group &&
+    group.active == false &&
+        <Navigate to="/"/>
+    }
 </section>
     )
 }
 
 export default memo(GetSala);
+
+

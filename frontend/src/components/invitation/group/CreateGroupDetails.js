@@ -49,12 +49,12 @@ const CreateGroupDetails = ({groupDetails, setGroupDetails, setHide, notEncounte
     return (
         <section className="creategroupdetails">
             {notEncounter ?
-            <div>
-                <p>No se han encontrado grupos activos pertenecientes a tu perfil</p>
-                <p>A continuacion podras crear uno nuevo</p>
+            <div className="not-encounter-group">
+                <p>No active groups belonging to your profile have been found</p>
+                <p>Then you can create a new one</p>
             </div>:null}
-            <div>
-                <h1>Create Description Group</h1>
+            <div className="title-group">
+                <h4>Create Description Group</h4>
             </div>
             <FormCreate createDetails={createDetails} />
             {rdtInvitate &&

@@ -235,7 +235,7 @@ p, span {
   border-right: 2px solid black;
   margin-left: auto;
   margin-right: auto;
-  background-color: white;
+  background-color: black;
 }
 .cont-room .room-msj {
   width: 90%;
@@ -245,17 +245,22 @@ p, span {
 }
 .cont-room .room-msj .inf {
   height: 15%;
+  color: white;
 }
 .cont-room .room-msj form {
   height: 85%;
 }
 .cont-room .room-msj form .box {
   height: 70%;
+  padding-left: 2%;
+  padding-right: 2%;
   word-wrap: break-word;
   overflow: hidden;
   overflow-y: auto;
   padding-top: 20px;
   padding-bottom: 20px;
+  background-color: white;
+  border-radius: 10px;
 }
 .cont-room .room-msj form .box .cont-msj, .cont-room .room-msj form .box .other-cont-msj {
   margin-top: 10px;
@@ -311,6 +316,20 @@ p, span {
 }
 .cont-err .err-h4 {
   margin-left: 10%;
+}
+
+.creategroupdetails {
+  height: 45vh;
+}
+.creategroupdetails .not-encounter-group {
+  height: 20%;
+  margin-bottom: 20px;
+}
+.creategroupdetails .title-group {
+  height: 10%;
+}
+.creategroupdetails .form-group {
+  height: 50%;
 }
 
 .cont-session {

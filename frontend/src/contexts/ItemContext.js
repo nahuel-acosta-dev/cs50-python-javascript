@@ -18,11 +18,12 @@ export const ItemProvider = ({children}) => {
             else if(response.statusText === 'Unauthorized')logoutUser();
     }
 
-    const updateItemContext = async (url, object) => {
+    const updateItemContext = async (url, object, set) => {
         let response = await ItemService.updateItem(url, object, authTokens);
 
         if(response.status === 200){
             console.log(response.data);
+            set(response.data);
         }
         else if(response.statusText === 'Unauthorized')logoutUser();
     }

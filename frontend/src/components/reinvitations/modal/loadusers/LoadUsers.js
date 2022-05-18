@@ -4,6 +4,8 @@ import OtherUser from './showusers/OtherUser';
 import Modal from 'react-bootstrap/Modal';
 import Buttons from './buttons/Buttons';
 import {Navigate} from "react-router-dom";
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 const LoadUsers = ({group, getGroupDetails, myUser, myUsername, setShow}) => {
     const [redirectRoom, setRedirectRoom] = useState(false);
@@ -13,7 +15,8 @@ const LoadUsers = ({group, getGroupDetails, myUser, myUsername, setShow}) => {
 
     if(roomName && group.user)encryptedPath = `${roomName}_${group.user}`;
 
-    const enviar = (e, message) => {
+    const enviar = (/*e,*/ message) => {
+        console.log(message)
         standbySocket.send(JSON.stringify({
           type:'message',
           message:message,
@@ -53,7 +56,8 @@ const LoadUsers = ({group, getGroupDetails, myUser, myUsername, setShow}) => {
         if (dataFromserver){
             if(dataFromserver.message == 'ready')setRedirectRoom('ready');
             else if(dataFromserver.message == 'newUser' && dataFromserver.username != myUsername){
-              if(group.user1 == null || group.user2 == null)getGroupDetails();}
+              if(group.user1 == null || group.user2 == null)getGroupDetails();
+            }
             else if(dataFromserver.message == 'out' && dataFromserver.username != myUsername){
               getGroupDetails();}
            /* else if(dataFromserver.message == 'newUser'){
@@ -70,21 +74,22 @@ const LoadUsers = ({group, getGroupDetails, myUser, myUsername, setShow}) => {
         <>
         {redirectRoom == 'ready' &&
                 <Navigate to={`/private_room/${btoa(encryptedPath)}/${btoa(myUsername)}/${btoa(myUser)}`}/>}
-        <Modal.Header closeButton>
-            <Modal.Title>Modal</Modal.Title>
-        </Modal.Header>
         <Modal.Body>
             <section className="row">
-                <div className="col-6">
+                <Row>
+                  <Col>
                     <MyUser group={group} myUser={myUser} getGroupDetails={getGroupDetails}/>
+                  </Col> 
+                  <Col>
                     <OtherUser group={group} myUser={myUser}/>
-                    <Buttons enviar={enviar} group={group} setShow={setShow}/>
-                    {/*en views crear una function que elimine el usuario del grupo, luego aqui llamar esa
-                    function de la api y luego usar el enviar*/}
-                </div>
+                  </Col>
+                </Row>
                 <div className="col-6">{group.user_username}</div>
             </section>
          </Modal.Body>
+         <Modal.Footer className="my-modal-footer">
+            <Buttons enviar={enviar} group={group} setShow={setShow}/>
+         </Modal.Footer>
          </>
     )
 }

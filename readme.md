@@ -10,7 +10,7 @@ I plan to continue developing the app to a much more mature point with more feat
 
 </br>
 
-# Distinctiveness and Complexity 
+# Distinctiveness and Complexity
 
 I consider that my application meets all the requirements stated in the description of the final project. It is a web platform, oriented to be a social game and to help people. It puts into practice the vast majority of concepts taught during the course and other external concepts, such as the use of channels or the implementation of a different login than the one that django brings by default to facilitate communication with react.
 
@@ -109,8 +109,8 @@ The classes that form the subsequent tables in MySql once the data has been migr
 
 </br>
 
-
 # Some tools/technologies used in the project
+
 - `JWT` - Used for the login that connects the backend to the frontend
 - `Django Channels` - To be able to manage the channels from the backend
 - `MySql` - Used to handle the tables in our database
@@ -142,7 +142,7 @@ npm install
 go to the frontend folder (in windows cd frontend) and apply:
 npm run dev
 
-Also in a separate terminal you can run gulp, to update in real time the changes with the following command: 
+Also in a separate terminal you can run gulp, to update in real time the changes with the following command:
 gulp
 ```
 

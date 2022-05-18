@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react';
 import AuthContext from '../../contexts/AuthContext';
+import ItemContext from '../../contexts/ItemContext';
 import GetSala from './GetSala';
 import Loading from '../loading/Loading';
 import { useParams } from 'react-router-dom';
@@ -7,10 +8,14 @@ import { useParams } from 'react-router-dom';
 const Room = () =>{
     const [entrada, setEntrada] = useState(false);
     const [messages, setMessages] = useState([]);
-    let {user} = useContext(AuthContext);
+    const [groupDetails, setGroupDetails] = useState(); 
+    let {user, authTokens} = useContext(AuthContext);
     let {room, myuser, id} = useParams();
+    let {getItemContext, updateItemContext} = useContext(ItemContext);
 
     const getData = async () => { 
+        console.log(atob(room));
+        console.log(atob(id))
         let response = await fetch(`http://127.0.0.1:8000/capstone_api/messages/${atob(room)}`,
         {
             method: 'GET',
@@ -33,11 +38,40 @@ const Room = () =>{
         
     }
 
+    let getGroupDetails = () =>{
+        try {getItemContext('group/get_group_details', setGroupDetails);}
+            
+        catch{
+            console.log('no groups found');
+        }
+    }
+
+    const desactiveGroupDetails = async () =>{
+        let response = await fetch(`http://127.0.0.1:8000/capstone_api/group/desactive_group_details/${groupDetails.id}`,
+        {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + String(authTokens.access)
+            }
+        })
     
+        let data = await response.json();
     
+        if(response.status === 200){
+            setGroupDetails(data);
+            console.log(data)
+        }
+        else{
+            console.log('error modifying api');
+        }
+
+    }
+
 
     useEffect(() => {
         getData();
+        getGroupDetails();
     }, [])
 
 
@@ -48,7 +82,7 @@ return (
         (<Loading/>):(
         <>{atob(id) == user.user_id ?
             <GetSala roomName={atob(room)} username={atob(myuser)} messages={messages} 
-            setMessages={setMessages}/>
+            setMessages={setMessages} desactiveGroup={desactiveGroupDetails} group={groupDetails}/>
             :
             <div className="cont-err">
                 <h4 className="err-h4">Error the room was not found or you are not included in the group</h4>

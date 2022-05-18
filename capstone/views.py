@@ -15,12 +15,13 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
 
 
-from .serializers import CoinsSerializer, GroupDetailsSerializer
-from .models import User, Coins, GroupDetails, Message, ChatModel, Invitations
+from .serializers import CoinsSerializer
+from .models import User, Coins, GroupDetails, Message, Invitations
 
 
 # ----------------Token Views-------------------------
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    # Gets the token needed to authenticate the user
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
@@ -41,6 +42,8 @@ grupos = GroupDetails.objects.all()
 
 # print(len(grupos))
 
+# Routes in which the user token is obtained and updated
+
 
 @api_view(['GET'])
 def getRoutes(request):
@@ -56,6 +59,7 @@ def getRoutes(request):
 
 # -----------User Views---------------
 
+# function for the user to get their data
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def myUser(request):
@@ -64,6 +68,7 @@ def myUser(request):
     return Response(objecto.serialize(), status=200)
 
 
+# get the data of all users except the logged in, obviously excluding password and other sensitive data
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def allUsers(request):
@@ -73,6 +78,7 @@ def allUsers(request):
     return Response([objec.serialize() for objec in objecto], status=200)
 
 
+# Function to create the user
 @api_view(['POST'])
 def createUser(request):
     if request.method == "POST":
@@ -104,8 +110,11 @@ def createUser(request):
 
 
 # -----------Coins Views-------------
+# creation of the user's monetary data (price, coins)
 def createCoins(user):
     Coins.objects.create(user=user)
+
+# Obtains the monetary data of the logged in user
 
 
 @api_view(['GET'])
@@ -115,6 +124,8 @@ def getCoins(request):
     coins = Coins.objects.filter(user_id=user.id)
     serializer = CoinsSerializer(coins, many=True)
     return Response(serializer.data)
+
+# Obtains all the monetary data of the users except the one who is logged in
 
 
 @api_view(['GET'])
@@ -129,6 +140,8 @@ def getAllCoins(request):
 
 # -----------Invitations Views-------------
 
+# Obtains all the invitations of the room that we indicate through the id
+
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -138,15 +151,16 @@ def getInvitations(request):
         if rooms:
             return Response([room.serialize() for room in rooms], status=200)
         else:
-            return Response({"message": "No se ha encontrado Invitaciones de grupo disponible"}, status=204)
+            return Response({"message": "Group invites not found available"}, status=204)
     except:
-        return Response({"message": "No se ha encontrado Invitaciones de grupo disponible"}, status=400)
+        return Response({"message": "Group invites not found available"}, status=400)
 
 # ------------------------------
 
 
 # -----------GroupDetails Views--------------
 
+# Create a group of requirements necessary for the group of ideas
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def createGroupDetails(request):
@@ -160,6 +174,7 @@ def createGroupDetails(request):
     return Response(group.serialize(), status=200)
 
 
+# Modify a group using the id we give it
 @api_view(['PUT', 'DELETE'])
 @permission_classes([IsAuthenticated])
 def modGroupDetails(request, id):
@@ -199,6 +214,8 @@ def modGroupDetails(request, id):
     else:
         return Response({'message': 'Not changes'}, status=200)
 
+# Desactivate a group through the id
+
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -210,7 +227,9 @@ def desactiveGroupDetails(request, id):
         print("Group desactivate")
         return Response(group.serialize(), status=200)
     else:
-        return Response({'message': 'Not changes'}, status=204)
+        return Response(group.serialize(), status=204)
+
+# remove a user from a group
 
 
 @api_view(['PUT', 'DELETE'])
@@ -240,6 +259,8 @@ def deleteUserGroupDetails(request, id):
     else:
         return Response({'message': 'Not changes'}, status=204)
 
+# get the last active group of the user
+
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -255,6 +276,8 @@ def getGroupDetails(request):
     except:
         return Response({"message": "No se ha encontrado ningun grupo disponible"}, status=400)
 
+# get a group via id
+
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -267,6 +290,8 @@ def getIdGroupDetails(request, id):
             return Response({"message": "No se ha encontrado ningun grupo disponible"}, status=204)
     except:
         return Response({"message": "No se ha encontrado ningun grupo disponible"}, status=400)
+
+# Remove a group via id
 
 
 @api_view(['DELETE'])
@@ -283,6 +308,8 @@ def deleteGroupDetails(request, id):
         return Response({"message": "No available group found"}, status=400)
 
 # -----------------------------
+
+# get all messages in the room
 
 
 @api_view(['GET'])

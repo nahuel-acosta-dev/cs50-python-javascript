@@ -33,8 +33,7 @@ urlpatterns = [
 
 
     path("group/delete_group_details/<int:id>", views.deleteGroupDetails),
-    path('messages/<str:room_name>', views.getMessages, name="getMessages"),
-    path('newroom/<str:username>', views.chatPage),
+    path('messages/<str:room_name>', views.getMessages, name="getMessages")
 
 
 ]

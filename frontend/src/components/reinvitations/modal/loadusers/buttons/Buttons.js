@@ -31,8 +31,8 @@ const Buttons = ({enviar, group, setShow}) => {
 
     return (
         <>
-            <Button variant="primary" onClick={(e) => enviar(e, 'newUser')}>listo</Button>
-            <Button variant="danger" onClick={(e) => outRoom(e, 'out')}>Salir</Button>
+            <Button variant="primary" onClick={(e) => enviar(/*e, */'newUser')}>listo</Button>
+            <Button variant="danger" onClick={(e) => outRoom(/*e, */'out')}>Salir</Button>
         </>
     )
 
