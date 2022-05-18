@@ -81,6 +81,7 @@ The application has 5 models that are migrated to MySql, these are the models:.
 4. `Invitations` - handles all invite messages sent through channels
 5. `Message` - Manage all the ideas sent in the rooms
 6. `PreRoom` - Saves in the database the different interactions in the preRoom
+7. There are some more models but at the moment they are not being implemented, it is intended to develop more functions in the application
 
 ### Views file:
 
