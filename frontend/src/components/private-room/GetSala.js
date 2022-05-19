@@ -15,6 +15,7 @@ const GetSala = ({roomName, username, messages, setMessages, desactiveGroup, gro
         console.log(group.id);
     }
 
+
     chatSocket.onmessage = function(e) {
         console.log('onmessage');
 
@@ -61,16 +62,16 @@ const GetSala = ({roomName, username, messages, setMessages, desactiveGroup, gro
     //After the indicated time has elapsed, the group is deactivated.
     setTimeout(() =>{
         if(username == creatorUsername){
-        desactiveGroup();}
-        if(group && username == creatorUsername){
-        console.log(group.active);
+            desactiveGroup();
+            setRedirect(true);
         }
-
         else if(username != creatorUsername){
             setRedirect(true);
         }
     }, 60000)
 }
+
+    console.log("repetir aca")
 
     if(username == creatorUsername){
         if(group.active == "false")setRedirect(false);
@@ -93,7 +94,7 @@ const GetSala = ({roomName, username, messages, setMessages, desactiveGroup, gro
             <form className="column is-6 is-offset-3" onSubmit={(e) => messageSubmit(e)}>
                 <div className="box">
                     <div id="chat-messages">
-                    {messages.reverse().map((message, i) => (
+                    {messages.map((message, i) => (
                         message.username == username ?
                         <div key={i} className="cont-msj">
                             <div className="my-msj">
@@ -125,7 +126,8 @@ const GetSala = ({roomName, username, messages, setMessages, desactiveGroup, gro
                 <Row className="cont-send-msj justify-content-center">
                     <Col xs={8} className="field">
                         <div className="control row align-content-center justify-content-center">
-                            <input className="input" type="text" placeholder="Idea" name="chatmessage" />
+                            <input className="input" type="text" placeholder="Idea" 
+                            name="chatmessage"/>
                         </div>
                     </Col>
 

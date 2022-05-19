@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect, useContext, memo} from 'react';
 import AuthContext from '../../contexts/AuthContext';
 import ItemContext from '../../contexts/ItemContext';
 import GetSala from './GetSala';
@@ -106,4 +106,4 @@ return (
     )
 }
 
-export default Room;
+export default memo(Room);
