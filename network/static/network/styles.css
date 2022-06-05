@@ -1,0 +1,67 @@
+body {
+  font-size: 1em;
+}
+
+.post {
+  margin-top: 20px;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+}
+
+.username {
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+.cont-btn {
+  box-sizing: content-box;
+  width: 100%;
+  padding-bottom: 1px;
+}
+hr {
+  margin: 1px;
+}
+.btn-like {
+  width: 100%;
+  border: none;
+}
+
+.btn-like:hover {
+  background-color: #e4e4e4d2;
+}
+
+.fecha-post {
+  font-size: 0.5em;
+}
+.post-date {
+  margin-top: 10px;
+}
+
+.cont-btn-create {
+  padding: 10px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.btn-create {
+  border: 1px solid #b9b5b5 !important;
+  font-weight: bold;
+  width: 100%;
+  border-radius: 30px;
+}
+
+.btn-dpd {
+  border: none;
+}
+
+.btn-dpd:hover {
+  border: none;
+}
+
+.like {
+  color: black;
+}
+
+.pagination {
+  margin-top: 10px !important;
+}
