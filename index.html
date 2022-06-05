@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+        <link href="static/css/styles.css" rel="stylesheet">
+        <title>Google Search</title>
+    </head>
+    <body>
+        <header>
+            <ul class="nav justify-content-end"> 
+                <li class="nav-item">
+                  <a class="nav-link" href="./image-search.html">Image Search</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="advance-search.html">Advanced Search</a>
+                </li>
+              </ul>
+        </header>
+
+        <div class="container">
+            <section class="section-center text-center">
+                <div class="">
+                    <img src="static/img/googlelogo_color_272x92dp.png" class="img-responsive" alt="google image" width="272" height="90">
+                </div>
+                <form action="https://google.com/search" method="get">
+                    <div class="row height d-flex justify-content-center">
+                        <div class="col-md-6">
+                            <div class="form"><i class="bi bi-search"></i>
+                                <input type="text" class="form-control form-input" name="q"><span class="left-pan"><i class="bi bi-mic-fill"></i></span>
+                            </div>
+                            <div class="group-buttons row">
+                                <input class="button1 buttons btn btn-light col" type="submit" value="Google Search">
+                                <input class="button2 buttons btn btn-light col" type="submit" value="I feel lucky" name="btnI">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </div>
+        <footer class="btn-light overflow-hidden">    
+            <div class="footer-section1">
+                <p>Argentina</p>
+            </div>
+            <div class="row footer-section2">
+                <a class="col" href="https://about.google/">About Google</a>
+                <a class="col" href="https://ads.google.com/">Advertising</a>
+                <a class="col" href="https://smallbusiness.withgoogle.com/">Business</a>
+                <a class="col-xl-5" href="https://www.google.com/search/howsearchworks/">How Search works</a>
+                <a class="col" href="https://policies.google.com/privacy">Privacy</a>
+                <a class="col" href="https://policies.google.com/terms">Conditions</a>
+                <a class="col">Preferences</a>
+            </div>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
+    </body>
+</html>
