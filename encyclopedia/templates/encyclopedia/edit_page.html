@@ -1,0 +1,18 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Edit Item
+{% endblock %}
+
+{% block body %}
+    <h1>Edit your Article</h1>
+    <form action="{% url 'edit_page' %}" method="GET">
+        <div class="form-group">
+            {{form}}
+        </div>
+        <div>
+            <input type="submit" value="Save">
+        </div>  
+    </form>
+
+{% endblock %}
