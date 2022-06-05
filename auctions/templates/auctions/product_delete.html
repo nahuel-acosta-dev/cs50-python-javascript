@@ -1,0 +1,15 @@
+{% extends "auctions/product_add.html" %}
+
+
+{% block form %}
+  {% if user.is_authenticated %}
+  <form class="col" action="{% url 'delete_product' product.title product.id %}" method="POST">
+    {% csrf_token %}
+    <div>
+      <button class="btn-link" type="submit" value="{{ user.username }}" name="button">Remove from tracks</button>
+    </div>
+  </form>
+  {% else %}
+    <a href="{% url 'login' %}">Remove from tracks</a>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<ul class="row">
+{% for track in trackings %}
+<li class="card col-3 tarjet" style="width: 15rem;">
+    <a class="links-a" href="{% url 'product' track.product.title track.product.id %}">
+        <div style="height:60%;margin-bottom:10px;">
+            <img src="{{ track.product.image }}" class="card-img-top" alt="image-product" style="width: 100%;">
+        </div>
+    </a>
+    <hr>
+    <a class="links-a" href="{% url 'product' track.product.title track.product.id %}">
+    <div class="card-body">
+        <h5 class="card-title">$ {{ track.product.price }} </h5>
+        <p class="card-text">{{ track.product }}</p>
+    </div>
+    </a>
+</li>
+{% empty %}
+    <li>No hay seguimientos</li>
+{% endfor %}
+</ul>
+{% endblock %}

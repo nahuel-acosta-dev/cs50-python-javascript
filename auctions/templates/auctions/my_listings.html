@@ -1,0 +1,29 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<ul class="row">
+{% for product in products %}
+<li class="card col-3 tarjet" style="width: 15rem;">
+    <a class="links-a" href="{% url 'product' product.title product.id %}">
+        <div style="height:60%;margin-bottom:10px;">
+            <img src="{{ product.image }}" class="card-img-top" alt="image-product" style="width: 100%;">
+        </div>
+    <hr>
+    <div class="card-body">
+        <div class="row">
+            <h5 class="card-title col">$ {{ product.price }} </h5>
+            {% if product.activate == False %}
+            <p class="col">Desactivado</p>
+            {% else %}
+            <p class="col">Activado</p>
+            {% endif %}
+        </div>
+        <p class="card-text">{{ product }}</p>
+    </div>
+    </a>
+</li>
+{% empty %}
+    <li>No hay seguimientos</li>
+{% endfor %}
+</ul>
+{% endblock %}

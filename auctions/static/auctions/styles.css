@@ -1,0 +1,47 @@
+body {
+    padding: 10px;
+}
+
+a{
+    text-decoration: none!important;
+}
+/*-----------------List------------------*/
+
+.tarjet{
+    margin-right: 20px;
+}
+
+
+/*-----------------category------------------*/
+.links-a{
+    text-decoration: none;
+}
+
+.links-a:hover{
+    text-decoration: none;
+}
+
+
+/*----------------product-------------------*/
+.btn-link {
+    background: none;
+    border: none;
+    padding: 0px;
+    color: #3097D1;
+    font: inherit;
+    text-decoration: none;
+}
+
+.btn-link:hover {
+    color: #216a94;
+    text-decoration: underline;
+}
+
+.input_number{
+    margin-bottom: 10px;
+}
+
+.comments{
+    margin-top: 20px!important;
+}
+
